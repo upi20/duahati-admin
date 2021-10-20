@@ -52,3 +52,6 @@ $config['page_setting']     = 'hold-transition sidebar-mini  layout-fixed';
 $config['page_nav'] = 'main-header navbar navbar-expand navbar-white navbar-light';
 
 $config['minify'] = false;
+
+// level mentor
+$config['level_mentor'] = 2;

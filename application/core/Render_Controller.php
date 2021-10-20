@@ -24,6 +24,7 @@ class Render_Controller extends CI_Controller
 	protected $breadcrumb_4;
 	protected $breadcrumb_4_url;
 	protected $content;
+	protected $photo_path = './files/';
 
 	protected $navigation		= array();
 	protected $data 			= array();
@@ -194,5 +195,38 @@ class Render_Controller extends CI_Controller
 			);
 		}
 		return $main_menu;
+	}
+
+	public function uploadImage($name)
+	{
+		$config['upload_path']          = $this->photo_path;
+		$config['allowed_types']        = 'jpg|png|jpeg|JPG|PNG|JPEG';
+		$config['file_name']            = md5(uniqid("duahati", true));
+		$config['overwrite']            = true;
+		$config['max_size']             = 8024;
+		$this->load->library('upload', $config);
+		$this->upload->initialize($config);
+		if ($this->upload->do_upload($name)) {
+			return [
+				'status' => true,
+				'data' => $this->upload->data("file_name"),
+				'message' => 'Success'
+			];
+		} else {
+			return [
+				'status' => false,
+				'data' => null,
+				'message' => $this->upload->display_errors('', '')
+			];
+		}
+	}
+
+	public function deleteFile($file)
+	{
+		$res_foto = true;
+		if (file_exists($this->photo_path . $file)) {
+			$res_foto = unlink($this->photo_path . $file);
+		}
+		return $res_foto;
 	}
 }

@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class DataMember extends Render_Controller
+class Data extends Render_Controller
 {
 
     // dipakai Administrator |
@@ -18,10 +18,10 @@ class DataMember extends Render_Controller
         $this->breadcrumb_2 = 'Member';
         $this->breadcrumb_2_url = '#';
         $this->breadcrumb_3 = 'DataMember';
-        $this->breadcrumb_3_url = base_url() . 'member/data-member';
+        $this->breadcrumb_3_url = base_url() . 'member/list';
 
         // content
-        $this->content      = 'member/data-member';
+        $this->content      = 'member/list';
 
         // Send data to view
         $this->render();
@@ -83,7 +83,7 @@ class DataMember extends Render_Controller
             redirect('my404', 'refresh');
         }
 
-        $this->load->model("member/dataMemberModel", 'model');
+        $this->load->model("member/DataModel", 'model');
         $this->default_template = 'templates/dashboard';
         $this->load->library('plugin');
         $this->load->helper('url');
