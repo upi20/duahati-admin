@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Oct 20, 2021 at 01:48 PM
+-- Generation Time: Oct 21, 2021 at 06:07 AM
 -- Server version: 10.4.20-MariaDB
 -- PHP Version: 7.4.21
 
@@ -23,14 +23,26 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `kelas` (
   `id` int(11) NOT NULL,
-  `id_kategori` int(11) DEFAULT NULL,
+  `kategori_id` int(11) DEFAULT NULL,
   `nama` varchar(255) DEFAULT NULL,
+  `keterangan` text NOT NULL,
+  `foto` varchar(255) NOT NULL,
+  `status` int(11) NOT NULL,
   `created_by` int(11) DEFAULT NULL,
   `updated_by` int(11) DEFAULT NULL,
+  `deleted_by` int(11) DEFAULT NULL,
   `created_at` datetime NOT NULL DEFAULT current_timestamp(),
   `updated_at` datetime DEFAULT NULL ON UPDATE current_timestamp(),
   `deleted_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `kelas`
+--
+
+INSERT INTO `kelas` (`id`, `kategori_id`, `nama`, `keterangan`, `foto`, `status`, `created_by`, `updated_by`, `deleted_by`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 2, 'Pra Nikah', 'Keterangan', '8244068289ba0be186962db6a2530d7f.png', 1, 1, 1, NULL, '2021-10-21 07:59:52', '2021-10-21 08:00:48', NULL),
+(2, 2, 'Pasca Nikah', 'Ket 2', 'df3e865f96693e30cc47cfc4dafba0dd.png', 1, 1, NULL, NULL, '2021-10-21 08:01:10', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -41,13 +53,24 @@ CREATE TABLE `kelas` (
 CREATE TABLE `kelas_kategori` (
   `id` int(11) NOT NULL,
   `nama` varchar(255) DEFAULT NULL,
+  `keterangan` text NOT NULL,
+  `foto` varchar(255) NOT NULL,
   `status` int(11) DEFAULT NULL,
   `created_by` int(11) DEFAULT NULL,
   `updated_by` int(11) DEFAULT NULL,
+  `deleted_by` int(11) DEFAULT NULL,
   `created_at` datetime NOT NULL DEFAULT current_timestamp(),
   `updated_at` datetime DEFAULT NULL ON UPDATE current_timestamp(),
   `deleted_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `kelas_kategori`
+--
+
+INSERT INTO `kelas_kategori` (`id`, `nama`, `keterangan`, `foto`, `status`, `created_by`, `updated_by`, `deleted_by`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 'Isep Lutpi Nur', 'keterangan', 'f4fdb45a2d0449b1fc49644b35c6146e.png', 3, 1, 1, 1, '2021-10-21 07:09:27', '2021-10-21 07:38:32', '2021-10-21 07:38:32'),
+(2, 'Kelas Premium', 'Kelas Berbayar Khusus', '', 1, 1, 1, NULL, '2021-10-21 07:20:26', '2021-10-21 07:21:18', NULL);
 
 -- --------------------------------------------------------
 
@@ -57,14 +80,25 @@ CREATE TABLE `kelas_kategori` (
 
 CREATE TABLE `kelas_materi` (
   `id` int(11) NOT NULL,
+  `kelas_id` int(11) DEFAULT NULL,
+  `nama` varchar(255) NOT NULL,
   `url` varchar(255) DEFAULT NULL,
   `keterangan` text DEFAULT NULL,
   `created_by` int(11) DEFAULT NULL,
   `updated_by` int(11) DEFAULT NULL,
+  `deleted_by` int(11) DEFAULT NULL,
+  `status` int(11) NOT NULL,
   `created_at` datetime NOT NULL DEFAULT current_timestamp(),
   `updated_at` datetime DEFAULT NULL ON UPDATE current_timestamp(),
   `deleted_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `kelas_materi`
+--
+
+INSERT INTO `kelas_materi` (`id`, `kelas_id`, `nama`, `url`, `keterangan`, `created_by`, `updated_by`, `deleted_by`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 2, 'Dumy Data ubah', 'https://www.youtube.com/watch?v=hcKwn7PIK_A', 'Ket\r\n1', 1, 1, NULL, 1, '2021-10-21 08:31:45', '2021-10-21 08:36:53', NULL);
 
 -- --------------------------------------------------------
 
@@ -96,16 +130,18 @@ INSERT INTO `level` (`lev_id`, `lev_nama`, `lev_keterangan`, `lev_status`, `crea
 
 CREATE TABLE `member` (
   `id` int(11) NOT NULL,
-  `mentor_id` int(11) NOT NULL,
+  `mentor_id` int(11) DEFAULT NULL,
   `nik` varchar(255) DEFAULT NULL,
   `nama` varchar(255) DEFAULT NULL,
   `no_telepon` varchar(255) DEFAULT NULL,
   `tanggal_lahir` date DEFAULT NULL,
   `jenis_kelamin` varchar(255) DEFAULT NULL,
+  `alamat` text NOT NULL,
   `password` varchar(255) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
+  `foto` varchar(255) NOT NULL,
   `token` varchar(255) DEFAULT NULL,
-  `parrent_id` int(11) NOT NULL,
+  `parrent_id` int(11) DEFAULT NULL,
   `kode_refeal` varchar(255) NOT NULL,
   `status` int(11) DEFAULT NULL,
   `created_by` int(11) DEFAULT NULL,
@@ -114,6 +150,14 @@ CREATE TABLE `member` (
   `updated_at` datetime DEFAULT NULL ON UPDATE current_timestamp(),
   `deleted_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `member`
+--
+
+INSERT INTO `member` (`id`, `mentor_id`, `nik`, `nama`, `no_telepon`, `tanggal_lahir`, `jenis_kelamin`, `alamat`, `password`, `email`, `foto`, `token`, `parrent_id`, `kode_refeal`, `status`, `created_by`, `updated_by`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(2, 6, NULL, 'Eska Yulinda Rahayu', '085798132505', NULL, NULL, 'Cianjur', '$2y$10$NXyctYJcxQTOVH0qJSgPX.d6W8IowPywTZ0JK08OQs/1jMfk11lCe', 'eskayr@gmail.com', '5a93fd88386b9bb7b9c194a31fd7172b.png', 'duahati202110211058496170e57995b5f', NULL, ' UMJYG7P', 1, 1, 1, '2021-10-21 10:58:49', '2021-10-21 11:05:34', NULL),
+(3, 6, NULL, 'Member 2', '085798132505', NULL, NULL, '', '$2y$10$6.3PXYQx5KKVWQJ5C9cYqeJ5HiyQH9sOSfw2HdyTuEgeX4tUj/gkC', '2@gmail.com', 'f3fcbb4ac7377f576efebf18050e2b11.png', 'duahati202110211106436170e753c600c', NULL, ' FHECNLZ', 1, 1, NULL, '2021-10-21 11:06:43', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -127,6 +171,7 @@ CREATE TABLE `member_kelas` (
   `kelas_id` int(11) NOT NULL,
   `created_by` int(11) DEFAULT NULL,
   `updated_by` int(11) DEFAULT NULL,
+  `deleted_by` int(11) DEFAULT NULL,
   `created_at` datetime NOT NULL DEFAULT current_timestamp(),
   `updated_at` datetime DEFAULT NULL ON UPDATE current_timestamp(),
   `deleted_at` datetime DEFAULT NULL
@@ -142,6 +187,7 @@ CREATE TABLE `member_materi_tonton` (
   `id` int(11) NOT NULL,
   `member_id` int(11) DEFAULT NULL,
   `kelas_id` int(11) NOT NULL,
+  `kelas_materi_id` int(11) NOT NULL,
   `created_by` int(11) DEFAULT NULL,
   `updated_by` int(11) DEFAULT NULL,
   `created_at` datetime NOT NULL DEFAULT current_timestamp(),
@@ -179,9 +225,9 @@ INSERT INTO `menu` (`menu_id`, `menu_menu_id`, `menu_nama`, `menu_keterangan`, `
 (5, 2, 'Level', '-', 3, 'far fa-circle', 'pengaturan/level', 'Aktif', '2020-06-17 19:40:07'),
 (6, 2, 'Pengguna', '-', 5, 'far fa-circle', 'pengaturan/pengguna', 'Aktif', '2020-06-17 19:40:07'),
 (7, 0, 'Ganti Password', 'Ganti password', 99, 'fa fa-key', 'pengaturan/password', 'Aktif', '2021-06-28 01:34:14'),
-(82, 0, 'Master', '-', 4, 'fas fa-database', '#', 'Aktif', '2021-08-25 02:03:41'),
+(82, 0, 'Kelas', '-', 4, 'fas fa-book', '#', 'Aktif', '2021-08-25 02:03:41'),
 (97, 2, 'Backup & Reset', '-', 6, 'fa fa-download', 'pengaturan/backupReset', 'Aktif', '2021-10-06 00:41:32'),
-(104, 0, 'Member', '-', 2, 'fa fa-users', 'member/dataMember', 'Aktif', '2021-10-12 11:56:14'),
+(104, 0, 'Member', '-', 2, 'fa fa-users', 'member/data', 'Aktif', '2021-10-12 11:56:14'),
 (105, 0, 'Pertandingan', '-', 3, 'fas fa-list', 'pertandingan/#', 'Aktif', '2021-10-12 11:58:59'),
 (106, 105, 'Master  ', '-', 1, 'far fa-circle', 'pertandingan/jadwal', 'Aktif', '2021-10-12 12:01:09'),
 (107, 105, 'Tebak Score', '-', 2, 'far fa-circle', 'pertandingan/tebakScore', 'Aktif', '2021-10-12 12:01:37'),
@@ -192,7 +238,11 @@ INSERT INTO `menu` (`menu_id`, `menu_menu_id`, `menu_nama`, `menu_keterangan`, `
 (112, 82, 'Stadion', '-', 2, 'far fa-circle', 'master/stadion', 'Aktif', '2021-10-12 12:04:25'),
 (113, 82, 'Posisi', '-', 3, 'far fa-circle', 'master/posisi', 'Aktif', '2021-10-12 14:16:32'),
 (114, 82, 'Kategori Kursi', '-', 5, 'far fa-circle', 'master/kategoriKursi', 'Aktif', '2021-10-13 09:01:24'),
-(115, 82, 'Iklan', 'iklan', 1, 'far fa-circle', 'master/iklan', 'Aktif', '2021-10-19 17:47:24');
+(115, 82, 'Iklan', 'iklan', 1, 'far fa-circle', 'master/iklan', 'Aktif', '2021-10-19 17:47:24'),
+(116, 0, 'Mentor', 'Menu Mentor', 3, 'fas fa-fw fa-user', 'mentor/data', 'Aktif', '2021-10-20 12:17:22'),
+(117, 82, 'Data Kelas', '-', 1, 'far fa-circle', 'kelas/master', 'Aktif', '2021-10-20 12:22:56'),
+(118, 82, 'Kategori', '-', 3, 'far fa-circle', 'kelas/kategori', 'Aktif', '2021-10-20 12:23:20'),
+(119, 82, 'Materi', 'Materi Kelas', 2, 'far fa-circle', 'kelas/materi', 'Aktif', '2021-10-21 01:04:35');
 
 -- --------------------------------------------------------
 
@@ -212,37 +262,24 @@ CREATE TABLE `role_aplikasi` (
 --
 
 INSERT INTO `role_aplikasi` (`rola_id`, `rola_menu_id`, `rola_lev_id`, `created_at`) VALUES
-(1, 1, 1, '2021-07-14 05:27:04'),
-(3, 4, 1, '2021-07-14 05:27:17'),
-(4, 5, 1, '2021-07-14 05:27:25'),
-(5, 6, 1, '2021-07-14 05:27:31'),
-(6, 7, 1, '2021-07-14 05:27:37'),
-(7, 2, 1, '2021-07-14 05:27:48'),
-(83, 52, 1, '2021-08-14 09:00:46'),
-(94, 63, 1, '2021-08-14 09:09:44'),
-(95, 64, 1, '2021-08-14 09:09:50'),
-(96, 65, 1, '2021-08-14 09:10:00'),
-(97, 66, 1, '2021-08-14 09:10:09'),
-(98, 67, 1, '2021-08-14 09:10:18'),
-(113, 3, 1, '2021-08-25 02:01:35'),
-(114, 82, 1, '2021-08-25 02:04:08'),
-(141, 93, 1, '2021-09-16 20:49:15'),
-(151, 99, 1, '2021-10-06 00:41:32'),
-(152, 100, 1, '2021-10-06 00:41:32'),
-(153, 101, 1, '2021-10-06 00:42:54'),
-(154, 101, 1, '2021-10-06 00:43:26'),
-(155, 111, 1, '2021-10-12 12:05:14'),
-(156, 112, 1, '2021-10-12 12:05:15'),
-(157, 106, 1, '2021-10-12 12:05:23'),
-(158, 107, 1, '2021-10-12 12:05:24'),
-(159, 108, 1, '2021-10-12 12:05:25'),
-(160, 109, 1, '2021-10-12 12:05:27'),
-(162, 104, 1, '2021-10-12 12:05:44'),
-(163, 110, 1, '2021-10-12 12:05:45'),
-(167, 105, 1, '2021-10-12 12:06:56'),
-(169, 113, 1, '2021-10-12 14:16:47'),
-(170, 114, 1, '2021-10-13 09:01:33'),
-(171, 115, 1, '2021-10-19 17:47:41');
+(1, 1, 1, '2021-10-20 11:49:31'),
+(2, 82, 1, '2021-10-20 11:49:35'),
+(9, 2, 1, '2021-10-20 12:15:21'),
+(10, 3, 1, '2021-10-20 12:15:22'),
+(11, 4, 1, '2021-10-20 12:15:23'),
+(12, 5, 1, '2021-10-20 12:15:24'),
+(13, 6, 1, '2021-10-20 12:15:27'),
+(14, 97, 1, '2021-10-20 12:15:27'),
+(15, 106, 1, '2021-10-20 12:15:29'),
+(16, 107, 1, '2021-10-20 12:15:30'),
+(17, 108, 1, '2021-10-20 12:15:30'),
+(18, 109, 1, '2021-10-20 12:15:31'),
+(19, 104, 1, '2021-10-20 12:15:32'),
+(21, 7, 1, '2021-10-20 12:15:35'),
+(22, 116, 1, '2021-10-20 12:17:30'),
+(23, 117, 1, '2021-10-20 12:23:57'),
+(24, 118, 1, '2021-10-20 12:24:27'),
+(25, 119, 1, '2021-10-21 01:16:17');
 
 -- --------------------------------------------------------
 
@@ -262,7 +299,20 @@ CREATE TABLE `role_users` (
 --
 
 INSERT INTO `role_users` (`role_id`, `role_user_id`, `role_lev_id`, `created_at`) VALUES
-(1, 1, 1, '2020-06-18 02:39:26');
+(1, 1, 1, '2020-06-18 02:39:26'),
+(59, 6, 2, '2021-10-20 22:21:07'),
+(61, 8, 2, '2021-10-20 22:34:19'),
+(66, 13, 1, '2021-10-20 22:43:44'),
+(67, 14, 1, '2021-10-20 22:44:07'),
+(68, 15, 1, '2021-10-20 22:44:17'),
+(69, 16, 1, '2021-10-20 22:46:29'),
+(70, 17, 1, '2021-10-20 22:46:55'),
+(71, 18, 1, '2021-10-20 22:47:24'),
+(72, 19, 1, '2021-10-20 22:47:42'),
+(73, 20, 1, '2021-10-20 22:48:12'),
+(74, 21, 1, '2021-10-20 22:49:39'),
+(75, 22, 1, '2021-10-20 22:50:01'),
+(76, 23, 1, '2021-10-20 22:51:04');
 
 -- --------------------------------------------------------
 
@@ -279,6 +329,7 @@ CREATE TABLE `users` (
   `user_email` varchar(50) NOT NULL,
   `user_phone` varchar(15) NOT NULL,
   `user_foto` varchar(255) DEFAULT NULL,
+  `alamat` text DEFAULT NULL,
   `user_status` int(1) NOT NULL DEFAULT 0 COMMENT '0 Tidak Aktif | 1 Aktif | 2 Pendding',
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NULL DEFAULT NULL,
@@ -289,8 +340,10 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`user_id`, `user_nama`, `user_tgl_lahir`, `user_jk`, `user_password`, `user_email`, `user_phone`, `user_foto`, `user_status`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'Soni Setiawan', NULL, NULL, '$2y$10$7XCVzUlzjXOTMq0s90XfMO6bR7Tb2xZB5LgxL1Lw6o2KqoeAi8Vjq', 'administrator@gmail.com', '08123123', NULL, 1, '2020-06-18 02:39:08', '2020-06-18 02:39:08', NULL);
+INSERT INTO `users` (`user_id`, `user_nama`, `user_tgl_lahir`, `user_jk`, `user_password`, `user_email`, `user_phone`, `user_foto`, `alamat`, `user_status`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 'Soni Setiawan', NULL, NULL, '$2y$10$7XCVzUlzjXOTMq0s90XfMO6bR7Tb2xZB5LgxL1Lw6o2KqoeAi8Vjq', 'administrator@gmail.com', '08123123', NULL, '', 1, '2020-06-18 02:39:08', '2020-06-18 02:39:08', NULL),
+(6, 'Isep Lutpi Nur', '2000-08-10', 'Laki-Laki', '$2y$10$Qg6RtVNkbkHfqq5qtXT/huWM2p4h5qyAo1aeOxMWJkj5jrlTsjVTC', 'iseplutpi@gmail.com', '085798132505', 'fcf1dcaa2cf63eb7853b6419b0090ec8.jpeg', 'Alamat', 1, '2021-10-20 22:21:07', '2021-10-20 22:59:45', NULL),
+(8, 'Mentor 3', '2000-10-08', 'Laki-Laki', '$2y$10$VCMLcYbOuQF3ySRpK2DF5.z.ao7VYme7IwC5IyKBwOH8aHjFQJSWe', 'iseplutpi1008@gmail.com', '085798132505', '', 'Alamat', 3, '2021-10-20 22:34:19', NULL, '2021-10-20 22:39:54');
 
 --
 -- Indexes for dumped tables
@@ -300,19 +353,30 @@ INSERT INTO `users` (`user_id`, `user_nama`, `user_tgl_lahir`, `user_jk`, `user_
 -- Indexes for table `kelas`
 --
 ALTER TABLE `kelas`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_kategori` (`kategori_id`),
+  ADD KEY `created_by` (`created_by`),
+  ADD KEY `updated_by` (`updated_by`),
+  ADD KEY `deleted_by` (`deleted_by`);
 
 --
 -- Indexes for table `kelas_kategori`
 --
 ALTER TABLE `kelas_kategori`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `created_by` (`created_by`),
+  ADD KEY `updated_by` (`updated_by`),
+  ADD KEY `deleted_by` (`deleted_by`);
 
 --
 -- Indexes for table `kelas_materi`
 --
 ALTER TABLE `kelas_materi`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `kelas_id` (`kelas_id`),
+  ADD KEY `created_by` (`created_by`),
+  ADD KEY `updated_by` (`updated_by`),
+  ADD KEY `deleted_by` (`deleted_by`);
 
 --
 -- Indexes for table `level`
@@ -324,13 +388,32 @@ ALTER TABLE `level`
 -- Indexes for table `member`
 --
 ALTER TABLE `member`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `parrent_id` (`parrent_id`),
+  ADD KEY `mentor_id` (`mentor_id`),
+  ADD KEY `created_by` (`created_by`),
+  ADD KEY `updated_by` (`updated_by`);
+
+--
+-- Indexes for table `member_kelas`
+--
+ALTER TABLE `member_kelas`
+  ADD KEY `member_id` (`member_id`),
+  ADD KEY `kelas_id` (`kelas_id`),
+  ADD KEY `created_by` (`created_by`),
+  ADD KEY `updated_by` (`updated_by`),
+  ADD KEY `deleted_by` (`deleted_by`);
 
 --
 -- Indexes for table `member_materi_tonton`
 --
 ALTER TABLE `member_materi_tonton`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `kelas_id` (`kelas_id`),
+  ADD KEY `member_id` (`member_id`),
+  ADD KEY `created_by` (`created_by`),
+  ADD KEY `updated_by` (`updated_by`),
+  ADD KEY `kelas_materi_id` (`kelas_materi_id`);
 
 --
 -- Indexes for table `menu`
@@ -342,20 +425,23 @@ ALTER TABLE `menu`
 -- Indexes for table `role_aplikasi`
 --
 ALTER TABLE `role_aplikasi`
-  ADD PRIMARY KEY (`rola_id`);
+  ADD PRIMARY KEY (`rola_id`),
+  ADD KEY `rola_lev_id` (`rola_lev_id`),
+  ADD KEY `rola_menu_id` (`rola_menu_id`);
 
 --
 -- Indexes for table `role_users`
 --
 ALTER TABLE `role_users`
-  ADD PRIMARY KEY (`role_id`);
+  ADD PRIMARY KEY (`role_id`),
+  ADD KEY `role_lev_id` (`role_lev_id`),
+  ADD KEY `role_user_id` (`role_user_id`);
 
 --
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`user_id`),
-  ADD UNIQUE KEY `user_email` (`user_email`);
+  ADD PRIMARY KEY (`user_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -365,19 +451,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `kelas`
 --
 ALTER TABLE `kelas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `kelas_kategori`
 --
 ALTER TABLE `kelas_kategori`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `kelas_materi`
 --
 ALTER TABLE `kelas_materi`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `level`
@@ -389,7 +475,7 @@ ALTER TABLE `level`
 -- AUTO_INCREMENT for table `member`
 --
 ALTER TABLE `member`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `member_materi_tonton`
@@ -401,23 +487,96 @@ ALTER TABLE `member_materi_tonton`
 -- AUTO_INCREMENT for table `menu`
 --
 ALTER TABLE `menu`
-  MODIFY `menu_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=116;
+  MODIFY `menu_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=120;
 
 --
 -- AUTO_INCREMENT for table `role_aplikasi`
 --
 ALTER TABLE `role_aplikasi`
-  MODIFY `rola_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=172;
+  MODIFY `rola_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `role_users`
 --
 ALTER TABLE `role_users`
-  MODIFY `role_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
+  MODIFY `role_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `kelas`
+--
+ALTER TABLE `kelas`
+  ADD CONSTRAINT `kelas_ibfk_1` FOREIGN KEY (`kategori_id`) REFERENCES `kelas_kategori` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `kelas_ibfk_2` FOREIGN KEY (`created_by`) REFERENCES `users` (`user_id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `kelas_ibfk_3` FOREIGN KEY (`updated_by`) REFERENCES `users` (`user_id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `kelas_ibfk_4` FOREIGN KEY (`deleted_by`) REFERENCES `users` (`user_id`) ON DELETE SET NULL ON UPDATE CASCADE;
+
+--
+-- Constraints for table `kelas_kategori`
+--
+ALTER TABLE `kelas_kategori`
+  ADD CONSTRAINT `kelas_kategori_ibfk_1` FOREIGN KEY (`created_by`) REFERENCES `users` (`user_id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `kelas_kategori_ibfk_2` FOREIGN KEY (`updated_by`) REFERENCES `users` (`user_id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `kelas_kategori_ibfk_3` FOREIGN KEY (`deleted_by`) REFERENCES `users` (`user_id`) ON DELETE SET NULL ON UPDATE CASCADE;
+
+--
+-- Constraints for table `kelas_materi`
+--
+ALTER TABLE `kelas_materi`
+  ADD CONSTRAINT `kelas_materi_ibfk_1` FOREIGN KEY (`kelas_id`) REFERENCES `kelas` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `kelas_materi_ibfk_2` FOREIGN KEY (`created_by`) REFERENCES `users` (`user_id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `kelas_materi_ibfk_3` FOREIGN KEY (`updated_by`) REFERENCES `users` (`user_id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `kelas_materi_ibfk_4` FOREIGN KEY (`deleted_by`) REFERENCES `users` (`user_id`) ON DELETE SET NULL ON UPDATE CASCADE;
+
+--
+-- Constraints for table `member`
+--
+ALTER TABLE `member`
+  ADD CONSTRAINT `member_ibfk_1` FOREIGN KEY (`parrent_id`) REFERENCES `member` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `member_ibfk_2` FOREIGN KEY (`mentor_id`) REFERENCES `users` (`user_id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `member_ibfk_3` FOREIGN KEY (`created_by`) REFERENCES `users` (`user_id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `member_ibfk_4` FOREIGN KEY (`updated_by`) REFERENCES `users` (`user_id`) ON DELETE SET NULL ON UPDATE CASCADE;
+
+--
+-- Constraints for table `member_kelas`
+--
+ALTER TABLE `member_kelas`
+  ADD CONSTRAINT `member_kelas_ibfk_1` FOREIGN KEY (`member_id`) REFERENCES `member` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `member_kelas_ibfk_2` FOREIGN KEY (`kelas_id`) REFERENCES `kelas` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `member_kelas_ibfk_3` FOREIGN KEY (`created_by`) REFERENCES `users` (`user_id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `member_kelas_ibfk_4` FOREIGN KEY (`updated_by`) REFERENCES `users` (`user_id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `member_kelas_ibfk_5` FOREIGN KEY (`deleted_by`) REFERENCES `users` (`user_id`) ON DELETE SET NULL ON UPDATE CASCADE;
+
+--
+-- Constraints for table `member_materi_tonton`
+--
+ALTER TABLE `member_materi_tonton`
+  ADD CONSTRAINT `member_materi_tonton_ibfk_1` FOREIGN KEY (`kelas_id`) REFERENCES `kelas` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `member_materi_tonton_ibfk_2` FOREIGN KEY (`member_id`) REFERENCES `member` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `member_materi_tonton_ibfk_3` FOREIGN KEY (`created_by`) REFERENCES `users` (`user_id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `member_materi_tonton_ibfk_4` FOREIGN KEY (`updated_by`) REFERENCES `users` (`user_id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `member_materi_tonton_ibfk_5` FOREIGN KEY (`kelas_materi_id`) REFERENCES `kelas_materi` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `role_aplikasi`
+--
+ALTER TABLE `role_aplikasi`
+  ADD CONSTRAINT `role_aplikasi_ibfk_1` FOREIGN KEY (`rola_lev_id`) REFERENCES `level` (`lev_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `role_aplikasi_ibfk_2` FOREIGN KEY (`rola_menu_id`) REFERENCES `menu` (`menu_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `role_users`
+--
+ALTER TABLE `role_users`
+  ADD CONSTRAINT `role_users_ibfk_1` FOREIGN KEY (`role_lev_id`) REFERENCES `level` (`lev_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `role_users_ibfk_2` FOREIGN KEY (`role_user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;

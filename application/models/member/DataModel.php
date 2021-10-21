@@ -5,9 +5,14 @@ class DataModel extends Render_Model
 {
     public function getAllData($draw = null, $show = null, $start = null, $cari = null, $order = null)
     {
+        $level = $this->config->item('level_mentor');
         // select tabel
-        $this->db->select("a.*, IF(a.status = '2' , 'Tidak Aktif', IF(a.status = '1' , 'Aktif', 'Tidak Diketahui')) as status_str");
+        $this->db->select("a.*,
+        IF(a.status = '0' , 'Tidak Aktif', IF(a.status = '1' , 'Aktif', 'Tidak Diketahui')) as status_str,
+        b.user_nama as mentor
+        ");
         $this->db->from("member a");
+        $this->db->join("users b", 'a.mentor_id = b.user_id', 'left');
         $this->db->where('a.status <>', 3);
 
         // order by
@@ -28,7 +33,11 @@ class DataModel extends Render_Model
 
         // pencarian
         if ($cari != null) {
-            $this->db->where("(a.username LIKE '%$cari%' or a.email LIKE '%$cari%' or a.no_whatsapp LIKE '%$cari%' or IF(a.status = '0' , 'Tidak Aktif', IF(a.status = '1' , 'Aktif', 'Tidak Diketahui')) LIKE '%$cari%')");
+            $this->db->where("(
+                b.user_nama LIKE '%$cari%' or
+                a.nama LIKE '%$cari%' or
+                IF(a.status = '0' , 'Tidak Aktif', IF(a.status = '1' , 'Aktif', 'Tidak Diketahui')) LIKE '%$cari%'
+            )");
         }
 
         // pagination
@@ -40,18 +49,119 @@ class DataModel extends Render_Model
         return $result;
     }
 
-    public function getDataMember($id)
-    {
-        $result = $this->db->get_where("member", ['id' => $id])->row_array();
-        return $result;
+    public function insert(
+        $user_id,
+        $mentor_id,
+        $nama,
+        $nik,
+        $no_telepon,
+        $foto,
+        $tanggal_lahir,
+        $jenis_kelamin,
+        $alamat,
+        $password,
+        $email,
+        $status,
+        $kode_refeal
+    ) {
+        $data = [
+            'mentor_id' => $mentor_id,
+            'nama' => $nama,
+            'nik' => $nik,
+            'no_telepon' => $no_telepon,
+            'foto' => $foto,
+            'token' => uniqid("duahati" . Date('Ymdhis'), false),
+            'tanggal_lahir' => $tanggal_lahir,
+            'jenis_kelamin' => $jenis_kelamin,
+            'alamat' => $alamat,
+            'password' => $this->b_password->bcrypt_hash($password),
+            'email' => $email,
+            'status' => $status,
+            'kode_refeal' => $kode_refeal,
+            'created_by' => $user_id,
+        ];
+        // Insert users
+        $execute = $this->db->insert('member', $data);
+        $execute = $this->db->insert_id();
+        return $execute;
     }
 
-    // dipakai Registrasi
-    public function cari($key)
+    public function update(
+        $user_id,
+        $id,
+        $mentor_id,
+        $nama,
+        $nik,
+        $no_telepon,
+        $foto,
+        $tanggal_lahir,
+        $jenis_kelamin,
+        $alamat,
+        $password,
+        $email,
+        $status,
+        $kode_refeal
+    ) {
+        $data = [
+            'mentor_id' => $mentor_id,
+            'nama' => $nama,
+            'nik' => $nik,
+            'no_telepon' => $no_telepon,
+            'foto' => $foto,
+            'tanggal_lahir' => $tanggal_lahir,
+            'jenis_kelamin' => $jenis_kelamin,
+            'alamat' => $alamat,
+            'email' => $email,
+            'status' => $status,
+            'kode_refeal' => $kode_refeal,
+            'updated_by' => $user_id,
+        ];
+
+        if ($password != '') {
+            $data['password'] = $this->b_password->bcrypt_hash($password);
+        }
+
+        // Update users
+        $execute = $this->db->where('id', $id)->update('member', $data);
+        return  $execute;
+    }
+
+    public function delete($user_id, $id)
     {
-        $this->db->select('a.id as id, a.keterangan as text');
-        $this->db->from('member a');
-        $this->db->where("keterangan LIKE '%$key%' or keterangan LIKE '%$key%' or jumlah_klik LIKE '%$key%'");
-        return $this->db->get()->result_array();
+        // Delete users
+        $exe = $this->db->where('id', $id)->update('member', [
+            'status' => 3,
+            'deleted_by' => $user_id,
+            'deleted_at' => Date("Y-m-d H:i:s", time())
+        ]);
+        return $exe;
+    }
+
+
+    public function emailCheck($email, $id)
+    {
+        return $this->db->select('email')
+            ->from('member')
+            ->where('email', $email)
+            ->where('id <> ', $id)
+            ->where('status <> ', 3)
+            ->get()
+            ->row_array();
+    }
+
+    public function cekKodeRefeal($kode_refeal, $member_id)
+    {
+        return $this->db->select('kode_refeal')
+            ->from('member')
+            ->where('kode_refeal', $kode_refeal)
+            ->where('id <> ', $member_id)
+            ->where('status <> ', 3)
+            ->get()
+            ->row_array();
+    }
+
+    public function getList()
+    {
+        return $this->db->select('id, nama as text')->from('member')->where('status', 1)->get()->result_array();
     }
 }

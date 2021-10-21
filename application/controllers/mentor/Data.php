@@ -44,14 +44,6 @@ class Data extends Render_Controller
         $this->output_json(['recordsTotal' => $count, 'recordsFiltered' => $count, 'draw' => $draw, 'search' => $_cari, 'data' => $data]);
     }
 
-    public function getTeam()
-    {
-        $id = $this->input->get("id");
-        $result = $this->model->getTeam($id);
-        $code = $result ? 200 : 500;
-        $this->output_json(["data" => $result], $code);
-    }
-
     public function insert()
     {
         $this->db->trans_start();
@@ -150,6 +142,14 @@ class Data extends Render_Controller
                 'message' => $status ? 'Email belum digunakan' : 'Email sudah terdaftar'
             ], $code);
         }
+    }
+
+
+    public function getList()
+    {
+        $result = $this->model->getList();
+        $code = $result ? 200 : 500;
+        $this->output_json($result, $code);
     }
 
     function __construct()

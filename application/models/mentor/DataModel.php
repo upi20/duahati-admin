@@ -78,7 +78,6 @@ class DataModel extends Render_Model
         return $exe;
     }
 
-
     public function update($id, $nama, $tanggal_lahir, $jenis_kelamin, $telepon, $email, $password,  $foto, $status, $level, $alamat)
     {
         $data['user_nama'] = $nama;
@@ -111,7 +110,6 @@ class DataModel extends Render_Model
         return $exe;
     }
 
-
     public function delete($id)
     {
         // Delete users
@@ -121,7 +119,6 @@ class DataModel extends Render_Model
         ]);
         return $exe;
     }
-
 
     public function emailCheck($email, $id_user)
     {
@@ -136,11 +133,19 @@ class DataModel extends Render_Model
             ->row_array();
     }
 
-
     public function getDataMember($id)
     {
         $result = $this->db->get_where("member", ['id' => $id])->row_array();
         return $result;
+    }
+
+    public function getList()
+    {
+        $level = $this->config->item('level_mentor');
+        return $this->db->select('user_id as id, user_nama as text')
+            ->join("role_users b", 'a.user_id=b.role_user_id')
+            ->where('b.role_lev_id', $level)
+            ->from('users a')->where('a.user_status', 1)->get()->result_array();
     }
 
     // dipakai Registrasi
