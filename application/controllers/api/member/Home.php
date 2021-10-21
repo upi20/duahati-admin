@@ -6,6 +6,36 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Home extends RestController
 {
+  public function list_slider_get()
+  {
+    $data = $this->model->get_list_slider();
+    $code = $data['data'] == null ?
+      RestController::HTTP_NOT_FOUND
+      : RestController::HTTP_OK;
+    $status = $data['data'] != null;
+
+    $this->response([
+      'status' => $status,
+      'length' => $data['length'],
+      'data' => $data['data']
+    ], $code);
+  }
+
+  public function get_mentor_get()
+  {
+    $data = $this->model->get_mentor_by_member($this->id);
+    $code = $data['data'] == null ?
+      RestController::HTTP_NOT_FOUND
+      : RestController::HTTP_OK;
+    $status = $data['data'] != null;
+
+    $this->response([
+      'status' => $status,
+      'length' => $data['length'],
+      'data' => $data['data']
+    ], $code);
+  }
+
   public function list_pertandingan_get()
   {
     $id = $this->get('id');
@@ -15,7 +45,6 @@ class Home extends RestController
       : RestController::HTTP_OK;
     $status = $data['data'] != null;
 
-    // send response
     $this->response([
       'status' => $status,
       'length' => $data['length'],
@@ -38,7 +67,6 @@ class Home extends RestController
     }
 
     // cek level
-    // Get data
     $userdata = $this->sesion->cek_userdata_api_member($key);
     if ($userdata == null) {
       $this->response([
