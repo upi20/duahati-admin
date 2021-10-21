@@ -1,14 +1,16 @@
 $("#mentor_id").select2({ dropdownParent: $('#tambahModal') });
 const config_max_refeal = 7;
 $(function () {
-    ajax_select(false, '#mentor_id', '<?= base_url(); ?>mentor/data/getList', null, false, 'Pilih Mentor');
+    ajax_select(false, '#mentor_id', '<?= base_url(); ?>mentor/data/getList?id_member=${}', null, false, 'Pilih Mentor');
     function dynamic() {
         const table_html = $('#dt_basic');
         table_html.dataTable().fnDestroy()
         const new_table = table_html.DataTable({
             "ajax": {
                 "url": "<?= base_url()?>member/data/ajax_data/",
-                "data": null,
+                "data": {
+                    member_id: $('#member_id').val()
+                },
                 "type": 'POST'
             },
             "processing": true,
@@ -32,11 +34,15 @@ $(function () {
                         id="btn-gambar"><i class="fas fa-eye"></i></button>`
                     }, className: "nowrap"
                 },
-                // { "data": "jumlah_kelas" },
+                { "data": "kode_refeal" },
+                { "data": "jumlah_kelas" },
                 { "data": "status_str" },
                 {
                     "data": "id", render(data, type, full, meta) {
                         return `<div class="pull-right">
+                        			<a href="<?= base_url()?>member/kelas/${data}" class="btn btn-info btn-xs">
+										<i class="fa fa-list"></i> Kelas
+									</a>
 									<button class="btn btn-primary btn-xs"
                                     data-id="${full.id}"
                                     data-foto="${full.foto}"

@@ -9,7 +9,7 @@
 |
 */
 
-$config['app_name']         = 'Nobar';
+$config['app_name']         = 'Dua Hati Admin';
 
 /*
 |--------------------------------------------------------------------------
@@ -20,7 +20,7 @@ $config['app_name']         = 'Nobar';
 |
 */
 
-$config['copyright']         = '&copy; 2021 Developed by <b>BOBOTOH</b>';
+$config['copyright']         = '&copy; 2021 Developed by <b>Dua Hati</b>';
 
 /*
 |--------------------------------------------------------------------------

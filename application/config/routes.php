@@ -75,3 +75,4 @@ $route['data-master/satuan-harga']      = 'data-master/satuanHarga';
 $route['stok/masuk']      = 'stok/masuk/listMasuk';
 $route['stok/keluar']      = 'stok/keluar/listKeluar';
 
+$route['member/kelas/(:num)'] = 'member/kelas/index/$1';

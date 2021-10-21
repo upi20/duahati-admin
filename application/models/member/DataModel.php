@@ -9,6 +9,7 @@ class DataModel extends Render_Model
         // select tabel
         $this->db->select("a.*,
         IF(a.status = '0' , 'Tidak Aktif', IF(a.status = '1' , 'Aktif', 'Tidak Diketahui')) as status_str,
+        (select count(*) from member_kelas as z where z.status <> 3 and z.member_id = a.id) as jumlah_kelas,
         b.user_nama as mentor
         ");
         $this->db->from("member a");
@@ -36,6 +37,7 @@ class DataModel extends Render_Model
             $this->db->where("(
                 b.user_nama LIKE '%$cari%' or
                 a.nama LIKE '%$cari%' or
+                a.kode_refeal LIKE '%$cari%' or
                 IF(a.status = '0' , 'Tidak Aktif', IF(a.status = '1' , 'Aktif', 'Tidak Diketahui')) LIKE '%$cari%'
             )");
         }

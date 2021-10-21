@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Oct 21, 2021 at 06:07 AM
+-- Generation Time: Oct 21, 2021 at 08:56 AM
 -- Server version: 10.4.20-MariaDB
 -- PHP Version: 7.4.21
 
@@ -41,8 +41,8 @@ CREATE TABLE `kelas` (
 --
 
 INSERT INTO `kelas` (`id`, `kategori_id`, `nama`, `keterangan`, `foto`, `status`, `created_by`, `updated_by`, `deleted_by`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 2, 'Pra Nikah', 'Keterangan', '8244068289ba0be186962db6a2530d7f.png', 1, 1, 1, NULL, '2021-10-21 07:59:52', '2021-10-21 08:00:48', NULL),
-(2, 2, 'Pasca Nikah', 'Ket 2', 'df3e865f96693e30cc47cfc4dafba0dd.png', 1, 1, NULL, NULL, '2021-10-21 08:01:10', NULL, NULL);
+(1, 3, 'Pra Nikah', 'Keterangan', '8244068289ba0be186962db6a2530d7f.png', 1, 1, 1, NULL, '2021-10-21 07:59:52', '2021-10-21 13:50:44', NULL),
+(2, 3, 'Pasca Nikah', 'Ket 2', 'df3e865f96693e30cc47cfc4dafba0dd.png', 1, 1, 1, NULL, '2021-10-21 08:01:10', '2021-10-21 13:50:50', NULL);
 
 -- --------------------------------------------------------
 
@@ -70,7 +70,9 @@ CREATE TABLE `kelas_kategori` (
 
 INSERT INTO `kelas_kategori` (`id`, `nama`, `keterangan`, `foto`, `status`, `created_by`, `updated_by`, `deleted_by`, `created_at`, `updated_at`, `deleted_at`) VALUES
 (1, 'Isep Lutpi Nur', 'keterangan', 'f4fdb45a2d0449b1fc49644b35c6146e.png', 3, 1, 1, 1, '2021-10-21 07:09:27', '2021-10-21 07:38:32', '2021-10-21 07:38:32'),
-(2, 'Kelas Premium', 'Kelas Berbayar Khusus', '', 1, 1, 1, NULL, '2021-10-21 07:20:26', '2021-10-21 07:21:18', NULL);
+(2, NULL, 'null', 'Kelas Premium', 3, 1, 1, 1, '2021-10-21 07:20:26', '2021-10-21 13:48:49', '2021-10-21 13:48:49'),
+(3, 'Premium', 'Premium', '8e2a33b035453798209c969209756cff.png', 1, 1, 1, NULL, '2021-10-21 13:45:01', '2021-10-21 13:50:02', NULL),
+(4, 'Gratis', 'Kelas Gratis', '', 1, 1, NULL, NULL, '2021-10-21 13:50:15', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -92,13 +94,6 @@ CREATE TABLE `kelas_materi` (
   `updated_at` datetime DEFAULT NULL ON UPDATE current_timestamp(),
   `deleted_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `kelas_materi`
---
-
-INSERT INTO `kelas_materi` (`id`, `kelas_id`, `nama`, `url`, `keterangan`, `created_by`, `updated_by`, `deleted_by`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 2, 'Dumy Data ubah', 'https://www.youtube.com/watch?v=hcKwn7PIK_A', 'Ket\r\n1', 1, 1, NULL, 1, '2021-10-21 08:31:45', '2021-10-21 08:36:53', NULL);
 
 -- --------------------------------------------------------
 
@@ -131,7 +126,6 @@ INSERT INTO `level` (`lev_id`, `lev_nama`, `lev_keterangan`, `lev_status`, `crea
 CREATE TABLE `member` (
   `id` int(11) NOT NULL,
   `mentor_id` int(11) DEFAULT NULL,
-  `nik` varchar(255) DEFAULT NULL,
   `nama` varchar(255) DEFAULT NULL,
   `no_telepon` varchar(255) DEFAULT NULL,
   `tanggal_lahir` date DEFAULT NULL,
@@ -155,9 +149,9 @@ CREATE TABLE `member` (
 -- Dumping data for table `member`
 --
 
-INSERT INTO `member` (`id`, `mentor_id`, `nik`, `nama`, `no_telepon`, `tanggal_lahir`, `jenis_kelamin`, `alamat`, `password`, `email`, `foto`, `token`, `parrent_id`, `kode_refeal`, `status`, `created_by`, `updated_by`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(2, 6, NULL, 'Eska Yulinda Rahayu', '085798132505', NULL, NULL, 'Cianjur', '$2y$10$NXyctYJcxQTOVH0qJSgPX.d6W8IowPywTZ0JK08OQs/1jMfk11lCe', 'eskayr@gmail.com', '5a93fd88386b9bb7b9c194a31fd7172b.png', 'duahati202110211058496170e57995b5f', NULL, ' UMJYG7P', 1, 1, 1, '2021-10-21 10:58:49', '2021-10-21 11:05:34', NULL),
-(3, 6, NULL, 'Member 2', '085798132505', NULL, NULL, '', '$2y$10$6.3PXYQx5KKVWQJ5C9cYqeJ5HiyQH9sOSfw2HdyTuEgeX4tUj/gkC', '2@gmail.com', 'f3fcbb4ac7377f576efebf18050e2b11.png', 'duahati202110211106436170e753c600c', NULL, ' FHECNLZ', 1, 1, NULL, '2021-10-21 11:06:43', NULL, NULL);
+INSERT INTO `member` (`id`, `mentor_id`, `nama`, `no_telepon`, `tanggal_lahir`, `jenis_kelamin`, `alamat`, `password`, `email`, `foto`, `token`, `parrent_id`, `kode_refeal`, `status`, `created_by`, `updated_by`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(2, 6, 'Eska Yulinda Rahayu', '085798132505', NULL, NULL, 'Cianjur', '$2y$10$NXyctYJcxQTOVH0qJSgPX.d6W8IowPywTZ0JK08OQs/1jMfk11lCe', 'eskayr@gmail.com', '5a93fd88386b9bb7b9c194a31fd7172b.png', 'duahati202110211058496170e57995b5f', NULL, ' UMJYG7P', 1, 1, 1, '2021-10-21 10:58:49', '2021-10-21 11:05:34', NULL),
+(3, 6, 'Member 2', '085798132505', NULL, NULL, '', '$2y$10$6.3PXYQx5KKVWQJ5C9cYqeJ5HiyQH9sOSfw2HdyTuEgeX4tUj/gkC', '2@gmail.com', 'f3fcbb4ac7377f576efebf18050e2b11.png', 'duahati202110211106436170e753c600c', NULL, ' FHECNLZ', 1, 1, NULL, '2021-10-21 11:06:43', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -172,10 +166,21 @@ CREATE TABLE `member_kelas` (
   `created_by` int(11) DEFAULT NULL,
   `updated_by` int(11) DEFAULT NULL,
   `deleted_by` int(11) DEFAULT NULL,
+  `status` int(11) NOT NULL DEFAULT 1,
   `created_at` datetime NOT NULL DEFAULT current_timestamp(),
   `updated_at` datetime DEFAULT NULL ON UPDATE current_timestamp(),
   `deleted_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `member_kelas`
+--
+
+INSERT INTO `member_kelas` (`id`, `member_id`, `kelas_id`, `created_by`, `updated_by`, `deleted_by`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 2, 1, 1, NULL, NULL, 1, '2021-10-21 13:18:38', NULL, NULL),
+(2, 2, 2, 1, NULL, 1, 3, '2021-10-21 13:29:12', '2021-10-21 13:31:29', '2021-10-21 13:31:29'),
+(3, 2, 2, 1, NULL, 1, 3, '2021-10-21 13:31:35', '2021-10-21 13:40:46', '2021-10-21 13:40:46'),
+(4, 2, 2, 1, NULL, NULL, 0, '2021-10-21 13:40:55', '2021-10-21 13:40:59', NULL);
 
 -- --------------------------------------------------------
 
@@ -398,6 +403,7 @@ ALTER TABLE `member`
 -- Indexes for table `member_kelas`
 --
 ALTER TABLE `member_kelas`
+  ADD PRIMARY KEY (`id`),
   ADD KEY `member_id` (`member_id`),
   ADD KEY `kelas_id` (`kelas_id`),
   ADD KEY `created_by` (`created_by`),
@@ -457,13 +463,13 @@ ALTER TABLE `kelas`
 -- AUTO_INCREMENT for table `kelas_kategori`
 --
 ALTER TABLE `kelas_kategori`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `kelas_materi`
 --
 ALTER TABLE `kelas_materi`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `level`
@@ -476,6 +482,12 @@ ALTER TABLE `level`
 --
 ALTER TABLE `member`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `member_kelas`
+--
+ALTER TABLE `member_kelas`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `member_materi_tonton`

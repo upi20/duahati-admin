@@ -63,10 +63,9 @@ class Kategori extends Render_Controller
         }
         $nama = $this->input->post("nama");
         $keterangan = $this->input->post("keterangan");
-        $kategori_id = $this->input->post("kategori_id");
         $status = $this->input->post("status");
         $user_id = $this->id;
-        $result = $this->model->insert($user_id, $kategori_id, $nama, $keterangan, $foto, $status);
+        $result = $this->model->insert($user_id, $nama, $keterangan, $foto, $status);
 
         $this->db->trans_complete();
         $code = $result ? 200 : 500;
@@ -85,11 +84,10 @@ class Kategori extends Render_Controller
             $foto = $temp_foto;
         }
         $nama = $this->input->post("nama");
-        $kategori_id = $this->input->post("kategori_id");
         $keterangan = $this->input->post("keterangan");
         $status = $this->input->post("status");
         $user_id = $this->id;
-        $result = $this->model->update($id, $user_id, $kategori_id, $nama, $keterangan, $foto, $status);
+        $result = $this->model->update($id, $user_id, $nama, $keterangan, $foto, $status);
         $code = $result ? 200 : 500;
         $this->output_json(["data" => $result], $code);
     }

@@ -15,7 +15,8 @@
                     <th>Nama</th>
                     <th>Email</th>
                     <th>Foto</th>
-                    <!-- <th>Jumlah Kelas</th> -->
+                    <th>K. Refeal</th>
+                    <th>Jml Kelas</th>
                     <th>Status</th>
                     <th>Aksi</th>
                 </tr>
