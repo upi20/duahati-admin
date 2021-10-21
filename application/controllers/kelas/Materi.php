@@ -1,13 +1,13 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Master extends Render_Controller
+class Materi extends Render_Controller
 {
     public function index()
     {
         // Page Settings
-        $this->title = 'Data Kelas';
-        $this->navigation = ['Data Kelas'];
+        $this->title = 'Data Materi';
+        $this->navigation = ['Materi'];
         $this->plugins = ['datatables', 'select2'];
 
         // Breadcrumb setting
@@ -15,10 +15,10 @@ class Master extends Render_Controller
         $this->breadcrumb_1_url = base_url();
         $this->breadcrumb_3 = 'Kelas';
         $this->breadcrumb_3_url = '#';
-        $this->breadcrumb_4 = 'master';
-        $this->breadcrumb_4_url = base_url() . 'kelas/master/list';
+        $this->breadcrumb_4 = 'Materi';
+        $this->breadcrumb_4_url = base_url() . 'kelas/materi/list';
         // content
-        $this->content      = 'kelas/master/list';
+        $this->content      = 'kelas/materi/list';
 
         // Send data to view
         $this->render();
@@ -57,16 +57,19 @@ class Master extends Render_Controller
     {
         $this->db->trans_start();
         $foto = '';
-        if ($_FILES['foto']['name'] != '') {
-            $foto = $this->uploadImage('foto');
-            $foto = $foto['data'];
+        if (isset($_FILES['foto']['name'])) {
+            if ($_FILES['foto']['name'] != '') {
+                $foto = $this->uploadImage('foto');
+                $foto = $foto['data'];
+            }
         }
+        $url = $this->input->post("url");
         $nama = $this->input->post("nama");
-        $kategori_id = $this->input->post("kategori_id");
+        $kelas_id = $this->input->post("kelas_id");
         $keterangan = $this->input->post("keterangan");
         $status = $this->input->post("status");
         $user_id = $this->id;
-        $result = $this->model->insert($user_id, $kategori_id, $nama, $keterangan, $foto, $status);
+        $result = $this->model->insert($user_id, $kelas_id, $nama, $keterangan, $url, $status);
 
         $this->db->trans_complete();
         $code = $result ? 200 : 500;
@@ -77,19 +80,22 @@ class Master extends Render_Controller
     {
         $id = $this->input->post("id");
         $temp_foto = $this->input->post("temp_foto");
-        if ($_FILES['foto']['name'] != '') {
-            $foto = $this->uploadImage('foto');
-            $foto = $foto['data'];
-            $this->deleteFile($temp_foto);
-        } else {
-            $foto = $temp_foto;
+        if (isset($_FILES['foto']['name'])) {
+            if ($_FILES['foto']['name'] != '') {
+                $foto = $this->uploadImage('foto');
+                $foto = $foto['data'];
+                $this->deleteFile($temp_foto);
+            } else {
+                $foto = $temp_foto;
+            }
         }
+        $url = $this->input->post("url");
         $nama = $this->input->post("nama");
-        $kategori_id = $this->input->post("kategori_id");
+        $kelas_id = $this->input->post("kelas_id");
         $keterangan = $this->input->post("keterangan");
         $status = $this->input->post("status");
         $user_id = $this->id;
-        $result = $this->model->update($id, $user_id, $kategori_id, $nama, $keterangan, $foto, $status);
+        $result = $this->model->update($id, $user_id, $kelas_id, $nama, $keterangan, $url, $status);
         $code = $result ? 200 : 500;
         $this->output_json(["data" => $result], $code);
     }
@@ -125,8 +131,8 @@ class Master extends Render_Controller
             redirect('my404', 'refresh');
         }
         $this->id = $this->session->userdata('data')['id'];
-        $this->photo_path = './files/kelas/master/';
-        $this->load->model("kelas/MasterModel", 'model');
+        $this->photo_path = './files/kelas/materi/';
+        $this->load->model("kelas/materiModel", 'model');
         $this->default_template = 'templates/dashboard';
         $this->load->library('plugin');
         $this->load->helper('url');

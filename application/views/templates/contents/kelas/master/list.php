@@ -1,7 +1,7 @@
 <div class="card card-primary card-outline">
     <div class="card-header">
         <div class="d-flex justify-content-between w-100">
-            <h3 class="card-title">List Mentor</h3>
+            <h3 class="card-title">List Kelas</h3>
             <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#tambahModal" id="btn-tambah"><i class="fa fa-plus"></i> Tambah</button>
         </div>
     </div>
@@ -16,7 +16,7 @@
                     <th>Keterangan</th>
                     <th>Icon</th>
                     <th>Materi</th>
-                    <th>Tanggal</th>
+                    <th>Status</th>
                     <th>Aksi</th>
                 </tr>
             </thead>
