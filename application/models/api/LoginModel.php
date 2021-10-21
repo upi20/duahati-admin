@@ -9,7 +9,7 @@ class LoginModel extends Render_Model
 		$query = $this->db->get_where('member', ['email' => $email]);
 		if ($query->num_rows() == 1) {
 
-			$cek = $this->b_password->hash_check($password, $query->row_array()['kata_sandi']);
+			$cek = $this->b_password->hash_check($password, $query->row_array()['password']);
 
 			if ($cek == true) {
 				$return['status'] = 0;
