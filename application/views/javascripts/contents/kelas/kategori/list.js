@@ -4,7 +4,7 @@ $(function () {
         table_html.dataTable().fnDestroy()
         const new_table = table_html.DataTable({
             "ajax": {
-                "url": "<?= base_url()?>mentor/data/ajax_data/",
+                "url": "<?= base_url()?>kelas/kategori/ajax_data/",
                 "data": null,
                 "type": 'POST'
             },
@@ -15,11 +15,10 @@ $(function () {
             "autoWidth": false,
             "columns": [
                 { "data": null },
-                { "data": "user_nama" },
-                { "data": "user_email" },
-                { "data": "user_phone" },
+                { "data": "nama" },
+                { "data": "keterangan" },
                 {
-                    "data": "user_foto", render(data, type, full, meta) {
+                    "data": "foto", render(data, type, full, meta) {
                         return `<button
                         class="btn btn-success btn-sm btn-gambar"
                         data-toggle="modal"
@@ -29,27 +28,17 @@ $(function () {
                         id="btn-gambar"><i class="fas fa-eye"></i></button>`
                     }, className: "nowrap"
                 },
-                { "data": "jumlah_member" },
+                { "data": "jumlah_kelas" },
                 { "data": "status_str" },
                 {
-                    "data": "updated_at", render(data, type, full, meta) {
-                        return data == null || data == '' ? full.created_at : full.updated_at;
-
-                    }, className: "nowrap"
-                },
-                {
-                    "data": "user_id", render(data, type, full, meta) {
+                    "data": "id", render(data, type, full, meta) {
                         return `<div class="pull-right">
 									<button class="btn btn-primary btn-xs"
                                         data-id="${data}"
-                                        data-nama="${full.user_nama}"
-                                        data-tanggal_lahir="${full.user_tgl_lahir}"
-                                        data-jenis_kelamin="${full.user_jk}"
-                                        data-temp_foto="${full.user_foto}"
-                                        data-alamat="${full.alamat}"
-                                        data-email="${full.user_email}"
-                                        data-telepon="${full.user_phone}"
-                                        data-status="${full.user_status}"
+                                        data-nama="${full.nama}"
+                                        data-foto="${full.foto}"
+                                        data-keterangan="${full.keterangan}"
+                                        data-status="${full.status}"
                                         data-toggle="modal" data-target="#tambahModal"
                                     onclick="Ubah(this)">
 										<i class="fa fa-edit"></i> Ubah
@@ -66,7 +55,7 @@ $(function () {
             ],
             columnDefs: [{
                 orderable: false,
-                targets: [0, 7]
+                targets: [0, 6]
             }],
         });
         new_table.on('draw.dt', function () {
@@ -81,17 +70,11 @@ $(function () {
     dynamic();
 
     $("#btn-tambah").click(() => {
-        $("#tambahModalTitle").text("Tambah mentor");
+        $("#tambahModalTitle").text("Tambah Kategori");
         $('#id').val('');
         $('#nama').val('');
-        $('#tanggal_lahir').val('');
-        $('#jenis_kelamin').val('Laki-Laki');
         $('#foto').val('');
-        $('#alamat').val('');
-        $('#email').val('');
-        $('#password').val('123456');
-        $('#password').attr('required', '');
-        $('#telepon').val('');
+        $('#keterangan').val('');
         $('#status').val('1');
     });
 
@@ -102,7 +85,7 @@ $(function () {
         $.LoadingOverlay("show");
         $.ajax({
             method: 'post',
-            url: '<?= base_url() ?>mentor/data/' + ($("#id").val() == "" ? 'insert' : 'update'),
+            url: '<?= base_url() ?>kelas/kategori/' + ($("#id").val() == "" ? 'insert' : 'update'),
             data: form,
             cache: false,
             contentType: false,
@@ -130,7 +113,7 @@ $(function () {
         $.LoadingOverlay("show");
         $.ajax({
             method: 'post',
-            url: '<?= base_url() ?>mentor/data/delete',
+            url: '<?= base_url() ?>kelas/kategori/delete',
             data: {
                 id: id
             }
@@ -150,14 +133,10 @@ $(function () {
             $.LoadingOverlay("hide");
         })
     })
-
-    $("#email").change(function () {
-        emailCheck(this);
-    })
 })
 
 const view_gambar = (datas) => {
-    $("#img-view").attr('src', `<?= base_url() ?>/files/mentor/${datas.dataset.data}`)
+    $("#img-view").attr('src', `<?= base_url() ?>/files/kelas/kategori/${datas.dataset.data}`)
 }
 
 // Click Hapus
@@ -172,50 +151,9 @@ const Hapus = (id) => {
 const Ubah = (datas) => {
     const data = datas.dataset;
     $('#id').val(data.id);
+    $('#temp_foto').val(data.foto);
     $('#nama').val(data.nama);
-    $('#tanggal_lahir').val(data.tanggal_lahir);
-    $('#jenis_kelamin').val(data.jenis_kelamin);
-    $('#foto').val('');
-    $('#temp_foto').val(data.temp_foto);
-    $('#alamat').val(data.alamat);
-    $('#email').val(data.email);
-    $('#telepon').val(data.telepon);
+    $('#keterangan').val(data.keterangan);
     $('#status').val(data.status);
-    $('#password').val('');
-    $('#password').removeAttr('required');
-    $("#tambahModalTitle").text("Ubah mentor");
-}
-
-function emailCheck(email_ele) {
-    const email = $(email_ele);
-    if (email.val() == '') {
-        return;
-    }
-
-    email.attr('readonly', '')
-    $.ajax({
-        url: '<?= base_url() ?>mentor/data/emailCheck',
-        data: {
-            id_user: $('#id').val(),
-            email: email.val()
-        },
-        type: 'post',
-        success: function (data) {
-            Toast.fire({
-                icon: 'success',
-                title: 'Success Email Belum Terdaftar'
-            })
-        },
-        error: function (data) {
-            Toast.fire({
-                icon: 'error',
-                title: data.responseJSON.message
-            })
-            email.val('');
-            email.focus();
-        },
-        complete: function () {
-            email.removeAttr('readonly');
-        }
-    });
+    $("#tambahModalTitle").text("Ubah Kategori");
 }

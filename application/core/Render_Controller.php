@@ -224,8 +224,10 @@ class Render_Controller extends CI_Controller
 	public function deleteFile($file)
 	{
 		$res_foto = true;
-		if (file_exists($this->photo_path . $file)) {
-			$res_foto = unlink($this->photo_path . $file);
+		if ($file != null && $file != '') {
+			if (file_exists($this->photo_path . $file)) {
+				$res_foto = unlink($this->photo_path . $file);
+			}
 		}
 		return $res_foto;
 	}

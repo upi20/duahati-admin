@@ -10,10 +10,12 @@
         <table id="dt_basic" class="table table-bordered table-striped table-hover">
             <thead>
                 <tr>
+                    <th>No</th>
                     <th>Nama Lengkap</th>
                     <th>Email</th>
                     <th>No Whatsapp</th>
                     <th>Photo</th>
+                    <th>Member</th>
                     <th>Status</th>
                     <th>Tanggal</th>
                     <th>Aksi</th>
