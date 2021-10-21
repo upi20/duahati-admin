@@ -8,9 +8,9 @@ class ProfileModel extends Render_Model
   {
     return $this->db->select("
     email as email,
-    username as nama,
-    photo as foto,
-    no_whatsapp as telepon,
+    nama as nama,
+    foto,
+    no_telepon as telepon,
     date(created_at) as since
     ")->from('member')->where('id', $id)->get()->row_array();
   }
@@ -18,8 +18,8 @@ class ProfileModel extends Render_Model
   public function UpdateProfile($id, $nama, $email, $telepon, $password)
   {
     $data = [
-      'username' => $nama,
-      'no_whatsapp' => $telepon,
+      'nama' => $nama,
+      'no_telepon' => $telepon,
       'email' => $email,
       'updated_at' => Date('Y-m-d h:i:s')
     ];
