@@ -1,10 +1,12 @@
+$("#kategori").select2({ dropdownParent: $('#tambahModal') });
 $(function () {
+    ajax_select(false, '#kategori_id', '<?= base_url(); ?>kelas/kategori/getList', null, false, 'Pilih Kategori');
     function dynamic() {
         const table_html = $('#dt_basic');
         table_html.dataTable().fnDestroy()
         const new_table = table_html.DataTable({
             "ajax": {
-                "url": "<?= base_url()?>kelas/kategori/ajax_data/",
+                "url": "<?= base_url()?>kelas/master/ajax_data/",
                 "data": null,
                 "type": 'POST'
             },
@@ -15,6 +17,7 @@ $(function () {
             "autoWidth": false,
             "columns": [
                 { "data": null },
+                { "data": "kategori" },
                 { "data": "nama" },
                 { "data": "keterangan" },
                 {
@@ -28,13 +31,14 @@ $(function () {
                         id="btn-gambar"><i class="fas fa-eye"></i></button>`
                     }, className: "nowrap"
                 },
-                { "data": "jumlah_kelas" },
+                { "data": "jumlah_materi" },
                 { "data": "status_str" },
                 {
                     "data": "id", render(data, type, full, meta) {
                         return `<div class="pull-right">
 									<button class="btn btn-primary btn-xs"
                                         data-id="${data}"
+                                        data-kategori_id="${full.kategori_id}"
                                         data-nama="${full.nama}"
                                         data-foto="${full.foto}"
                                         data-keterangan="${full.keterangan}"
@@ -55,7 +59,7 @@ $(function () {
             ],
             columnDefs: [{
                 orderable: false,
-                targets: [0, 6]
+                targets: [0, 7]
             }],
         });
         new_table.on('draw.dt', function () {
@@ -73,6 +77,7 @@ $(function () {
         $("#tambahModalTitle").text("Tambah Kategori");
         $('#id').val('');
         $('#nama').val('');
+        $('#kategori_id').val('').trigger('change');
         $('#foto').val('');
         $('#keterangan').val('');
         $('#status').val('1');
@@ -85,7 +90,7 @@ $(function () {
         $.LoadingOverlay("show");
         $.ajax({
             method: 'post',
-            url: '<?= base_url() ?>kelas/kategori/' + ($("#id").val() == "" ? 'insert' : 'update'),
+            url: '<?= base_url() ?>kelas/master/' + ($("#id").val() == "" ? 'insert' : 'update'),
             data: form,
             cache: false,
             contentType: false,
@@ -113,7 +118,7 @@ $(function () {
         $.LoadingOverlay("show");
         $.ajax({
             method: 'post',
-            url: '<?= base_url() ?>kelas/kategori/delete',
+            url: '<?= base_url() ?>kelas/master/delete',
             data: {
                 id: id
             }
@@ -136,7 +141,7 @@ $(function () {
 })
 
 const view_gambar = (datas) => {
-    $("#img-view").attr('src', `<?= base_url() ?>/files/kelas/kategori/${datas.dataset.data}`)
+    $("#img-view").attr('src', `<?= base_url() ?>/files/kelas/master/${datas.dataset.data}`)
 }
 
 // Click Hapus
@@ -153,6 +158,7 @@ const Ubah = (datas) => {
     $('#id').val(data.id);
     $('#temp_foto').val(data.foto);
     $('#foto').val('');
+    $('#kategori_id').val(data.kategori_id).trigger('change');
     $('#nama').val(data.nama);
     $('#keterangan').val(data.keterangan);
     $('#status').val(data.status);

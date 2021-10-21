@@ -26,7 +26,6 @@ function ajax_select_kode(btn = { id: '', pretext: '', text: '' }, select, url, 
 		data: data
 	}).done((data) => {
 		const init_select = initial_select != false ? `<option value="">${initial_select}</option>` : '';
-		// console.log(init_select);
 		$(select).html('');
 		let html = init_select;
 		data.forEach(e => {
@@ -57,13 +56,14 @@ function ajax_select(btn = { id: '', pretext: '', text: '' }, select, url, data 
 		data: data
 	}).done((data) => {
 		const init_select = initial_select != false ? `<option value="">${initial_select}</option>` : '';
-		// console.log(init_select);
 		$(select).html('');
 		let html = init_select;
-		data.forEach(e => {
-			const select = e.id == selected ? 'selected' : '';
-			html += `<option value="${e.id}" ${select}>${e.text}</option>`;
-		});
+		if (data != null) {
+			data.forEach(e => {
+				const select = e.id == selected ? 'selected' : '';
+				html += `<option value="${e.id}" ${select}>${e.text}</option>`;
+			});
+		}
 		$(select).html(html);
 		$(modal).modal('toggle');
 	}).fail(($xhr) => {

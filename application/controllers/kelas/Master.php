@@ -1,25 +1,25 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Kategori extends Render_Controller
+class master extends Render_Controller
 {
 
     public function index()
     {
         // Page Settings
-        $this->title = 'Katergori Kelas';
-        $this->navigation = ['Kategori'];
-        $this->plugins = ['datatables'];
+        $this->title = 'Data Kelas';
+        $this->navigation = ['Master'];
+        $this->plugins = ['datatables', 'select2'];
 
         // Breadcrumb setting
         $this->breadcrumb_1 = 'Dashboard';
         $this->breadcrumb_1_url = base_url();
         $this->breadcrumb_3 = 'Kelas';
         $this->breadcrumb_3_url = '#';
-        $this->breadcrumb_4 = 'Kategori';
-        $this->breadcrumb_4_url = base_url() . 'kelas/kategori/list';
+        $this->breadcrumb_4 = 'master';
+        $this->breadcrumb_4_url = base_url() . 'kelas/master/list';
         // content
-        $this->content      = 'kelas/kategori/list';
+        $this->content      = 'kelas/master/list';
 
         // Send data to view
         $this->render();
@@ -46,11 +46,12 @@ class Kategori extends Render_Controller
         $this->output_json(['recordsTotal' => $count, 'recordsFiltered' => $count, 'draw' => $draw, 'search' => $_cari, 'data' => $data]);
     }
 
+
     public function getList()
     {
         $result = $this->model->getList();
         $code = $result ? 200 : 500;
-        $this->output_json($result, $code);
+        $this->output_json(null, $code);
     }
 
     public function insert()
@@ -62,8 +63,8 @@ class Kategori extends Render_Controller
             $foto = $foto['data'];
         }
         $nama = $this->input->post("nama");
-        $keterangan = $this->input->post("keterangan");
         $kategori_id = $this->input->post("kategori_id");
+        $keterangan = $this->input->post("keterangan");
         $status = $this->input->post("status");
         $user_id = $this->id;
         $result = $this->model->insert($user_id, $kategori_id, $nama, $keterangan, $foto, $status);
@@ -125,8 +126,8 @@ class Kategori extends Render_Controller
             redirect('my404', 'refresh');
         }
         $this->id = $this->session->userdata('data')['id'];
-        $this->photo_path = './files/kelas/kategori/';
-        $this->load->model("kelas/KategoriModel", 'model');
+        $this->photo_path = './files/kelas/master/';
+        $this->load->model("kelas/MasterModel", 'model');
         $this->default_template = 'templates/dashboard';
         $this->load->library('plugin');
         $this->load->helper('url');

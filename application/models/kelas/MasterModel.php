@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class KategoriModel extends Render_Model
+class MasterModel extends Render_Model
 {
     public function getAllData($draw = null, $show = null, $start = null, $cari = null, $order = null)
     {
@@ -9,9 +9,11 @@ class KategoriModel extends Render_Model
         // select tabel
         $this->db->select("a.*,
         IF(a.status = '2' , 'Tidak Aktif', IF(a.status = '1' , 'Aktif', 'Tidak Diketahui')) as status_str,
-        ( select count(*) from kelas z where z.kategori_id = a.id and z.status = 1 ) as jumlah_kelas
+        ( select count(*) from kelas_materi z where z.kelas_id = a.id and z.status = 1 ) as jumlah_materi,
+        b.nama as kategori
         ");
-        $this->db->from("kelas_kategori a");
+        $this->db->from("kelas a");
+        $this->db->join("kelas_kategori b", 'a.kategori_id = b.id', 'left');
         $this->db->where('a.status <>', 3);
 
         // order by
@@ -48,26 +50,27 @@ class KategoriModel extends Render_Model
         return $result;
     }
 
-    public function insert($user_id, $nama, $keterangan, $foto, $status)
+    public function insert($user_id, $kategori_id, $nama, $keterangan, $foto, $status)
     {
         $data = [
             'nama' => $nama,
+            'kategori_id' => $kategori_id,
             'keterangan' => $keterangan,
             'status' => $status,
             'foto' => $foto,
             'created_by' => $user_id,
         ];
         // Insert users
-        $execute = $this->db->insert('kelas_kategori', $data);
+        $execute = $this->db->insert('kelas', $data);
         $execute = $this->db->insert_id();
         return $execute;
     }
 
-
-    public function update($id, $user_id, $nama, $keterangan, $foto, $status)
+    public function update($id, $user_id, $kategori_id, $nama, $keterangan, $foto, $status)
     {
         $data = [
             'nama' => $nama,
+            'kategori_id' => $kategori_id,
             'keterangan' => $keterangan,
             'status' => $status,
             'foto' => $foto,
@@ -75,15 +78,14 @@ class KategoriModel extends Render_Model
         ];
         // Update users
         $execute = $this->db->where('id', $id);
-        $execute = $this->db->update('kelas_kategori', $data);
+        $execute = $this->db->update('kelas', $data);
         return  $execute;
     }
-
 
     public function delete($user_id, $id)
     {
         // Delete users
-        $exe = $this->db->where('id', $id)->update('kelas_kategori', [
+        $exe = $this->db->where('id', $id)->update('kelas', [
             'status' => 3,
             'deleted_by' => $user_id,
             'deleted_at' => Date("Y-m-d H:i:s", time())
@@ -93,6 +95,6 @@ class KategoriModel extends Render_Model
 
     public function getList()
     {
-        return $this->db->select('id, nama as text')->from('kelas_kategori')->where('status', 1)->get()->result_array();
+        return $this->db->select('id, nama as text')->from('kelas')->where('status', 1)->get()->result_array();
     }
 }
