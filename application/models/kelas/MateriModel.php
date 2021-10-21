@@ -17,6 +17,7 @@ class MateriModel extends Render_Model
         $this->db->from("kelas_materi a");
         $this->db->join("kelas b", 'a.kelas_id = b.id', 'left');
         $this->db->where('a.status <>', 3);
+        $this->db->order_by('a.no_urut');
 
         // order by
         if ($order['order'] != null) {
@@ -53,12 +54,13 @@ class MateriModel extends Render_Model
         return $result;
     }
 
-    public function insert($user_id, $kelas_id, $nama, $keterangan, $url, $status)
+    public function insert($user_id, $kelas_id, $nama, $keterangan, $url, $no_urut, $status)
     {
         $data = [
             'nama' => $nama,
             'kelas_id' => $kelas_id,
             'keterangan' => $keterangan,
+            'no_urut' => $no_urut,
             'status' => $status,
             'url' => $url,
             'created_by' => $user_id,
@@ -69,12 +71,13 @@ class MateriModel extends Render_Model
         return $execute;
     }
 
-    public function update($id, $user_id, $kelas_id, $nama, $keterangan, $url, $status)
+    public function update($id, $user_id, $kelas_id, $nama, $keterangan, $url, $no_urut, $status)
     {
         $data = [
             'nama' => $nama,
             'kelas_id' => $kelas_id,
             'keterangan' => $keterangan,
+            'no_urut' => $no_urut,
             'status' => $status,
             'url' => $url,
             'updated_by' => $user_id,
@@ -99,5 +102,34 @@ class MateriModel extends Render_Model
     public function getList()
     {
         return $this->db->select('id, nama as text')->from('kelas_materi')->where('status', 1)->get()->result_array();
+    }
+
+    public function noUrut($kelas_id)
+    {
+        $data = $this->db
+            ->select('(max(no_urut)+1) as no_urut')
+            ->from('kelas_materi')
+            ->where('kelas_id', $kelas_id)
+            ->where('status <>', 3)
+            ->get()
+            ->row_array();
+        $data = $data ?? ['no_urut' => 1];
+        $data = $data['no_urut'];
+        $data = $data ?? 1;
+        return $data;
+    }
+
+    public function cekNoUrut($kelas_id, $no)
+    {
+        $data = $this->db
+            ->select('count(*) as found')
+            ->from('kelas_materi')
+            ->where('kelas_id', $kelas_id)
+            ->where('no_urut', $no)
+            ->where('status <>', 3)
+            ->get()
+            ->row_array();
+        $data = $data['found'] == 0;
+        return $data;
     }
 }

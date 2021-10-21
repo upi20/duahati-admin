@@ -1,4 +1,8 @@
-$("#kelas").select2({ dropdownParent: $('#tambahModal') });
+$("#kelas_id").select2({ dropdownParent: $('#tambahModal') });
+let check_no_urut = true;
+let check_no_urut_check = true;
+let no_urut_current = 0;
+let kelas_id_current = 0;
 $(function () {
     ajax_select(false, '#kelas_id', '<?= base_url(); ?>kelas/master/getList', null, false, 'Pilih kelas');
     function dynamic() {
@@ -18,6 +22,7 @@ $(function () {
             "columns": [
                 { "data": null },
                 { "data": "kelas" },
+                { "data": "no_urut" },
                 { "data": "nama" },
                 { "data": "keterangan" },
                 {
@@ -43,6 +48,7 @@ $(function () {
                                         data-url="${full.url}"
                                         data-keterangan="${full.keterangan}"
                                         data-status="${full.status}"
+                                        data-no_urut="${full.no_urut}"
                                         data-toggle="modal" data-target="#tambahModal"
                                     onclick="Ubah(this)">
 										<i class="fa fa-edit"></i> Ubah
@@ -81,6 +87,7 @@ $(function () {
         $('#url').val('');
         $('#keterangan').val('');
         $('#status').val('1');
+        stop_no_urut();
     });
 
     // tambah dan ubah
@@ -138,6 +145,12 @@ $(function () {
             $.LoadingOverlay("hide");
         })
     })
+    $("#kelas_id").change(function () {
+        no_urut_get_new(this.value)
+    })
+    $("#no_urut").change(function () {
+        no_urut_get_check($("#kelas_id").val(), this.value)
+    })
 })
 
 const view_gambar = (datas) => {
@@ -155,8 +168,12 @@ const Hapus = (id) => {
 // Click Ubah
 const Ubah = (datas) => {
     const data = datas.dataset;
+    stop_no_urut(2000);
     $('#id').val(data.id);
     $('#url').val(data.url);
+    $('#no_urut').val(data.no_urut);
+    no_urut_current = data.no_urut;
+    kelas_id_current = data.kelas_id;
     $('#kelas_id').val(data.kelas_id).trigger('change');
     $('#nama').val(data.nama);
     $('#keterangan').val(data.keterangan);
@@ -188,4 +205,66 @@ function youtube_parser(url) {
     var regExp = /^https?\:\/\/(?:www\.youtube(?:\-nocookie)?\.com\/|m\.youtube\.com\/|youtube\.com\/)?(?:ytscreeningroom\?vi?=|youtu\.be\/|vi?\/|user\/.+\/u\/\w{1,2}\/|embed\/|watch\?(?:.*\&)?vi?=|\&vi?=|\?(?:.*\&)?vi?=)([^#\&\?\n\/<>"']*)/i;
     var match = url.match(regExp);
     return (match && match[1].length == 11) ? match[1] : false;
+}
+
+
+function no_urut_get_new(kelas_id) {
+    if (!check_no_urut) {
+        return;
+    }
+    $.ajax({
+        method: 'post',
+        url: '<?= base_url() ?>kelas/materi/noUrut',
+        data: {
+            kelas_id: kelas_id
+        }
+    }).done((data) => {
+        $("#no_urut").val(data);
+    }).fail(($xhr) => {
+        console.log($xhr);
+    })
+}
+
+function no_urut_get_check(kelas_id, no) {
+
+    if (!check_no_urut || (no_urut_current == no && kelas_id_current == kelas_id)) {
+        return;
+    }
+    $.ajax({
+        method: 'post',
+        url: '<?= base_url() ?>kelas/materi/cekNoUrut',
+        data: {
+            kelas_id: kelas_id,
+            no: no,
+        }
+    }).done((data) => {
+        if (data) {
+            Toast.fire({
+                icon: 'success',
+                title: 'No Urut Belum Digunakan'
+            })
+        } else {
+            Toast.fire({
+                icon: 'error',
+                title: 'No Urut Sudah Digunakan'
+            })
+            no_urut_get_new(kelas_id);
+        }
+    }).fail(($xhr) => {
+        console.log($xhr);
+    })
+}
+
+function stop_no_urut(time = 1000) {
+    check_no_urut = false;
+    setTimeout(() => {
+        check_no_urut = true;
+    }, time);
+}
+
+function stop_no_urut_check(time = 1000) {
+    check_no_urut_check = false;
+    setTimeout(() => {
+        check_no_urut_check = true;
+    }, time);
 }

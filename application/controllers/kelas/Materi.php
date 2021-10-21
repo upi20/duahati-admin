@@ -68,8 +68,9 @@ class Materi extends Render_Controller
         $kelas_id = $this->input->post("kelas_id");
         $keterangan = $this->input->post("keterangan");
         $status = $this->input->post("status");
+        $no_urut = $this->input->post("no_urut");
         $user_id = $this->id;
-        $result = $this->model->insert($user_id, $kelas_id, $nama, $keterangan, $url, $status);
+        $result = $this->model->insert($user_id, $kelas_id, $nama, $keterangan, $url, $no_urut, $status);
 
         $this->db->trans_complete();
         $code = $result ? 200 : 500;
@@ -93,9 +94,10 @@ class Materi extends Render_Controller
         $nama = $this->input->post("nama");
         $kelas_id = $this->input->post("kelas_id");
         $keterangan = $this->input->post("keterangan");
+        $no_urut = $this->input->post("no_urut");
         $status = $this->input->post("status");
         $user_id = $this->id;
-        $result = $this->model->update($id, $user_id, $kelas_id, $nama, $keterangan, $url, $status);
+        $result = $this->model->update($id, $user_id, $kelas_id, $nama, $keterangan, $url,  $no_urut, $status);
         $code = $result ? 200 : 500;
         $this->output_json(["data" => $result], $code);
     }
@@ -122,6 +124,24 @@ class Materi extends Render_Controller
             ]);
         }
     }
+
+    public function noUrut()
+    {
+        $kelas_id = $this->input->post('kelas_id');
+        $result = $this->model->noUrut($kelas_id);
+        $code = $result ? 200 : 500;
+        $this->output_json($result, $code);
+    }
+
+    public function cekNoUrut()
+    {
+        $kelas_id = $this->input->post('kelas_id');
+        $no = $this->input->post('no');
+        $result = $this->model->cekNoUrut($kelas_id, $no);
+        $this->output_json($result, 200);
+    }
+
+
 
     function __construct()
     {

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Oct 21, 2021 at 08:56 AM
+-- Generation Time: Oct 22, 2021 at 01:15 AM
 -- Server version: 10.4.20-MariaDB
 -- PHP Version: 7.4.21
 
@@ -14,6 +14,35 @@ SET time_zone = "+00:00";
 --
 -- Database: `duahati`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `home_slider`
+--
+
+CREATE TABLE `home_slider` (
+  `id` int(11) NOT NULL,
+  `nama` varchar(255) DEFAULT NULL,
+  `keterangan` text NOT NULL,
+  `foto` varchar(255) NOT NULL,
+  `status` int(11) DEFAULT NULL,
+  `created_by` int(11) DEFAULT NULL,
+  `updated_by` int(11) DEFAULT NULL,
+  `deleted_by` int(11) DEFAULT NULL,
+  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
+  `updated_at` datetime DEFAULT NULL ON UPDATE current_timestamp(),
+  `deleted_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `home_slider`
+--
+
+INSERT INTO `home_slider` (`id`, `nama`, `keterangan`, `foto`, `status`, `created_by`, `updated_by`, `deleted_by`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(5, 'Slider 1', 'Keterangan Slider 1', 'd99312b8a730e6c274eafcb876d593fc.png', 1, 1, 1, NULL, '2021-10-21 17:36:21', '2021-10-21 17:36:29', NULL),
+(6, 'Slider 2', 'Keterangan Slider 2', 'aae710740d537620922acecc25bcbf14.png', 1, 1, NULL, NULL, '2021-10-21 17:36:47', NULL, NULL),
+(7, 'Slider 3', 'Keterangan Slider 3', 'c4f70ac52686d3af8c5a4e6dd8ef8409.jpg', 1, 1, NULL, NULL, '2021-10-21 17:37:14', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -42,7 +71,8 @@ CREATE TABLE `kelas` (
 
 INSERT INTO `kelas` (`id`, `kategori_id`, `nama`, `keterangan`, `foto`, `status`, `created_by`, `updated_by`, `deleted_by`, `created_at`, `updated_at`, `deleted_at`) VALUES
 (1, 3, 'Pra Nikah', 'Keterangan', '8244068289ba0be186962db6a2530d7f.png', 1, 1, 1, NULL, '2021-10-21 07:59:52', '2021-10-21 13:50:44', NULL),
-(2, 3, 'Pasca Nikah', 'Ket 2', 'df3e865f96693e30cc47cfc4dafba0dd.png', 1, 1, 1, NULL, '2021-10-21 08:01:10', '2021-10-21 13:50:50', NULL);
+(2, 3, 'Pasca Nikah', 'Ket 2', 'df3e865f96693e30cc47cfc4dafba0dd.png', 1, 1, 1, NULL, '2021-10-21 08:01:10', '2021-10-21 13:50:50', NULL),
+(3, 5, 'Belajar Tahsin', 'Serial Belajar Tahsin Yufid.tv', '02a8edb6d1061e88ea069f8454f8780d.jpg', 1, 1, NULL, NULL, '2021-10-22 00:15:28', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -72,7 +102,8 @@ INSERT INTO `kelas_kategori` (`id`, `nama`, `keterangan`, `foto`, `status`, `cre
 (1, 'Isep Lutpi Nur', 'keterangan', 'f4fdb45a2d0449b1fc49644b35c6146e.png', 3, 1, 1, 1, '2021-10-21 07:09:27', '2021-10-21 07:38:32', '2021-10-21 07:38:32'),
 (2, NULL, 'null', 'Kelas Premium', 3, 1, 1, 1, '2021-10-21 07:20:26', '2021-10-21 13:48:49', '2021-10-21 13:48:49'),
 (3, 'Premium', 'Premium', '8e2a33b035453798209c969209756cff.png', 1, 1, 1, NULL, '2021-10-21 13:45:01', '2021-10-21 13:50:02', NULL),
-(4, 'Gratis', 'Kelas Gratis', '', 1, 1, NULL, NULL, '2021-10-21 13:50:15', NULL, NULL);
+(4, 'Gratis', 'Kelas Gratis', '', 1, 1, NULL, NULL, '2021-10-21 13:50:15', NULL, NULL),
+(5, 'Mengaji', '', '', 1, 1, NULL, NULL, '2021-10-22 00:13:52', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -83,6 +114,7 @@ INSERT INTO `kelas_kategori` (`id`, `nama`, `keterangan`, `foto`, `status`, `cre
 CREATE TABLE `kelas_materi` (
   `id` int(11) NOT NULL,
   `kelas_id` int(11) DEFAULT NULL,
+  `no_urut` int(11) NOT NULL,
   `nama` varchar(255) NOT NULL,
   `url` varchar(255) DEFAULT NULL,
   `keterangan` text DEFAULT NULL,
@@ -94,6 +126,17 @@ CREATE TABLE `kelas_materi` (
   `updated_at` datetime DEFAULT NULL ON UPDATE current_timestamp(),
   `deleted_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `kelas_materi`
+--
+
+INSERT INTO `kelas_materi` (`id`, `kelas_id`, `no_urut`, `nama`, `url`, `keterangan`, `created_by`, `updated_by`, `deleted_by`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 3, 1, 'Kewajiban Belajar Tajwid - Ustadz Ulin Nuha', 'https://www.youtube.com/watch?v=qF_HuLMI-B4&list=PLUuYlj8dcEXbyJzGAUYTSCfYr5EqLo0dy&index=1', '', 1, NULL, NULL, 1, '2021-10-22 00:17:45', '2021-10-22 06:05:04', NULL),
+(2, 3, 2, 'Tujuan Mempelajari Ilmu Tajwid - Ustadz M. Ulin Nuha', 'https://www.youtube.com/watch?v=ztfrZn7jBx4&list=PLUuYlj8dcEXbyJzGAUYTSCfYr5EqLo0dy&index=2', '', 1, NULL, NULL, 1, '2021-10-22 00:17:45', '2021-10-22 06:05:07', NULL),
+(3, 3, 3, 'Adab-Adab Membaca Al-Quran - Ustadz M. Ulin Nuha', 'https://www.youtube.com/watch?v=KDt7qcbfb_g&list=PLUuYlj8dcEXbyJzGAUYTSCfYr5EqLo0dy&index=3', '', 1, NULL, NULL, 1, '2021-10-22 00:17:45', '2021-10-22 06:05:10', NULL),
+(4, 3, 4, 'Tingkatan Bacaan Al-Qur\'an', 'https://www.youtube.com/watch?v=6H9T2QvxDCg&list=PLUuYlj8dcEXbyJzGAUYTSCfYr5EqLo0dy&index=4', '', 1, NULL, NULL, 1, '2021-10-22 00:17:45', '2021-10-22 06:05:13', NULL),
+(5, 3, 5, 'Bacaan Ta\'awudz Di Awal Surat - Ustadz M. Ulin Nuha - Serial Pelajaran Tahsin (05)', 'https://www.youtube.com/watch?v=rKtGi3CrWZw&list=PLUuYlj8dcEXbyJzGAUYTSCfYr5EqLo0dy&index=5', '', 1, NULL, NULL, 1, '2021-10-22 00:17:45', '2021-10-22 06:05:16', NULL);
 
 -- --------------------------------------------------------
 
@@ -150,7 +193,7 @@ CREATE TABLE `member` (
 --
 
 INSERT INTO `member` (`id`, `mentor_id`, `nama`, `no_telepon`, `tanggal_lahir`, `jenis_kelamin`, `alamat`, `password`, `email`, `foto`, `token`, `parrent_id`, `kode_refeal`, `status`, `created_by`, `updated_by`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(2, 6, 'Eska Yulinda Rahayu', '085798132505', NULL, NULL, 'Cianjur', '$2y$10$NXyctYJcxQTOVH0qJSgPX.d6W8IowPywTZ0JK08OQs/1jMfk11lCe', 'eskayr@gmail.com', '5a93fd88386b9bb7b9c194a31fd7172b.png', 'duahati202110211058496170e57995b5f', NULL, ' UMJYG7P', 1, 1, 1, '2021-10-21 10:58:49', '2021-10-21 11:05:34', NULL),
+(2, 6, 'Eska Yulinda Rahayu', '085798132505', NULL, NULL, 'Cianjur', '$2y$10$NXyctYJcxQTOVH0qJSgPX.d6W8IowPywTZ0JK08OQs/1jMfk11lCe', 'eskayr@gmail.com', '5a93fd88386b9bb7b9c194a31fd7172b.png', 'duahati202110211058496170e57995b5f', NULL, ' UMJYG7P', 1, 1, 1, '2021-10-21 10:58:49', '2021-10-21 11:38:50', NULL),
 (3, 6, 'Member 2', '085798132505', NULL, NULL, '', '$2y$10$6.3PXYQx5KKVWQJ5C9cYqeJ5HiyQH9sOSfw2HdyTuEgeX4tUj/gkC', '2@gmail.com', 'f3fcbb4ac7377f576efebf18050e2b11.png', 'duahati202110211106436170e753c600c', NULL, ' FHECNLZ', 1, 1, NULL, '2021-10-21 11:06:43', NULL, NULL);
 
 -- --------------------------------------------------------
@@ -177,10 +220,11 @@ CREATE TABLE `member_kelas` (
 --
 
 INSERT INTO `member_kelas` (`id`, `member_id`, `kelas_id`, `created_by`, `updated_by`, `deleted_by`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 2, 1, 1, NULL, NULL, 1, '2021-10-21 13:18:38', NULL, NULL),
+(1, 2, 1, 1, NULL, NULL, 0, '2021-10-21 13:18:38', '2021-10-22 00:16:13', NULL),
 (2, 2, 2, 1, NULL, 1, 3, '2021-10-21 13:29:12', '2021-10-21 13:31:29', '2021-10-21 13:31:29'),
 (3, 2, 2, 1, NULL, 1, 3, '2021-10-21 13:31:35', '2021-10-21 13:40:46', '2021-10-21 13:40:46'),
-(4, 2, 2, 1, NULL, NULL, 0, '2021-10-21 13:40:55', '2021-10-21 13:40:59', NULL);
+(4, 2, 2, 1, NULL, NULL, 0, '2021-10-21 13:40:55', '2021-10-22 00:16:09', NULL),
+(5, 2, 3, 1, NULL, NULL, 1, '2021-10-22 00:16:03', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -193,6 +237,10 @@ CREATE TABLE `member_materi_tonton` (
   `member_id` int(11) DEFAULT NULL,
   `kelas_id` int(11) NOT NULL,
   `kelas_materi_id` int(11) NOT NULL,
+  `materi_feedback_nilai` int(11) NOT NULL,
+  `materi_feedback_keterangan` text NOT NULL,
+  `mentor_feedback_nilai` int(11) NOT NULL,
+  `mentor_feedback_keterangan` text NOT NULL,
   `created_by` int(11) DEFAULT NULL,
   `updated_by` int(11) DEFAULT NULL,
   `created_at` datetime NOT NULL DEFAULT current_timestamp(),
@@ -232,7 +280,7 @@ INSERT INTO `menu` (`menu_id`, `menu_menu_id`, `menu_nama`, `menu_keterangan`, `
 (7, 0, 'Ganti Password', 'Ganti password', 99, 'fa fa-key', 'pengaturan/password', 'Aktif', '2021-06-28 01:34:14'),
 (82, 0, 'Kelas', '-', 4, 'fas fa-book', '#', 'Aktif', '2021-08-25 02:03:41'),
 (97, 2, 'Backup & Reset', '-', 6, 'fa fa-download', 'pengaturan/backupReset', 'Aktif', '2021-10-06 00:41:32'),
-(104, 0, 'Member', '-', 2, 'fa fa-users', 'member/data', 'Aktif', '2021-10-12 11:56:14'),
+(104, 0, 'Member', '-', 3, 'fa fa-users', 'member/data', 'Aktif', '2021-10-12 11:56:14'),
 (105, 0, 'Pertandingan', '-', 3, 'fas fa-list', 'pertandingan/#', 'Aktif', '2021-10-12 11:58:59'),
 (106, 105, 'Master  ', '-', 1, 'far fa-circle', 'pertandingan/jadwal', 'Aktif', '2021-10-12 12:01:09'),
 (107, 105, 'Tebak Score', '-', 2, 'far fa-circle', 'pertandingan/tebakScore', 'Aktif', '2021-10-12 12:01:37'),
@@ -247,7 +295,8 @@ INSERT INTO `menu` (`menu_id`, `menu_menu_id`, `menu_nama`, `menu_keterangan`, `
 (116, 0, 'Mentor', 'Menu Mentor', 3, 'fas fa-fw fa-user', 'mentor/data', 'Aktif', '2021-10-20 12:17:22'),
 (117, 82, 'Data Kelas', '-', 1, 'far fa-circle', 'kelas/master', 'Aktif', '2021-10-20 12:22:56'),
 (118, 82, 'Kategori', '-', 3, 'far fa-circle', 'kelas/kategori', 'Aktif', '2021-10-20 12:23:20'),
-(119, 82, 'Materi', 'Materi Kelas', 2, 'far fa-circle', 'kelas/materi', 'Aktif', '2021-10-21 01:04:35');
+(119, 82, 'Materi', 'Materi Kelas', 2, 'far fa-circle', 'kelas/materi', 'Aktif', '2021-10-21 01:04:35'),
+(120, 0, 'Slider', 'Silder di menu home', 2, 'far fa-image', 'slider/data', 'Aktif', '2021-10-21 10:26:49');
 
 -- --------------------------------------------------------
 
@@ -284,7 +333,8 @@ INSERT INTO `role_aplikasi` (`rola_id`, `rola_menu_id`, `rola_lev_id`, `created_
 (22, 116, 1, '2021-10-20 12:17:30'),
 (23, 117, 1, '2021-10-20 12:23:57'),
 (24, 118, 1, '2021-10-20 12:24:27'),
-(25, 119, 1, '2021-10-21 01:16:17');
+(25, 119, 1, '2021-10-21 01:16:17'),
+(26, 120, 1, '2021-10-21 10:27:08');
 
 -- --------------------------------------------------------
 
@@ -353,6 +403,15 @@ INSERT INTO `users` (`user_id`, `user_nama`, `user_tgl_lahir`, `user_jk`, `user_
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `home_slider`
+--
+ALTER TABLE `home_slider`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `created_by` (`created_by`),
+  ADD KEY `updated_by` (`updated_by`),
+  ADD KEY `deleted_by` (`deleted_by`);
 
 --
 -- Indexes for table `kelas`
@@ -454,22 +513,28 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `home_slider`
+--
+ALTER TABLE `home_slider`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
 -- AUTO_INCREMENT for table `kelas`
 --
 ALTER TABLE `kelas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `kelas_kategori`
 --
 ALTER TABLE `kelas_kategori`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `kelas_materi`
 --
 ALTER TABLE `kelas_materi`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `level`
@@ -487,7 +552,7 @@ ALTER TABLE `member`
 -- AUTO_INCREMENT for table `member_kelas`
 --
 ALTER TABLE `member_kelas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `member_materi_tonton`
@@ -499,13 +564,13 @@ ALTER TABLE `member_materi_tonton`
 -- AUTO_INCREMENT for table `menu`
 --
 ALTER TABLE `menu`
-  MODIFY `menu_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=120;
+  MODIFY `menu_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=121;
 
 --
 -- AUTO_INCREMENT for table `role_aplikasi`
 --
 ALTER TABLE `role_aplikasi`
-  MODIFY `rola_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `rola_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `role_users`

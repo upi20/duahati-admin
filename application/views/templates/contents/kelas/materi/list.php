@@ -12,6 +12,7 @@
                 <tr>
                     <th>No</th>
                     <th>Kelas</th>
+                    <th>No Urut</th>
                     <th>Nama</th>
                     <th>Keterangan</th>
                     <th>Video</th>
@@ -53,12 +54,22 @@
                         <label for="keterangan">Keterangan</label>
                         <textarea cols="3" rows="4" class="form-control" id="keterangan" name="keterangan" placeholder="Keterangan"></textarea>
                     </div>
-                    <div class="form-group">
-                        <label for="status">Status</label>
-                        <select name="status" id="status" class="form-control">
-                            <option value="1">Aktif</option>
-                            <option value="0">Tidak Aktif</option>
-                        </select>
+                    <div class="row">
+                        <div class="col-md 6">
+                            <div class="form-group">
+                                <label for="no_urut">No Urut</label>
+                                <input type="number" class="form-control" id="no_urut" name="no_urut" min="1" placeholder="Nomor Urutan Materi" required />
+                            </div>
+                        </div>
+                        <div class="col-md 6">
+                            <div class="form-group">
+                                <label for="status">Status</label>
+                                <select name="status" id="status" class="form-control">
+                                    <option value="1">Aktif</option>
+                                    <option value="0">Tidak Aktif</option>
+                                </select>
+                            </div>
+                        </div>
                     </div>
                 </form>
             </div>
