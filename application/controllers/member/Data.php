@@ -113,7 +113,6 @@ class Data extends Render_Controller
             $id,
             $mentor_id,
             $nama,
-            $nik,
             $no_telepon,
             $foto,
             $tanggal_lahir,

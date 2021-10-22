@@ -94,7 +94,6 @@ class DataModel extends Render_Model
         $id,
         $mentor_id,
         $nama,
-        // $nik,
         $no_telepon,
         $foto,
         $tanggal_lahir,
