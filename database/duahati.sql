@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Oct 22, 2021 at 01:15 AM
+-- Generation Time: Oct 22, 2021 at 05:56 AM
 -- Server version: 10.4.20-MariaDB
 -- PHP Version: 7.4.21
 
@@ -103,7 +103,7 @@ INSERT INTO `kelas_kategori` (`id`, `nama`, `keterangan`, `foto`, `status`, `cre
 (2, NULL, 'null', 'Kelas Premium', 3, 1, 1, 1, '2021-10-21 07:20:26', '2021-10-21 13:48:49', '2021-10-21 13:48:49'),
 (3, 'Premium', 'Premium', '8e2a33b035453798209c969209756cff.png', 1, 1, 1, NULL, '2021-10-21 13:45:01', '2021-10-21 13:50:02', NULL),
 (4, 'Gratis', 'Kelas Gratis', '', 1, 1, NULL, NULL, '2021-10-21 13:50:15', NULL, NULL),
-(5, 'Mengaji', '', '', 1, 1, NULL, NULL, '2021-10-22 00:13:52', NULL, NULL);
+(5, 'Tahsin', '', '', 1, 1, 1, NULL, '2021-10-22 00:13:52', '2021-10-22 08:43:54', NULL);
 
 -- --------------------------------------------------------
 
@@ -132,7 +132,7 @@ CREATE TABLE `kelas_materi` (
 --
 
 INSERT INTO `kelas_materi` (`id`, `kelas_id`, `no_urut`, `nama`, `url`, `keterangan`, `created_by`, `updated_by`, `deleted_by`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 3, 1, 'Kewajiban Belajar Tajwid - Ustadz Ulin Nuha', 'https://www.youtube.com/watch?v=qF_HuLMI-B4&list=PLUuYlj8dcEXbyJzGAUYTSCfYr5EqLo0dy&index=1', '', 1, NULL, NULL, 1, '2021-10-22 00:17:45', '2021-10-22 06:05:04', NULL),
+(1, 3, 1, 'Kewajiban Belajar Tajwid - Ustadz Ulin Nuha', 'https://www.youtube.com/watch?v=qF_HuLMI-B4&list=PLUuYlj8dcEXbyJzGAUYTSCfYr5EqLo0dy&index=1', 'Keterangan video\r\n', 1, 1, NULL, 1, '2021-10-22 00:17:45', '2021-10-22 08:15:38', NULL),
 (2, 3, 2, 'Tujuan Mempelajari Ilmu Tajwid - Ustadz M. Ulin Nuha', 'https://www.youtube.com/watch?v=ztfrZn7jBx4&list=PLUuYlj8dcEXbyJzGAUYTSCfYr5EqLo0dy&index=2', '', 1, NULL, NULL, 1, '2021-10-22 00:17:45', '2021-10-22 06:05:07', NULL),
 (3, 3, 3, 'Adab-Adab Membaca Al-Quran - Ustadz M. Ulin Nuha', 'https://www.youtube.com/watch?v=KDt7qcbfb_g&list=PLUuYlj8dcEXbyJzGAUYTSCfYr5EqLo0dy&index=3', '', 1, NULL, NULL, 1, '2021-10-22 00:17:45', '2021-10-22 06:05:10', NULL),
 (4, 3, 4, 'Tingkatan Bacaan Al-Qur\'an', 'https://www.youtube.com/watch?v=6H9T2QvxDCg&list=PLUuYlj8dcEXbyJzGAUYTSCfYr5EqLo0dy&index=4', '', 1, NULL, NULL, 1, '2021-10-22 00:17:45', '2021-10-22 06:05:13', NULL),
@@ -224,7 +224,8 @@ INSERT INTO `member_kelas` (`id`, `member_id`, `kelas_id`, `created_by`, `update
 (2, 2, 2, 1, NULL, 1, 3, '2021-10-21 13:29:12', '2021-10-21 13:31:29', '2021-10-21 13:31:29'),
 (3, 2, 2, 1, NULL, 1, 3, '2021-10-21 13:31:35', '2021-10-21 13:40:46', '2021-10-21 13:40:46'),
 (4, 2, 2, 1, NULL, NULL, 0, '2021-10-21 13:40:55', '2021-10-22 00:16:09', NULL),
-(5, 2, 3, 1, NULL, NULL, 1, '2021-10-22 00:16:03', NULL, NULL);
+(5, 2, 3, 1, NULL, NULL, 1, '2021-10-22 00:16:03', NULL, NULL),
+(6, 3, 3, 1, NULL, NULL, 1, '2021-10-22 10:55:09', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -243,10 +244,19 @@ CREATE TABLE `member_materi_tonton` (
   `mentor_feedback_keterangan` text NOT NULL,
   `created_by` int(11) DEFAULT NULL,
   `updated_by` int(11) DEFAULT NULL,
+  `status` int(11) NOT NULL,
   `created_at` datetime NOT NULL DEFAULT current_timestamp(),
   `updated_at` datetime DEFAULT NULL ON UPDATE current_timestamp(),
   `deleted_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `member_materi_tonton`
+--
+
+INSERT INTO `member_materi_tonton` (`id`, `member_id`, `kelas_id`, `kelas_materi_id`, `materi_feedback_nilai`, `materi_feedback_keterangan`, `mentor_feedback_nilai`, `mentor_feedback_keterangan`, `created_by`, `updated_by`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(5, 2, 3, 1, 4, 'Feedback kedua', 4, 'Feedback pertama', NULL, NULL, 1, '2021-10-22 10:52:17', NULL, NULL),
+(6, 3, 3, 1, 5, 'Member 2', 4, 'Member 2', NULL, NULL, 1, '2021-10-22 10:55:27', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -552,13 +562,13 @@ ALTER TABLE `member`
 -- AUTO_INCREMENT for table `member_kelas`
 --
 ALTER TABLE `member_kelas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `member_materi_tonton`
 --
 ALTER TABLE `member_materi_tonton`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `menu`
