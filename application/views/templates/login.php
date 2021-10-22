@@ -40,7 +40,7 @@
     <div class="card card-outline card-primary">
       <div class="card-header text-center">
         <!-- <img src="./assets/favicon/android-chrome-256x256.png" class="rounded mx-auto d-block" style="max-width: 100px;" alt="Logo SIKK"> -->
-        <span class="h5"><b>DuaHAti</b><br>DuaHati Online Course</span>
+        <span class="h5"><b>DuaHati</b><br>DuaHati Online Course</span>
       </div>
       <div class="card-body">
         <form action="" method="post" autocomplete="off" id="form-login">
