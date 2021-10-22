@@ -1,25 +1,30 @@
-<div class="card card-primary card-outline">
-    <div class="card-header">
-        <div class="d-flex justify-content-between w-100">
-            <h3 class="card-title">List Kelas: <?= $user['nama'] ?></h3>
-            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#tambahModal" id="btn-tambah"><i class="fa fa-plus"></i> Tambah</button>
+<div class="row ">
+    <div class="col-lg-6">
+        <div class="card card-primary card-outline">
+            <div class="card-header">
+                <div class="d-flex justify-content-between w-100">
+                    <h3 class="card-title">List Kelas: <?= $user['nama'] ?></h3>
+                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#tambahModal" id="btn-tambah"><i class="fa fa-plus"></i> Tambah</button>
+                </div>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+                <table id="dt_basic" class="table table-bordered table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th style="max-width: 45px;">No</th>
+                            <th>Kelas</th>
+                            <!-- <th>Status</th> -->
+                            <th style="max-width: 100px;">Aksi</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+            <!-- /.card-body -->
         </div>
     </div>
-    <!-- /.card-header -->
-    <div class="card-body">
-        <table id="dt_basic" class="table table-bordered table-striped table-hover">
-            <thead>
-                <tr>
-                    <th>No</th>
-                    <th>Kelas</th>
-                    <th>Status</th>
-                    <th>Aksi</th>
-                </tr>
-            </thead>
-        </table>
-    </div>
-    <!-- /.card-body -->
 </div>
+
 
 
 <div class="modal fade" id="tambahModal" tabindex="-1" role="dialog" aria-labelledby="tambahModalLabel" aria-hidden="true">
@@ -41,7 +46,7 @@
                             </div>
                         </div>
 
-                        <div class="col-lg-12">
+                        <!-- <div class="col-lg-12">
                             <div class="form-group">
                                 <label for="status">Status</label>
                                 <select name="status" id="status" class="form-control">
@@ -49,7 +54,7 @@
                                     <option value="0">Tidak Aktif</option>
                                 </select>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </form>
             </div>

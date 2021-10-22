@@ -41,7 +41,7 @@ $(function () {
                     "data": "id", render(data, type, full, meta) {
                         return `<div class="pull-right">
                         			<a href="<?= base_url()?>member/kelas/${data}" class="btn btn-info btn-xs">
-										<i class="fa fa-list"></i> Kelas
+										<i class="fa fa-list"></i> Kelas VIP
 									</a>
 									<button class="btn btn-primary btn-xs"
                                     data-id="${full.id}"
@@ -69,7 +69,7 @@ $(function () {
             ],
             columnDefs: [{
                 orderable: false,
-                targets: [0, 6]
+                targets: [0, 8]
             }],
         });
         new_table.on('draw.dt', function () {

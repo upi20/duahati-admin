@@ -31,6 +31,7 @@ $(function () {
                         id="btn-gambar"><i class="fas fa-eye"></i></button>`
                     }, className: "nowrap"
                 },
+                { "data": "tipe_str" },
                 { "data": "jumlah_materi" },
                 { "data": "status_str" },
                 {
@@ -42,6 +43,7 @@ $(function () {
                                         data-nama="${full.nama}"
                                         data-foto="${full.foto}"
                                         data-keterangan="${full.keterangan}"
+                                        data-tipe="${full.tipe}"
                                         data-status="${full.status}"
                                         data-toggle="modal" data-target="#tambahModal"
                                     onclick="Ubah(this)">
@@ -80,6 +82,7 @@ $(function () {
         $('#kategori_id').val('').trigger('change');
         $('#foto').val('');
         $('#keterangan').val('');
+        $('#tipe').val('1');
         $('#status').val('1');
     });
 
@@ -161,6 +164,7 @@ const Ubah = (datas) => {
     $('#kategori_id').val(data.kategori_id).trigger('change');
     $('#nama').val(data.nama);
     $('#keterangan').val(data.keterangan);
+    $('#tipe').val(data.tipe);
     $('#status').val(data.status);
     $("#tambahModalTitle").text("Ubah Kategori");
 }

@@ -15,6 +15,7 @@
                     <th>Nama</th>
                     <th>Keterangan</th>
                     <th>Icon</th>
+                    <th>Tipe</th>
                     <th>Materi</th>
                     <th>Status</th>
                     <th>Aksi</th>
@@ -53,13 +54,27 @@
                         <label for="keterangan">Keterangan</label>
                         <textarea cols="3" rows="4" class="form-control" id="keterangan" name="keterangan" placeholder="Keterangan"></textarea>
                     </div>
-                    <div class="form-group">
-                        <label for="status">Status</label>
-                        <select name="status" id="status" class="form-control">
-                            <option value="1">Aktif</option>
-                            <option value="0">Tidak Aktif</option>
-                        </select>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="tipe">Tipe</label>
+                                <select name="tipe" id="tipe" class="form-control">
+                                    <option value="1">Premium</option>
+                                    <option value="2">VIP</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="status">Status</label>
+                                <select name="status" id="status" class="form-control">
+                                    <option value="1">Aktif</option>
+                                    <option value="0">Tidak Aktif</option>
+                                </select>
+                            </div>
+                        </div>
                     </div>
+
                 </form>
             </div>
             <div class="modal-footer">

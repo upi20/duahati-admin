@@ -5,13 +5,13 @@ class KelasModel extends Render_Model
 {
   public function get_list_kelas($id = null)
   {
-    $data = $this->db->select("b.id, b.nama, b.keterangan, b.foto, c.nama as kategori_nama")
-      ->from('member_kelas a')
-      ->join('kelas b', 'a.kelas_id = b.id', 'left')
-      ->join('kelas_kategori c', 'b.kategori_id = c.id', 'left')
-      ->where('a.member_id', $id)
-      ->where('b.status', 1)
-      ->where('a.status', 1);
+    $data = $this->db->select("b.id, b.nama, b.keterangan, b.foto, c.nama as kategori_nama, a.id as member_kelas_id, b.tipe, (if(b.tipe = 2, (
+      select count(*) from member_kelas as z where z.status = 1 and z.member_id = '$id' and z.kelas_id = b.id
+    ), 1)) taken")
+      ->from('kelas b')
+      ->join('member_kelas a', 'a.kelas_id = b.id', 'left')
+      ->join('kelas_kategori c', 'b.kategori_id = c.id', 'left');
+
     $data = $data->get()->result_array();
     $return = [
       'data' => $data,

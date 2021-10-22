@@ -60,10 +60,8 @@ class KelasModel extends Render_Model
         return $this->db
             ->select('a.id, a.nama as text')
             ->from('kelas a')
+            ->where('a.tipe <>', 1)
             ->where('a.status', 1)
-            // ->where("(
-            //     select count(*) from member_kelas as z where (z.member_id = '$member_id' and z.kelas_id = a.id) and z.status <> 3
-            // ) = 0")
             ->get()->result_array();
     }
 
@@ -92,7 +90,7 @@ class KelasModel extends Render_Model
             'kelas_id' => $kelas_id,
             'member_id' => $member_id,
             'kelas_id' => $kelas_id,
-            'status' => $status,
+            // 'status' => $status,
             'created_by' => $user_id,
         ];
 
@@ -118,7 +116,7 @@ class KelasModel extends Render_Model
             'kelas_id' => $kelas_id,
             'member_id' => $member_id,
             'kelas_id' => $kelas_id,
-            'status' => $status,
+            // 'status' => $status,
             'created_by' => $user_id,
         ];
 

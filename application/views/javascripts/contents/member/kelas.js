@@ -22,7 +22,7 @@ $(function () {
             "columns": [
                 { "data": null },
                 { "data": "nama_kelas" },
-                { "data": "status_str" },
+                // { "data": "status_str" },
                 {
                     "data": "id", render(data, type, full, meta) {
                         return `<div class="pull-right">
@@ -46,7 +46,7 @@ $(function () {
             ],
             columnDefs: [{
                 orderable: false,
-                targets: [0, 3]
+                targets: [0, 2]
             }],
         });
         new_table.on('draw.dt', function () {
