@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Oct 22, 2021 at 05:56 AM
+-- Generation Time: Oct 22, 2021 at 08:29 AM
 -- Server version: 10.4.20-MariaDB
 -- PHP Version: 7.4.21
 
@@ -56,6 +56,7 @@ CREATE TABLE `kelas` (
   `nama` varchar(255) DEFAULT NULL,
   `keterangan` text NOT NULL,
   `foto` varchar(255) NOT NULL,
+  `tipe` int(11) NOT NULL DEFAULT 1 COMMENT '1 Premium | 2 VIP',
   `status` int(11) NOT NULL,
   `created_by` int(11) DEFAULT NULL,
   `updated_by` int(11) DEFAULT NULL,
@@ -69,10 +70,10 @@ CREATE TABLE `kelas` (
 -- Dumping data for table `kelas`
 --
 
-INSERT INTO `kelas` (`id`, `kategori_id`, `nama`, `keterangan`, `foto`, `status`, `created_by`, `updated_by`, `deleted_by`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 3, 'Pra Nikah', 'Keterangan', '8244068289ba0be186962db6a2530d7f.png', 1, 1, 1, NULL, '2021-10-21 07:59:52', '2021-10-21 13:50:44', NULL),
-(2, 3, 'Pasca Nikah', 'Ket 2', 'df3e865f96693e30cc47cfc4dafba0dd.png', 1, 1, 1, NULL, '2021-10-21 08:01:10', '2021-10-21 13:50:50', NULL),
-(3, 5, 'Belajar Tahsin', 'Serial Belajar Tahsin Yufid.tv', '02a8edb6d1061e88ea069f8454f8780d.jpg', 1, 1, NULL, NULL, '2021-10-22 00:15:28', NULL, NULL);
+INSERT INTO `kelas` (`id`, `kategori_id`, `nama`, `keterangan`, `foto`, `tipe`, `status`, `created_by`, `updated_by`, `deleted_by`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 3, 'Pra Nikah (VIP)', 'Keterangan', '8244068289ba0be186962db6a2530d7f.png', 2, 1, 1, 1, NULL, '2021-10-21 07:59:52', '2021-10-22 12:33:04', NULL),
+(2, 3, 'Pasca Nikah', 'Ket 2', 'df3e865f96693e30cc47cfc4dafba0dd.png', 1, 1, 1, 1, NULL, '2021-10-21 08:01:10', '2021-10-21 13:50:50', NULL),
+(3, 5, 'Belajar Tahsin', 'Serial Belajar Tahsin Yufid.tv', '02a8edb6d1061e88ea069f8454f8780d.jpg', 2, 1, 1, 1, NULL, '2021-10-22 00:15:28', '2021-10-22 13:01:48', NULL);
 
 -- --------------------------------------------------------
 
@@ -103,7 +104,7 @@ INSERT INTO `kelas_kategori` (`id`, `nama`, `keterangan`, `foto`, `status`, `cre
 (2, NULL, 'null', 'Kelas Premium', 3, 1, 1, 1, '2021-10-21 07:20:26', '2021-10-21 13:48:49', '2021-10-21 13:48:49'),
 (3, 'Premium', 'Premium', '8e2a33b035453798209c969209756cff.png', 1, 1, 1, NULL, '2021-10-21 13:45:01', '2021-10-21 13:50:02', NULL),
 (4, 'Gratis', 'Kelas Gratis', '', 1, 1, NULL, NULL, '2021-10-21 13:50:15', NULL, NULL),
-(5, 'Tahsin', '', '', 1, 1, 1, NULL, '2021-10-22 00:13:52', '2021-10-22 08:43:54', NULL);
+(5, 'Tahsin', 'Keterangan', '', 1, 1, 1, NULL, '2021-10-22 00:13:52', '2021-10-22 12:17:21', NULL);
 
 -- --------------------------------------------------------
 
@@ -220,12 +221,9 @@ CREATE TABLE `member_kelas` (
 --
 
 INSERT INTO `member_kelas` (`id`, `member_id`, `kelas_id`, `created_by`, `updated_by`, `deleted_by`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 2, 1, 1, NULL, NULL, 0, '2021-10-21 13:18:38', '2021-10-22 00:16:13', NULL),
-(2, 2, 2, 1, NULL, 1, 3, '2021-10-21 13:29:12', '2021-10-21 13:31:29', '2021-10-21 13:31:29'),
-(3, 2, 2, 1, NULL, 1, 3, '2021-10-21 13:31:35', '2021-10-21 13:40:46', '2021-10-21 13:40:46'),
-(4, 2, 2, 1, NULL, NULL, 0, '2021-10-21 13:40:55', '2021-10-22 00:16:09', NULL),
-(5, 2, 3, 1, NULL, NULL, 1, '2021-10-22 00:16:03', NULL, NULL),
-(6, 3, 3, 1, NULL, NULL, 1, '2021-10-22 10:55:09', NULL, NULL);
+(7, 3, 1, 1, NULL, 1, 3, '2021-10-22 12:33:21', '2021-10-22 12:46:38', '2021-10-22 12:46:38'),
+(8, 3, 1, 1, NULL, 1, 3, '2021-10-22 12:46:41', '2021-10-22 12:55:30', '2021-10-22 12:55:30'),
+(9, 3, 1, 1, NULL, NULL, 1, '2021-10-22 13:01:10', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -256,7 +254,8 @@ CREATE TABLE `member_materi_tonton` (
 
 INSERT INTO `member_materi_tonton` (`id`, `member_id`, `kelas_id`, `kelas_materi_id`, `materi_feedback_nilai`, `materi_feedback_keterangan`, `mentor_feedback_nilai`, `mentor_feedback_keterangan`, `created_by`, `updated_by`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
 (5, 2, 3, 1, 4, 'Feedback kedua', 4, 'Feedback pertama', NULL, NULL, 1, '2021-10-22 10:52:17', NULL, NULL),
-(6, 3, 3, 1, 5, 'Member 2', 4, 'Member 2', NULL, NULL, 1, '2021-10-22 10:55:27', NULL, NULL);
+(6, 3, 3, 1, 5, 'Member 2', 4, 'Member 2', NULL, NULL, 1, '2021-10-22 10:55:27', NULL, NULL),
+(7, 3, 3, 2, 4, '', 4, '', NULL, NULL, 1, '2021-10-22 11:09:24', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -562,13 +561,13 @@ ALTER TABLE `member`
 -- AUTO_INCREMENT for table `member_kelas`
 --
 ALTER TABLE `member_kelas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `member_materi_tonton`
 --
 ALTER TABLE `member_materi_tonton`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `menu`
