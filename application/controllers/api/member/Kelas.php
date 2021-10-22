@@ -68,6 +68,44 @@ class Kelas extends RestController
     ], $code);
   }
 
+  public function get_materi_get()
+  {
+    $materi_id = $this->input->get('materi_id');
+    $data = $this->model->get_materi($this->id, $materi_id);
+    $code = $data['data'] == null ?
+      RestController::HTTP_NOT_FOUND
+      : RestController::HTTP_OK;
+    $status = $data['data'] != null;
+
+    $this->response([
+      'status' => $status,
+      'length' => $data['length'],
+      'data' => $data['data']
+    ], $code);
+  }
+
+  public function feedback_post()
+  {
+    $kelas_id = $this->input->post('kelas_id');
+    $keterangan_materi = $this->input->post('keterangan_materi');
+    $keterangan_mentor = $this->input->post('keterangan_mentor');
+    $materi_id = $this->input->post('materi_id');
+    $nilai_materi = $this->input->post('nilai_materi');
+    $nilai_mentor = $this->input->post('nilai_mentor');
+    $tonton_id = $this->input->post('tonton_id');
+    $return = $this->model->feedback(
+      $this->id,
+      $kelas_id,
+      $keterangan_materi,
+      $keterangan_mentor,
+      $materi_id,
+      $nilai_materi,
+      $nilai_mentor,
+      $tonton_id
+    );
+    $this->response($return, 200);
+  }
+
 
   function __construct()
   {

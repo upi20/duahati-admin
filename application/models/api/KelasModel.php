@@ -72,12 +72,7 @@ class KelasModel extends Render_Model
       ->where('a.id', $kelas_id)
       ->get()->row_array();
 
-    $mentor = $this->db
-      ->select('b.user_nama as nama, b.user_phone as no_whatsapp, b.user_foto as foto')
-      ->from('member a')
-      ->join('users b', 'a.mentor_id = b.user_id', 'left')
-      ->where('a.id', $member_id)
-      ->get()->row_array();
+    $mentor = $this->get_mentor_by_member($member_id)['data'];
 
     $return = [
       'data' => [
@@ -106,5 +101,78 @@ class KelasModel extends Render_Model
       'length' => $data->num_rows(),
     ];
     return $return;
+  }
+
+  public function get_materi($member_id, $materi_id)
+  {
+    $materi  = $this->db->select('a.id, a.no_urut, a.nama, a.keterangan, a.url, a.kelas_id, (
+      select id from kelas_materi as z where no_urut < a.no_urut and z.kelas_id = a.kelas_id order by no_urut desc limit 1
+      ) as sebelumnya, (
+        select id from kelas_materi as z where no_urut > a.no_urut and z.kelas_id = a.kelas_id limit 1
+      ) as selanjutnya
+    ')
+      ->from('kelas_materi a')
+      ->where('a.id', $materi_id)
+      ->where('a.status', 1)
+      ->get()->row_array();
+
+    $tonton = $this->db->select('id, materi_feedback_nilai, materi_feedback_keterangan, mentor_feedback_nilai, mentor_feedback_keterangan')
+      ->from('member_materi_tonton')
+      ->where('member_id', $member_id)
+      ->where('kelas_materi_id', $materi_id)
+      ->where('status', 1)
+      ->get()->row_array();
+    $return = [
+      'data' => [
+        'materi' => $materi,
+        'tonton' => $tonton,
+      ],
+      'length' => 2,
+    ];
+    return $return;
+  }
+
+  public function feedback(
+    $member_id,
+    $kelas_id,
+    $keterangan_materi,
+    $keterangan_mentor,
+    $materi_id,
+    $nilai_materi,
+    $nilai_mentor,
+    $tonton_id
+  ) {
+    if ($tonton_id == 0) {
+      $data = [
+        'member_id' => $member_id,
+        'kelas_id' => $kelas_id,
+        'kelas_materi_id' => $materi_id,
+        'materi_feedback_nilai' => $nilai_materi,
+        'materi_feedback_keterangan' => $keterangan_materi,
+        'mentor_feedback_nilai' => $nilai_mentor,
+        'mentor_feedback_keterangan' => $keterangan_mentor,
+        'status' => 1,
+        // 'created_by' => $member_id,
+      ];
+      $this->db->insert('member_materi_tonton', $data);
+      return [
+        'status' => true,
+        'id' => $this->db->insert_id(),
+      ];
+    } else {
+      $data = [
+        'materi_feedback_nilai' => $nilai_materi,
+        'materi_feedback_keterangan' => $keterangan_materi,
+        'mentor_feedback_nilai' => $nilai_mentor,
+        'mentor_feedback_keterangan' => $keterangan_mentor,
+        // 'updated_by' => $member_id,
+      ];
+
+      $this->db->where('id', $tonton_id)->update('member_materi_tonton', $data);
+      return [
+        'status' => true,
+        'id' => $tonton_id,
+      ];
+    }
   }
 }
