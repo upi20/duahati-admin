@@ -36,10 +36,10 @@ class Kelas extends RestController
     ], $code);
   }
 
-  public function list_pertandingan_get()
+  public function kelas_head_get()
   {
-    $id = $this->get('id');
-    $data = $this->model->list_pertandingan_detail($id);
+    $kelas_id = $this->input->get('kelas_id');
+    $data = $this->model->kelas_head($this->id, $kelas_id);
     $code = $data['data'] == null ?
       RestController::HTTP_NOT_FOUND
       : RestController::HTTP_OK;
@@ -51,6 +51,23 @@ class Kelas extends RestController
       'data' => $data['data']
     ], $code);
   }
+
+  public function kelas_body_list_get()
+  {
+    $kelas_id = $this->input->get('kelas_id');
+    $data = $this->model->kelas_body_list($this->id, $kelas_id);
+    $code = $data['data'] == null ?
+      RestController::HTTP_NOT_FOUND
+      : RestController::HTTP_OK;
+    $status = $data['data'] != null;
+
+    $this->response([
+      'status' => $status,
+      'length' => $data['length'],
+      'data' => $data['data']
+    ], $code);
+  }
+
 
   function __construct()
   {
