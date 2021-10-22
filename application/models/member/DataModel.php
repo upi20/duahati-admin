@@ -70,7 +70,7 @@ class DataModel extends Render_Model
         $data = [
             'mentor_id' => $mentor_id,
             'nama' => $nama,
-            'nik' => $nik,
+            // 'nik' => $nik,
             'no_telepon' => $no_telepon,
             'foto' => $foto,
             'token' => uniqid("duahati" . Date('Ymdhis'), false),
@@ -94,7 +94,7 @@ class DataModel extends Render_Model
         $id,
         $mentor_id,
         $nama,
-        $nik,
+        // $nik,
         $no_telepon,
         $foto,
         $tanggal_lahir,
@@ -108,7 +108,7 @@ class DataModel extends Render_Model
         $data = [
             'mentor_id' => $mentor_id,
             'nama' => $nama,
-            'nik' => $nik,
+            // 'nik' => $nik,
             'no_telepon' => $no_telepon,
             'foto' => $foto,
             'tanggal_lahir' => $tanggal_lahir,
