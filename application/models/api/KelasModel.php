@@ -3,16 +3,46 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class KelasModel extends Render_Model
 {
-  public function get_list_kelas($id = null)
+  public function get_list_kelas($cari = null)
+  {
+    $data = $this->db->select("b.id, b.nama, b.keterangan, b.foto, c.nama as kategori_nama, a.id as member_kelas_id, b.tipe, '1' as taken, b.status")
+      ->from('kelas b')
+      ->join('member_kelas a', '((a.kelas_id = b.id) and (a.status <> 3))', 'left')
+      ->join('kelas_kategori c', 'b.kategori_id = c.id', 'left')
+      ->where('b.status', 1)
+      ->where('b.tipe', 1);
+
+    if ($cari != null) {
+      $data->where("(
+          b.id LIKE '%$cari%' or
+          b.nama LIKE '%$cari%' or
+          b.keterangan LIKE '%$cari%' or
+          c.nama LIKE '%$cari%' or
+        )");
+    }
+
+
+    $data = $data->get()->result_array();
+    $return = [
+      'data' => $data,
+      'length' => $data == null ? 0 : 1
+    ];
+    return $return;
+  }
+
+  public function get_list_kelas_vip($id = null)
   {
     $data = $this->db->select("b.id, b.nama, b.keterangan, b.foto, c.nama as kategori_nama, a.id as member_kelas_id, b.tipe, (if(b.tipe = 2,(
       select count(*) from member_kelas as z where z.status = 1 and z.member_id = '$id' and z.kelas_id = b.id
     ), 1)) taken, b.status")
       ->from('kelas b')
-      ->join('member_kelas a', '((a.kelas_id = b.id) and (a.status <> 3))', 'left')
+      // ->join('member_kelas a', '((a.kelas_id = b.id) and (a.status <> 3))', 'left') // jika ingin semua kelas kelihatan
+      ->join('member_kelas a', '((a.kelas_id = b.id) and (a.status <> 3))')
       ->join('kelas_kategori c', 'b.kategori_id = c.id', 'left')
       ->where('b.status', 1)
-      ->order_by('taken');
+      ->where('b.tipe', 2)
+      ->group_by('b.id')
+      ->order_by('taken', 'desc');
 
     $data = $data->get()->result_array();
     $return = [
@@ -93,7 +123,7 @@ class KelasModel extends Render_Model
     $data =  $this->db
       ->select("a.id, a.nama, (
         select count(*) from member_materi_tonton as z where z.member_id = '$member_id' and z.kelas_id = '$kelas_id' and z.kelas_materi_id = a.id and z.status = 1
-      ) selesai")
+      ) selesai, url, keterangan")
       ->from('kelas_materi a')
       ->where('a.kelas_id', $kelas_id)
       ->where('a.status', 1)
@@ -177,4 +207,43 @@ class KelasModel extends Render_Model
       ];
     }
   }
+
+  // jaga jaga
+  // public function get_list_kelas($id = null)
+  // {
+  //   $data = $this->db->select("b.id, b.nama, b.keterangan, b.foto, c.nama as kategori_nama, a.id as member_kelas_id, b.tipe, (if(b.tipe = 2,(
+  //     select count(*) from member_kelas as z where z.status = 1 and z.member_id = '$id' and z.kelas_id = b.id
+  //   ), 1)) taken, b.status")
+  //     ->from('kelas b')
+  //     ->join('member_kelas a', '((a.kelas_id = b.id) and (a.status <> 3))', 'left')
+  //     ->join('kelas_kategori c', 'b.kategori_id = c.id', 'left')
+  //     ->where('b.status', 1)
+  //     ->order_by('taken');
+
+  //   $data = $data->get()->result_array();
+  //   $return = [
+  //     'data' => $data,
+  //     'length' => $data == null ? 0 : 1
+  //   ];
+  //   return $return;
+  // }
+
+  // public function get_list_kela_vip($id = null)
+  // {
+  //   $data = $this->db->select("b.id, b.nama, b.keterangan, b.foto, c.nama as kategori_nama, a.id as member_kelas_id, b.tipe, (if(b.tipe = 2,(
+  //     select count(*) from member_kelas as z where z.status = 1 and z.member_id = '$id' and z.kelas_id = b.id
+  //   ), 1)) taken, b.status")
+  //     ->from('kelas b')
+  //     ->join('member_kelas a', '((a.kelas_id = b.id) and (a.status <> 3))', 'left')
+  //     ->join('kelas_kategori c', 'b.kategori_id = c.id', 'left')
+  //     ->where('b.status', 1)
+  //     ->order_by('taken');
+
+  //   $data = $data->get()->result_array();
+  //   $return = [
+  //     'data' => $data,
+  //     'length' => $data == null ? 0 : 1
+  //   ];
+  //   return $return;
+  // }
 }

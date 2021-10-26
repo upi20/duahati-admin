@@ -6,9 +6,23 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Kelas extends RestController
 {
+  public function list_kelas_vip_get()
+  {
+    $data = $this->model->get_list_kelas_vip($this->id);
+    $code = $data['data'] == null ?
+      RestController::HTTP_NOT_FOUND
+      : RestController::HTTP_OK;
+    $status = $data['data'] != null;
+
+    $this->response([
+      'status' => $status,
+      'length' => $data['length'],
+      'data' => $data['data']
+    ], $code);
+  }
   public function list_kelas_get()
   {
-    $data = $this->model->get_list_kelas($this->id);
+    $data = $this->model->get_list_kelas();
     $code = $data['data'] == null ?
       RestController::HTTP_NOT_FOUND
       : RestController::HTTP_OK;
