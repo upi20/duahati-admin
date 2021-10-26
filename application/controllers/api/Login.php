@@ -19,6 +19,7 @@ class Login extends RestController
           'id' => $login['data'][0]['id'],
           'nama' => $login['data'][0]['nama'],
           'email' => $login['data'][0]['email'],
+          'foto' => $login['data'][0]['foto'],
         ];
         $this->response([
           'status' => true,
