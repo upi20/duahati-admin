@@ -123,7 +123,7 @@ class KelasModel extends Render_Model
     $data =  $this->db
       ->select("a.id, a.nama, (
         select count(*) from member_materi_tonton as z where z.member_id = '$member_id' and z.kelas_id = '$kelas_id' and z.kelas_materi_id = a.id and z.status = 1
-      ) selesai, url, keterangan")
+      ) selesai, url, keterangan, kelas_id")
       ->from('kelas_materi a')
       ->where('a.kelas_id', $kelas_id)
       ->where('a.status', 1)
