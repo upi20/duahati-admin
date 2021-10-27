@@ -54,10 +54,7 @@ class Data extends Render_Controller
         }
         $mentor_id = $this->input->post("mentor_id");
         $nama = $this->input->post("nama");
-        $nik = $this->input->post("nik");
         $no_telepon = $this->input->post("no_telepon");
-        $tanggal_lahir = $this->input->post("tanggal_lahir");
-        $jenis_kelamin = $this->input->post("jenis_kelamin");
         $alamat = $this->input->post("alamat");
         $password = $this->input->post("password");
         $email = $this->input->post("email");
@@ -69,11 +66,8 @@ class Data extends Render_Controller
             $this->id,
             $mentor_id,
             $nama,
-            $nik,
             $no_telepon,
             $foto,
-            $tanggal_lahir,
-            $jenis_kelamin,
             $alamat,
             $password,
             $email,
@@ -99,10 +93,7 @@ class Data extends Render_Controller
         }
         $mentor_id = $this->input->post("mentor_id");
         $nama = $this->input->post("nama");
-        $nik = $this->input->post("nik");
         $no_telepon = $this->input->post("no_telepon");
-        $tanggal_lahir = $this->input->post("tanggal_lahir");
-        $jenis_kelamin = $this->input->post("jenis_kelamin");
         $alamat = $this->input->post("alamat");
         $password = $this->input->post("password");
         $email = $this->input->post("email");
@@ -115,8 +106,6 @@ class Data extends Render_Controller
             $nama,
             $no_telepon,
             $foto,
-            $tanggal_lahir,
-            $jenis_kelamin,
             $alamat,
             $password,
             $email,

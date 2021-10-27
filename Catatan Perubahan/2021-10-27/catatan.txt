@@ -1,0 +1,28 @@
+Login [clear]
+Kelas // belum daftar kelas
+  List Kelas [clear]
+  Detail Kelas [clear]
+  Rating kosong bg transparant [clear]
+  kelas kembali [clear]
+
+VIP [clear]
+
+
+Registrasi
+Cek Status Pembayaran by email
+mentor acak (algoritma seperti mentor dengan member sedikit)
+number wa harus menggunakan kode negara biar tidak error
+
+
+
+harga kelas VIP (diskon)
+  Tablenya
+    harga kelas
+    nama
+    keterangan
+    nominal
+    diskon
+    nominal_diskon
+    status
+    tipe []
+    status [0 tidak aktif | 1 aktif]

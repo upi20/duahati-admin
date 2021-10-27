@@ -15,8 +15,9 @@
                     <th>Nama</th>
                     <th>Email</th>
                     <th>Foto</th>
+                    <th>Whatsapp</th>
                     <th>K. Refeal</th>
-                    <th>Jml Kelas</th>
+                    <th>Jml. Kel. VIP</th>
                     <th>Status</th>
                     <th>Aksi</th>
                 </tr>

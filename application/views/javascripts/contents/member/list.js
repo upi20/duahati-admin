@@ -34,6 +34,7 @@ $(function () {
                         id="btn-gambar"><i class="fas fa-eye"></i></button>`
                     }, className: "nowrap"
                 },
+                { "data": "no_telepon" },
                 { "data": "kode_refeal" },
                 { "data": "jumlah_kelas" },
                 { "data": "status_str" },

@@ -7,12 +7,19 @@ class DataModel extends Render_Model
     {
         $level = $this->config->item('level_mentor');
         // select tabel
+        // kelas vip
         $this->db->select("a.*,
         IF(a.status = '0' , 'Tidak Aktif', IF(a.status = '1' , 'Aktif', 'Tidak Diketahui')) as status_str,
-        ((select count(*) from member_kelas as z where z.status <> 3 and z.member_id = a.id) +
-        (select count(*) from kelas as y where y.tipe = 1)) as jumlah_kelas,
+        ((select count(*) from member_kelas as z where z.status <> 3 and z.member_id = a.id)) as jumlah_kelas,
         b.user_nama as mentor
         ");
+        // semua kelas
+        // $this->db->select("a.*,
+        // IF(a.status = '0' , 'Tidak Aktif', IF(a.status = '1' , 'Aktif', 'Tidak Diketahui')) as status_str,
+        // ((select count(*) from member_kelas as z where z.status <> 3 and z.member_id = a.id) +
+        // (select count(*) from kelas as y where y.tipe = 1)) as jumlah_kelas,
+        // b.user_nama as mentor
+        // ");
         $this->db->from("member a");
         $this->db->join("users b", 'a.mentor_id = b.user_id', 'left');
         $this->db->where('a.status <>', 3);
@@ -56,11 +63,8 @@ class DataModel extends Render_Model
         $user_id,
         $mentor_id,
         $nama,
-        $nik,
         $no_telepon,
         $foto,
-        $tanggal_lahir,
-        $jenis_kelamin,
         $alamat,
         $password,
         $email,
@@ -70,12 +74,9 @@ class DataModel extends Render_Model
         $data = [
             'mentor_id' => $mentor_id,
             'nama' => $nama,
-            // 'nik' => $nik,
             'no_telepon' => $no_telepon,
             'foto' => $foto,
             'token' => uniqid("duahati" . Date('Ymdhis'), false),
-            'tanggal_lahir' => $tanggal_lahir,
-            'jenis_kelamin' => $jenis_kelamin,
             'alamat' => $alamat,
             'password' => $this->b_password->bcrypt_hash($password),
             'email' => $email,
@@ -96,8 +97,6 @@ class DataModel extends Render_Model
         $nama,
         $no_telepon,
         $foto,
-        $tanggal_lahir,
-        $jenis_kelamin,
         $alamat,
         $password,
         $email,
@@ -107,11 +106,8 @@ class DataModel extends Render_Model
         $data = [
             'mentor_id' => $mentor_id,
             'nama' => $nama,
-            // 'nik' => $nik,
             'no_telepon' => $no_telepon,
             'foto' => $foto,
-            'tanggal_lahir' => $tanggal_lahir,
-            'jenis_kelamin' => $jenis_kelamin,
             'alamat' => $alamat,
             'email' => $email,
             'status' => $status,
