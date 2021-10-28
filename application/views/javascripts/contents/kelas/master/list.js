@@ -1,13 +1,23 @@
 $("#kategori").select2({ dropdownParent: $('#tambahModal') });
 $(function () {
+    $('#filter-kategori').select2();
+    ajax_select(false, '#filter-kategori', '<?= base_url(); ?>kelas/kategori/getList', null, false, 'Pilih Kategori');
     ajax_select(false, '#kategori_id', '<?= base_url(); ?>kelas/kategori/getList', null, false, 'Pilih Kategori');
-    function dynamic() {
+    function dynamic(datas = {
+        kategori: null,
+    }) {
+        let filter = null;
+        if (datas.kategori != null) {
+            filter = {
+                kategori: datas.kategori,
+            }
+        }
         const table_html = $('#dt_basic');
         table_html.dataTable().fnDestroy()
         const new_table = table_html.DataTable({
             "ajax": {
                 "url": "<?= base_url()?>kelas/master/ajax_data/",
-                "data": null,
+                "data": datas,
                 "type": 'POST'
             },
             "processing": true,
@@ -74,6 +84,14 @@ $(function () {
         });
     }
     dynamic();
+
+    $("#btn-filter").click(() => {
+        $('#stfilter').val(1);
+        const kategori = $('#filter-kategori').val();
+        dynamic({
+            kategori: kategori,
+        });
+    });
 
     $("#btn-tambah").click(() => {
         $("#tambahModalTitle").text("Tambah Kategori");

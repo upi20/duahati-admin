@@ -39,8 +39,13 @@ class Master extends Render_Controller
             $_cari = null;
         }
 
-        $data = $this->model->getAllData($draw, $length, $start, $_cari, $order)->result_array();
-        $count = $this->model->getAllData(null, null, null, $_cari, $order, null)->num_rows();
+        $kategori = $this->input->post('kategori');
+        $filter = [
+            'kategori' => $kategori,
+        ];
+
+        $data = $this->model->getAllData($draw, $length, $start, $_cari, $order, $filter)->result_array();
+        $count = $this->model->getAllData(null, null, null, $_cari, $order, $filter)->num_rows();
 
         $this->output_json(['recordsTotal' => $count, 'recordsFiltered' => $count, 'draw' => $draw, 'search' => $_cari, 'data' => $data]);
     }

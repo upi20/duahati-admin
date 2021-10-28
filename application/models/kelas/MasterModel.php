@@ -3,7 +3,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class MasterModel extends Render_Model
 {
-    public function getAllData($draw = null, $show = null, $start = null, $cari = null, $order = null)
+    public function getAllData($draw = null, $show = null, $start = null, $cari = null, $order = null, $filter = null)
     {
         $level = $this->config->item('level_mentor');
         // select tabel
@@ -31,6 +31,14 @@ class MasterModel extends Render_Model
         // initial data table
         if ($draw == 1) {
             $this->db->limit(10, 0);
+        }
+
+        // filter
+        if ($filter != null) {
+            // by partner
+            if ($filter['kategori'] != '') {
+                $this->db->where('b.id', $filter['kategori']);
+            }
         }
 
         // pencarian

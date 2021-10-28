@@ -1,0 +1,32 @@
+News (List Artikel)
+Tutroial (Sana Kaya kelas Materi)
+Filter Kelas
+  - Data Kelas [Kategori] [clear]
+  - Materi [kategori, Kelas]
+  - Member [mentor]
+
+----------------------------------------------------------------------
+buat tabel new, komentar di db
+News [belum]
+  id
+  foto
+  deskripsi
+  tanggal_terbit
+  publisher
+  created_by
+  updated_by
+  deleted_by
+  status (dibuat, disimpan, diterbitkan, tidak aktif, dihapus)
+  created_at
+  updated_at
+  deleted_at
+
+Komentar [belum]
+    id
+    news_id
+    member_id
+    komentar
+    status (aktif, tidak aktif, dihapus)
+    created_at
+    updated_at
+    deleted_at
