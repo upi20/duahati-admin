@@ -5,10 +5,15 @@ Filter Kelas
   - Materi [kategori, Kelas] [clear]
   - Member [mentor]
 
+CRUD News
+  - Data News
+  - Komentar
+
 ----------------------------------------------------------------------
-buat tabel new, komentar di db
-News [belum]
+buat tabel news, komentar di db
+News [clear]
   id
+  judul
   foto
   deskripsi
   tanggal_terbit
@@ -21,7 +26,7 @@ News [belum]
   updated_at
   deleted_at
 
-Komentar [belum]
+Komentar [clear]
     id
     news_id
     member_id
