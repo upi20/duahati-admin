@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Oct 22, 2021 at 08:29 AM
+-- Generation Time: Oct 28, 2021 at 05:32 AM
 -- Server version: 10.4.20-MariaDB
 -- PHP Version: 7.4.21
 
@@ -14,6 +14,25 @@ SET time_zone = "+00:00";
 --
 -- Database: `duahati`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `harga_pendaftaran`
+--
+
+CREATE TABLE `harga_pendaftaran` (
+  `id` int(11) NOT NULL,
+  `nama` varchar(255) DEFAULT NULL,
+  `jumlah_pembayaran` int(11) DEFAULT NULL,
+  `status` int(11) NOT NULL DEFAULT 0 COMMENT '0 tidak aktif | 1 aktif',
+  `created_by` int(11) DEFAULT NULL,
+  `updated_by` int(11) DEFAULT NULL,
+  `deleted_by` int(11) DEFAULT NULL,
+  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
+  `updated_at` datetime DEFAULT NULL ON UPDATE current_timestamp(),
+  `deleted_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -142,6 +161,32 @@ INSERT INTO `kelas_materi` (`id`, `kelas_id`, `no_urut`, `nama`, `url`, `keteran
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `konfirmasi_pembayaran`
+--
+
+CREATE TABLE `konfirmasi_pembayaran` (
+  `id` int(11) NOT NULL,
+  `member_id` int(11) NOT NULL,
+  `kelas_id` int(11) DEFAULT NULL,
+  `bank_nama` varchar(255) DEFAULT NULL,
+  `no_rekening` varchar(255) DEFAULT NULL,
+  `tanggal` date DEFAULT current_timestamp(),
+  `jumlah_pembayaran` int(11) DEFAULT NULL,
+  `foto` varchar(255) DEFAULT NULL,
+  `jenis` int(11) NOT NULL DEFAULT 1 COMMENT '1 Transfer Bank',
+  `tipe` int(11) NOT NULL DEFAULT 1 COMMENT '1 pembayaran pendaftaran',
+  `status` int(11) NOT NULL DEFAULT 0 COMMENT '0 diajukan | 1 terima | 0 tolak',
+  `created_by` int(11) DEFAULT NULL,
+  `updated_by` int(11) DEFAULT NULL,
+  `deleted_by` int(11) DEFAULT NULL,
+  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
+  `updated_at` datetime DEFAULT NULL ON UPDATE current_timestamp(),
+  `deleted_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `level`
 --
 
@@ -181,7 +226,7 @@ CREATE TABLE `member` (
   `token` varchar(255) DEFAULT NULL,
   `parrent_id` int(11) DEFAULT NULL,
   `kode_refeal` varchar(255) NOT NULL,
-  `status` int(11) DEFAULT NULL,
+  `status` int(11) DEFAULT NULL COMMENT '0 Tidak Aktif | 1 Aktif | 2 Menunggu Pembayaran',
   `created_by` int(11) DEFAULT NULL,
   `updated_by` int(11) DEFAULT NULL,
   `created_at` datetime NOT NULL DEFAULT current_timestamp(),
@@ -195,7 +240,8 @@ CREATE TABLE `member` (
 
 INSERT INTO `member` (`id`, `mentor_id`, `nama`, `no_telepon`, `tanggal_lahir`, `jenis_kelamin`, `alamat`, `password`, `email`, `foto`, `token`, `parrent_id`, `kode_refeal`, `status`, `created_by`, `updated_by`, `created_at`, `updated_at`, `deleted_at`) VALUES
 (2, 6, 'Eska Yulinda Rahayu', '085798132505', NULL, NULL, 'Cianjur', '$2y$10$NXyctYJcxQTOVH0qJSgPX.d6W8IowPywTZ0JK08OQs/1jMfk11lCe', 'eskayr@gmail.com', '5a93fd88386b9bb7b9c194a31fd7172b.png', 'duahati202110211058496170e57995b5f', NULL, ' UMJYG7P', 1, 1, 1, '2021-10-21 10:58:49', '2021-10-21 11:38:50', NULL),
-(3, 6, 'Member 2', '085798132505', NULL, NULL, '', '$2y$10$6.3PXYQx5KKVWQJ5C9cYqeJ5HiyQH9sOSfw2HdyTuEgeX4tUj/gkC', '2@gmail.com', 'f3fcbb4ac7377f576efebf18050e2b11.png', 'duahati202110211106436170e753c600c', NULL, ' FHECNLZ', 1, 1, NULL, '2021-10-21 11:06:43', NULL, NULL);
+(3, 6, 'Member 2', '085798132505', NULL, NULL, '', '$2y$10$6.3PXYQx5KKVWQJ5C9cYqeJ5HiyQH9sOSfw2HdyTuEgeX4tUj/gkC', '2@gmail.com', 'f3fcbb4ac7377f576efebf18050e2b11.png', 'duahati202110211106436170e753c600c', NULL, ' FHECNLZ', 1, 1, NULL, '2021-10-21 11:06:43', NULL, NULL),
+(4, 6, 'Member 3', '085798132505', NULL, NULL, 'Cianjur', '$2y$10$NZaMXT1ZhSJIA245iQoxk.wUfV7j2NZ3CY9sebJaufLQKE1HRBX02', 'member3@gmail.com', '', 'duahati202110270151266178f6ee1b17a', NULL, ' JRNYQGN', 1, 1, NULL, '2021-10-27 13:51:26', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -221,9 +267,10 @@ CREATE TABLE `member_kelas` (
 --
 
 INSERT INTO `member_kelas` (`id`, `member_id`, `kelas_id`, `created_by`, `updated_by`, `deleted_by`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(7, 3, 1, 1, NULL, 1, 3, '2021-10-22 12:33:21', '2021-10-22 12:46:38', '2021-10-22 12:46:38'),
-(8, 3, 1, 1, NULL, 1, 3, '2021-10-22 12:46:41', '2021-10-22 12:55:30', '2021-10-22 12:55:30'),
-(9, 3, 1, 1, NULL, NULL, 1, '2021-10-22 13:01:10', NULL, NULL);
+(12, 2, 1, 1, NULL, 1, 3, '2021-10-27 03:05:20', '2021-10-27 03:05:27', '2021-10-27 03:05:27'),
+(13, 2, 3, 1, NULL, 1, 3, '2021-10-27 03:05:35', '2021-10-27 03:05:50', '2021-10-27 03:05:50'),
+(14, 2, 1, 1, NULL, 1, 3, '2021-10-27 03:05:43', '2021-10-27 03:05:52', '2021-10-27 03:05:52'),
+(15, 2, 3, 1, NULL, NULL, 1, '2021-10-27 03:26:38', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -406,12 +453,21 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`user_id`, `user_nama`, `user_tgl_lahir`, `user_jk`, `user_password`, `user_email`, `user_phone`, `user_foto`, `alamat`, `user_status`, `created_at`, `updated_at`, `deleted_at`) VALUES
 (1, 'Soni Setiawan', NULL, NULL, '$2y$10$7XCVzUlzjXOTMq0s90XfMO6bR7Tb2xZB5LgxL1Lw6o2KqoeAi8Vjq', 'administrator@gmail.com', '08123123', NULL, '', 1, '2020-06-18 02:39:08', '2020-06-18 02:39:08', NULL),
-(6, 'Isep Lutpi Nur', '2000-08-10', 'Laki-Laki', '$2y$10$Qg6RtVNkbkHfqq5qtXT/huWM2p4h5qyAo1aeOxMWJkj5jrlTsjVTC', 'iseplutpi@gmail.com', '085798132505', 'fcf1dcaa2cf63eb7853b6419b0090ec8.jpeg', 'Alamat', 1, '2021-10-20 22:21:07', '2021-10-20 22:59:45', NULL),
+(6, 'Isep Lutpi Nur', '2000-08-10', 'Laki-Laki', '$2y$10$Qg6RtVNkbkHfqq5qtXT/huWM2p4h5qyAo1aeOxMWJkj5jrlTsjVTC', 'iseplutpi@gmail.com', '+6285798132505', '26024ff4a1f5ebcb8998ece4b2dffcf0.png', 'Alamat', 1, '2021-10-20 22:21:07', '2021-10-26 18:51:11', NULL),
 (8, 'Mentor 3', '2000-10-08', 'Laki-Laki', '$2y$10$VCMLcYbOuQF3ySRpK2DF5.z.ao7VYme7IwC5IyKBwOH8aHjFQJSWe', 'iseplutpi1008@gmail.com', '085798132505', '', 'Alamat', 3, '2021-10-20 22:34:19', NULL, '2021-10-20 22:39:54');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `harga_pendaftaran`
+--
+ALTER TABLE `harga_pendaftaran`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `created_by` (`created_by`),
+  ADD KEY `updated_by` (`updated_by`),
+  ADD KEY `deleted_by` (`deleted_by`);
 
 --
 -- Indexes for table `home_slider`
@@ -446,6 +502,17 @@ ALTER TABLE `kelas_kategori`
 --
 ALTER TABLE `kelas_materi`
   ADD PRIMARY KEY (`id`),
+  ADD KEY `kelas_id` (`kelas_id`),
+  ADD KEY `created_by` (`created_by`),
+  ADD KEY `updated_by` (`updated_by`),
+  ADD KEY `deleted_by` (`deleted_by`);
+
+--
+-- Indexes for table `konfirmasi_pembayaran`
+--
+ALTER TABLE `konfirmasi_pembayaran`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `member_id` (`member_id`),
   ADD KEY `kelas_id` (`kelas_id`),
   ADD KEY `created_by` (`created_by`),
   ADD KEY `updated_by` (`updated_by`),
@@ -522,6 +589,12 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `harga_pendaftaran`
+--
+ALTER TABLE `harga_pendaftaran`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `home_slider`
 --
 ALTER TABLE `home_slider`
@@ -546,6 +619,12 @@ ALTER TABLE `kelas_materi`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
+-- AUTO_INCREMENT for table `konfirmasi_pembayaran`
+--
+ALTER TABLE `konfirmasi_pembayaran`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `level`
 --
 ALTER TABLE `level`
@@ -555,13 +634,13 @@ ALTER TABLE `level`
 -- AUTO_INCREMENT for table `member`
 --
 ALTER TABLE `member`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `member_kelas`
 --
 ALTER TABLE `member_kelas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `member_materi_tonton`
@@ -598,6 +677,14 @@ ALTER TABLE `users`
 --
 
 --
+-- Constraints for table `harga_pendaftaran`
+--
+ALTER TABLE `harga_pendaftaran`
+  ADD CONSTRAINT `harga_pendaftaran_ibfk_3` FOREIGN KEY (`created_by`) REFERENCES `users` (`user_id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `harga_pendaftaran_ibfk_4` FOREIGN KEY (`updated_by`) REFERENCES `users` (`user_id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `harga_pendaftaran_ibfk_5` FOREIGN KEY (`deleted_by`) REFERENCES `users` (`user_id`) ON DELETE SET NULL ON UPDATE CASCADE;
+
+--
 -- Constraints for table `kelas`
 --
 ALTER TABLE `kelas`
@@ -622,6 +709,16 @@ ALTER TABLE `kelas_materi`
   ADD CONSTRAINT `kelas_materi_ibfk_2` FOREIGN KEY (`created_by`) REFERENCES `users` (`user_id`) ON DELETE SET NULL ON UPDATE CASCADE,
   ADD CONSTRAINT `kelas_materi_ibfk_3` FOREIGN KEY (`updated_by`) REFERENCES `users` (`user_id`) ON DELETE SET NULL ON UPDATE CASCADE,
   ADD CONSTRAINT `kelas_materi_ibfk_4` FOREIGN KEY (`deleted_by`) REFERENCES `users` (`user_id`) ON DELETE SET NULL ON UPDATE CASCADE;
+
+--
+-- Constraints for table `konfirmasi_pembayaran`
+--
+ALTER TABLE `konfirmasi_pembayaran`
+  ADD CONSTRAINT `konfirmasi_pembayaran_ibfk_1` FOREIGN KEY (`member_id`) REFERENCES `member` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `konfirmasi_pembayaran_ibfk_2` FOREIGN KEY (`kelas_id`) REFERENCES `kelas` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `konfirmasi_pembayaran_ibfk_3` FOREIGN KEY (`created_by`) REFERENCES `member` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `konfirmasi_pembayaran_ibfk_4` FOREIGN KEY (`updated_by`) REFERENCES `users` (`user_id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `konfirmasi_pembayaran_ibfk_5` FOREIGN KEY (`deleted_by`) REFERENCES `users` (`user_id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 --
 -- Constraints for table `member`
@@ -651,18 +748,4 @@ ALTER TABLE `member_materi_tonton`
   ADD CONSTRAINT `member_materi_tonton_ibfk_3` FOREIGN KEY (`created_by`) REFERENCES `users` (`user_id`) ON DELETE SET NULL ON UPDATE CASCADE,
   ADD CONSTRAINT `member_materi_tonton_ibfk_4` FOREIGN KEY (`updated_by`) REFERENCES `users` (`user_id`) ON DELETE SET NULL ON UPDATE CASCADE,
   ADD CONSTRAINT `member_materi_tonton_ibfk_5` FOREIGN KEY (`kelas_materi_id`) REFERENCES `kelas_materi` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `role_aplikasi`
---
-ALTER TABLE `role_aplikasi`
-  ADD CONSTRAINT `role_aplikasi_ibfk_1` FOREIGN KEY (`rola_lev_id`) REFERENCES `level` (`lev_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `role_aplikasi_ibfk_2` FOREIGN KEY (`rola_menu_id`) REFERENCES `menu` (`menu_id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `role_users`
---
-ALTER TABLE `role_users`
-  ADD CONSTRAINT `role_users_ibfk_1` FOREIGN KEY (`role_lev_id`) REFERENCES `level` (`lev_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `role_users_ibfk_2` FOREIGN KEY (`role_user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;

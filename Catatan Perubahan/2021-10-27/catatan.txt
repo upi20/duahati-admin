@@ -26,3 +26,18 @@ harga kelas VIP (diskon)
     status
     tipe []
     status [0 tidak aktif | 1 aktif]
+
+
+
+Duahati
+  halaman belum
+    referral
+
+  hosting
+    mobile: https://mobile.duahati.id
+    backend:
+      https://duahati.id (udah di upload tapi belum ke index)
+      https://duahati-backend.komunitashalal.com/login (sementara pake ini)
+
+
+
