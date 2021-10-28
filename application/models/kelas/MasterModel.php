@@ -35,7 +35,7 @@ class MasterModel extends Render_Model
 
         // filter
         if ($filter != null) {
-            // by partner
+            // by kategori
             if ($filter['kategori'] != '') {
                 $this->db->where('b.id', $filter['kategori']);
             }

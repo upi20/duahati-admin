@@ -4,14 +4,28 @@ let check_no_urut_check = true;
 let no_urut_current = 0;
 let kelas_id_current = 0;
 $(function () {
+    $('#filter-kategori').select2({ dropdownParent: $('#filter') });
+    $('#filter-kelas').select2({ dropdownParent: $('#filter') });
+    ajax_select(false, '#filter-kategori', '<?= base_url(); ?>kelas/kategori/getList', null, false, 'Pilih Kategori');
+    ajax_select(false, '#filter-kelas', '<?= base_url(); ?>kelas/master/getList', null, false, 'Pilih Kelas');
     ajax_select(false, '#kelas_id', '<?= base_url(); ?>kelas/master/getList', null, false, 'Pilih kelas');
-    function dynamic() {
+    function dynamic(datas = {
+        kategori: null,
+        kelas: null,
+    }) {
+        let filter = null;
+        if (datas.kategori != null && datas.kelas != null) {
+            filter = {
+                kategori: datas.kategori,
+                kelas: datas.kelas,
+            }
+        }
         const table_html = $('#dt_basic');
         table_html.dataTable().fnDestroy()
         const new_table = table_html.DataTable({
             "ajax": {
                 "url": "<?= base_url()?>kelas/materi/ajax_data/",
-                "data": null,
+                "data": datas,
                 "type": 'POST'
             },
             "processing": true,
@@ -21,6 +35,7 @@ $(function () {
             "autoWidth": false,
             "columns": [
                 { "data": null },
+                { "data": "kategori" },
                 { "data": "kelas" },
                 { "data": "no_urut" },
                 { "data": "nama" },
@@ -78,6 +93,16 @@ $(function () {
         });
     }
     dynamic();
+
+    $("#btn-filter").click(() => {
+        $('#stfilter').val(1);
+        const kategori = $('#filter-kategori').val();
+        const kelas = $('#filter-kelas').val();
+        dynamic({
+            kategori: kategori,
+            kelas: kelas,
+        });
+    });
 
     $("#btn-tambah").click(() => {
         $("#tambahModalTitle").text("Tambah kelas");

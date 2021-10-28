@@ -3,7 +3,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class MateriModel extends Render_Model
 {
-    public function getAllData($draw = null, $show = null, $start = null, $cari = null, $order = null)
+    public function getAllData($draw = null, $show = null, $start = null, $cari = null, $order = null, $filter = null)
     {
         $level = $this->config->item('level_mentor');
         // select tabel
@@ -12,10 +12,12 @@ class MateriModel extends Render_Model
         b.nama as kelas,
         (
             select count(*) from member_materi_tonton as z where z.kelas_materi_id = a.id
-        ) as jumlah_ditonton
+        ) as jumlah_ditonton,
+        c.nama as kategori
         ");
         $this->db->from("kelas_materi a");
         $this->db->join("kelas b", 'a.kelas_id = b.id', 'left');
+        $this->db->join("kelas_kategori c", 'b.kategori_id = c.id', 'left');
         $this->db->where('a.status <>', 3);
         $this->db->order_by('a.no_urut');
 
@@ -43,6 +45,18 @@ class MateriModel extends Render_Model
                 a.keterangan LIKE '%$cari%' or
                 IF(a.status = '0' , 'Tidak Aktif', IF(a.status = '1' , 'Aktif', 'Tidak Diketahui')) LIKE '%$cari%'
             )");
+        }
+
+        // filter
+        if ($filter != null) {
+            // by kategori
+            if ($filter['kategori'] != '') {
+                $this->db->where('c.id', $filter['kategori']);
+            }
+            // by kelas
+            if ($filter['kelas'] != '') {
+                $this->db->where('b.id', $filter['kelas']);
+            }
         }
 
         // pagination

@@ -1,4 +1,4 @@
-$("#kategori").select2({ dropdownParent: $('#tambahModal') });
+$("#kategori_id").select2({ dropdownParent: $('#tambahModal') });
 $(function () {
     $('#filter-kategori').select2();
     ajax_select(false, '#filter-kategori', '<?= base_url(); ?>kelas/kategori/getList', null, false, 'Pilih Kategori');

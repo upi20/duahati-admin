@@ -2,7 +2,7 @@ News (List Artikel)
 Tutroial (Sana Kaya kelas Materi)
 Filter Kelas
   - Data Kelas [Kategori] [clear]
-  - Materi [kategori, Kelas]
+  - Materi [kategori, Kelas] [clear]
   - Member [mentor]
 
 ----------------------------------------------------------------------
