@@ -59,7 +59,7 @@ class Data extends Render_Controller
         $password = $this->input->post("password");
         $email = $this->input->post("email");
         $status = $this->input->post("status");
-        $kode_refeal = $this->input->post("kode_refeal");
+        $kode_referral = $this->input->post("kode_referral");
         //token, parrent_id
 
         $result = $this->model->insert(
@@ -72,7 +72,7 @@ class Data extends Render_Controller
             $password,
             $email,
             $status,
-            $kode_refeal
+            $kode_referral
         );
 
         $this->db->trans_complete();
@@ -98,7 +98,7 @@ class Data extends Render_Controller
         $password = $this->input->post("password");
         $email = $this->input->post("email");
         $status = $this->input->post("status");
-        $kode_refeal = $this->input->post("kode_refeal");
+        $kode_referral = $this->input->post("kode_referral");
         $result = $this->model->update(
             $this->id,
             $id,
@@ -110,7 +110,7 @@ class Data extends Render_Controller
             $password,
             $email,
             $status,
-            $kode_refeal
+            $kode_referral
         );
         $code = $result ? 200 : 500;
         $this->output_json(["data" => $result], $code);
@@ -166,7 +166,7 @@ class Data extends Render_Controller
         }
     }
 
-    public function cekKodeRefeal()
+    public function cekKodeReferral()
     {
         $this->load->library('form_validation');
         $this->form_validation->set_error_delimiters('', '');
@@ -180,7 +180,7 @@ class Data extends Render_Controller
         } else {
             $email = $this->input->post('kode');
             $member_id = $this->input->post('id');
-            $result = $this->model->cekKodeRefeal($email, $member_id);
+            $result = $this->model->cekKodeReferral($email, $member_id);
 
             $code = $result == null ? 200 : 409;
             $status = $result == null;
@@ -188,7 +188,7 @@ class Data extends Render_Controller
                 'status' => $status,
                 'length' => 1,
                 'data' =>  $result,
-                'message' => $status ? 'Kode Refeal belum digunakan' : 'Kode Refeal sudah terdaftar'
+                'message' => $status ? 'Kode Referral belum digunakan' : 'Kode Referral sudah terdaftar'
             ], $code);
         }
     }

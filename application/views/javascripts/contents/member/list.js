@@ -1,7 +1,7 @@
 $("#mentor_id").select2({ dropdownParent: $('#tambahModal') });
-const config_max_refeal = 7;
+const config_max_referral = 7;
 $(function () {
-    ajax_select(false, '#mentor_id', '<?= base_url(); ?>mentor/data/getList?id_member=${}', null, false, 'Pilih Mentor');
+    ajax_select(false, '#mentor_id', '<?= base_url(); ?>mentor/data/getList', null, false, 'Pilih Mentor');
     function dynamic() {
         const table_html = $('#dt_basic');
         table_html.dataTable().fnDestroy()
@@ -15,7 +15,7 @@ $(function () {
             },
             "processing": true,
             "serverSide": true,
-            "responsive": true,
+            "scrollX": true,
             "lengthChange": true,
             "autoWidth": false,
             "columns": [
@@ -35,13 +35,29 @@ $(function () {
                     }, className: "nowrap"
                 },
                 { "data": "no_telepon" },
-                { "data": "kode_refeal" },
+                { "data": "kode_referral" },
                 { "data": "jumlah_kelas" },
-                { "data": "status_str" },
+                {
+                    "data": "status_str", render(data, type, full, meta) {
+                        let color = 'success';
+                        color = full.status == 0 ? 'danger' : color;
+                        color = full.status == 2 ? 'warning' : color;
+                        return `<span class="text-${color} font-weight-bold">${data}</span>`;
+                    }
+                },
                 {
                     "data": "id", render(data, type, full, meta) {
+                        let btn_pembayaran = '';
+                        if (full.jumlah_pembayaran > 0) {
+                            btn_pembayaran = `
+                            <a href="<?= base_url()?>member/pembayaran/${data}" class="btn btn-warning btn-xs">
+								<i class="fa fa-check"></i> Pembayaran
+							</a>
+                            `;
+                        }
                         return `<div class="pull-right">
-                        			<a href="<?= base_url()?>member/kelas/${data}" class="btn btn-info btn-xs">
+                                    ${btn_pembayaran}
+                                    <a href="<?= base_url()?>member/kelas/${data}" class="btn btn-info btn-xs">
 										<i class="fa fa-list"></i> Kelas VIP
 									</a>
 									<button class="btn btn-primary btn-xs"
@@ -53,7 +69,7 @@ $(function () {
                                     data-no_telepon="${full.no_telepon == null ? '' : full.no_telepon}"
                                     data-alamat="${full.alamat}"
                                     data-status="${full.status}"
-                                    data-kode_refeal="${full.kode_refeal}"
+                                    data-kode_referral="${full.kode_referral}"
                                         data-toggle="modal" data-target="#tambahModal"
                                     onclick="Ubah(this)">
 										<i class="fa fa-edit"></i> Ubah
@@ -62,7 +78,7 @@ $(function () {
 										<i class="fa fa-trash"></i> Hapus
 									</button>
 								</div>`
-                    }, className: "nowrap"
+                    }
                 }
             ],
             order: [
@@ -96,34 +112,34 @@ $(function () {
         $('#password').attr('required', '');
         $('#alamat').val('');
         $('#status').val('1');
-        generateRefeal(config_max_refeal, '#kode_refeal');
+        generateReferral(config_max_referral, '#kode_referral');
     });
 
-    $("#kode_refeal").change(function () {
+    $("#kode_referral").change(function () {
         const val = $(this).val();
         if (val == '') {
             Toast.fire({
                 icon: 'error',
-                title: 'Kode Refeal Tidak Boleh Kosong'
+                title: 'Kode Referral Tidak Boleh Kosong'
             })
             $(this).focus();
             return;
         }
 
-        if (val.length > config_max_refeal) {
+        if (val.length > config_max_referral) {
             Toast.fire({
                 icon: 'error',
-                title: `Kode Refeal Tidak boleh lebih dari ${config_max_refeal} huruf`
+                title: `Kode Referral Tidak boleh lebih dari ${config_max_referral} huruf`
             })
-            $(this).val((new String($(this).val())).substring(0, config_max_refeal + 1));
+            $(this).val((new String($(this).val())).substring(0, config_max_referral));
             $(this).focus();
             return;
         }
 
-        checkKodeRefeal(val, false, this, true);
+        checkKodeReferral(val, false, this, true);
     })
 
-    $('#kode_refeal').keypress(function (e) {
+    $('#kode_referral').keypress(function (e) {
         var regex = new RegExp("^[a-zA-Z0-9]+$");
         var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
         if (regex.test(str)) {
@@ -133,7 +149,7 @@ $(function () {
         return false;
     });
 
-    $("#kode_refeal").keyup(function () {
+    $("#kode_referral").keyup(function () {
         $(this).val(new String(this.value).toLocaleUpperCase());
     })
 
@@ -221,7 +237,7 @@ const Ubah = (datas) => {
     $('#foto').val('');
     $('#email').val(data.email);
     $('#no_telepon').val(data.no_telepon);
-    $('#kode_refeal').val(data.kode_refeal);
+    $('#kode_referral').val(data.kode_referral);
     $('#password').val('');
     $('#password').removeAttr('required');
     $('#alamat').val(data.alamat);
@@ -233,7 +249,7 @@ const Ubah = (datas) => {
 
 function generatorString(length) {
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-    let result = ' ';
+    let result = '';
     const charactersLength = characters.length;
     for (let i = 0; i < length; i++) {
         result += characters.charAt(Math.floor(Math.random() * charactersLength));
@@ -241,16 +257,16 @@ function generatorString(length) {
     return result;
 }
 
-function generateRefeal(length, element) {
-    const new_refeal = generatorString(length);
-    checkKodeRefeal(new_refeal, length, element, false, true);
+function generateReferral(length, element) {
+    const new_referral = generatorString(length);
+    checkKodeReferral(new_referral, length, element, false, true);
 }
 
 
-function checkKodeRefeal(kode, length, element = false, notif = false, init = false) {
+function checkKodeReferral(kode, length, element = false, notif = false, init = false) {
     $.ajax({
         method: 'post',
-        url: '<?= base_url() ?>member/data/cekKodeRefeal',
+        url: '<?= base_url() ?>member/data/cekKodeReferral',
         data: {
             kode: kode,
             id: $("#id").val(),
@@ -259,7 +275,7 @@ function checkKodeRefeal(kode, length, element = false, notif = false, init = fa
         if (notif) {
             Toast.fire({
                 icon: 'success',
-                title: 'Kode Refeal Belum Terdaftar'
+                title: 'Kode Referral Belum Terdaftar'
             })
         }
         $(element).val(kode);
@@ -267,13 +283,13 @@ function checkKodeRefeal(kode, length, element = false, notif = false, init = fa
         if (notif) {
             Toast.fire({
                 icon: 'error',
-                title: 'Kode Refeal Sudah Terdaftar'
+                title: 'Kode Referral Sudah Terdaftar'
             })
         }
         $(element).val('');
         $(element).focus();
         if (init) {
-            generateRefeal(length, element);
+            generateReferral(length, element);
         }
     })
 }

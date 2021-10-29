@@ -1,7 +1,23 @@
 News (List Artikel)
+  Komentar
 Tutroial (Sana Kaya kelas Materi)
 Filter Kelas
   - Data Kelas [Kategori]
   - Materi [kategori, Kelas]
   - Member [mentor]
 
+
+Registrasi
+  Frontend:
+    Form[clear]
+    Inovice[clear]
+    Konfirmasi[clear]
+  Backend:
+    Member
+      API Registrasi On submit
+        Create Record
+        Send email
+        Referral Handeler (generate)
+      Status Menuggu Dikonfirmasi
+      Halaman List Pembayaran
+  Cek Status Konfirmasi Pembayaran

@@ -76,3 +76,4 @@ $route['stok/masuk']      = 'stok/masuk/listMasuk';
 $route['stok/keluar']      = 'stok/keluar/listKeluar';
 
 $route['member/kelas/(:num)'] = 'member/kelas/index/$1';
+$route['member/pembayaran/(:num)'] = 'member/pembayaran/index/$1';

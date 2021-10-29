@@ -10,54 +10,67 @@ class Login extends RestController
     $username   = $this->input->post('email');
     $password   = $this->input->post('password');
     $login     = $this->login->cekLogin($username, $password);
-    if ($login['status'] == 0) {
-      // Set session value
-      // akun aktif
-      if ($login['data'][0]['status'] == 1) {
-        $data = [
-          'key' => $login['data'][0]['token'],
-          'id' => $login['data'][0]['id'],
-          'nama' => $login['data'][0]['nama'],
-          'email' => $login['data'][0]['email'],
-          'foto' => $login['data'][0]['foto'],
-        ];
-        $this->response([
-          'status' => true,
-          'message' => 'Login berhasil',
-          'data' => $data
-        ], 200);
-      }
-      // akun di nonaktifkan
-      else if ($login['data'][0]['status'] == 0) {
+    switch ($login['status']) {
+      case 0: // user found
+        switch ($login['data'][0]['status']) {
+          case 0: // akun nonaktif
+            $this->response([
+              'status' => false,
+              'message' => 'Akun di nonaktifkan'
+            ], 400);
+            break;
+
+          case 1: // oke
+            $data = [
+              'key' => $login['data'][0]['token'],
+              'id' => $login['data'][0]['id'],
+              'nama' => $login['data'][0]['nama'],
+              'email' => $login['data'][0]['email'],
+              'foto' => $login['data'][0]['foto'],
+            ];
+            $this->response([
+              'status' => true,
+              'message' => 'Login berhasil',
+              'data' => $data
+            ], 200);
+            break;
+
+          case 0: // akun nonaktif
+            $this->response([
+              'status' => false,
+              'message' => 'Akun di nonaktifkan'
+            ], 400);
+            break;
+
+          case 2: // belum bayar
+            $this->response([
+              'status' => false,
+              'message' => 'Pembayaran belum dilakukan'
+            ], 400);
+            break;
+
+          default: // default
+            $this->response([
+              'status' => false,
+              'message' => 'Server error'
+            ], 500);
+            break;
+        }
+        break;
+
+      case 1: // Passwor Salah
         $this->response([
           'status' => false,
-          'message' => 'Akun di nonaktifkan'
+          'message' => 'Password salah'
         ], 400);
-      }
-      // menunggu dikonfirmasi
-      else if ($login['data'][0]['status'] == 2) {
+        break;
+
+      default: // default
         $this->response([
           'status' => false,
-          'message' => 'Akun di nonaktifkan'
+          'message' => 'Akun tidak ditemukan'
         ], 400);
-      }
-      // erorr
-      else {
-        $this->response([
-          'status' => false,
-          'message' => 'Server error'
-        ], 500);
-      }
-    } else if ($login['status'] == 1) {
-      $this->response([
-        'status' => false,
-        'message' => 'Password salah'
-      ], 400);
-    } else {
-      $this->response([
-        'status' => false,
-        'message' => 'Akun tidak ditemukan'
-      ], 400);
+        break;
     }
   }
 
@@ -80,17 +93,14 @@ class Login extends RestController
       $email = $this->input->post('email');
       $telepon = $this->input->post('telepon');
       $password = $this->input->post('password');
-      $result = $this->login->registrasi($nama, $email, $telepon, $password);
-
-      $code = $result == null ?
-        400
-        : RestController::HTTP_OK;
-      $status = $result != null;
+      $referral = $this->input->post('referral');
+      $result = $this->login->registrasi($nama, $email, $telepon, $password, $referral, 2);
       $this->response([
-        'status' => $status,
+        'status' => $result->status,
         'length' => 1,
-        'data' =>  $result
-      ], $code);
+        'data' =>  $result->data,
+        'message' => $result->message,
+      ], $result->code);
     }
   }
 

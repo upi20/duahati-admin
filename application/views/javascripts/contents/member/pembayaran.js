@@ -1,6 +1,3 @@
-$("#kelas_id").select2({ dropdownParent: $('#tambahModal') });
-const config_max_referral = 7;
-ajax_select(false, '#kelas_id', `<?= base_url(); ?>member/kelas/getListKelas?id_member=${$('#member_id').val()}`, null, false, 'Pilih Kelas');
 $(function () {
 
     function dynamic() {
@@ -8,7 +5,7 @@ $(function () {
         table_html.dataTable().fnDestroy()
         const new_table = table_html.DataTable({
             "ajax": {
-                "url": "<?= base_url()?>member/kelas/ajax_data/",
+                "url": "<?= base_url()?>member/pembayaran/ajax_data/",
                 "data": {
                     member_id: $('#member_id').val()
                 },
@@ -16,30 +13,60 @@ $(function () {
             },
             "processing": true,
             "serverSide": true,
-            "responsive": true,
+            "scrollX": true,
             "lengthChange": true,
             "autoWidth": false,
             "columns": [
                 { "data": null },
-                { "data": "nama_kelas" },
-                // { "data": "status_str" },
                 {
-                    "data": "id", render(data, type, full, meta) {
+                    "data": "kode", render(data, type, full, meta) {
                         return `<div class="pull-right">
 									<button class="btn btn-primary btn-xs"
                                     data-id="${full.id}"
-                                    data-kelas_id="${full.kelas_id}"
+                                    data-pembayaran_id="${full.pembayaran_id}"
                                     data-status="${full.status}"
                                         data-toggle="modal" data-target="#tambahModal"
                                     onclick="Ubah(this)">
-										<i class="fa fa-edit"></i> Ubah
+										<i class="fa fa-check"></i> Terima
 									</button>
 									<button class="btn btn-danger btn-xs" onclick="Hapus(${data})">
-										<i class="fa fa-trash"></i> Hapus
+										<i class="fa fa-times"></i> Tolak
 									</button>
 								</div > `
                     }, className: "nowrap"
-                }
+                },
+                {
+                    "data": "status", render(data, type, full, meta) {
+                        let color = 'success';
+                        color = data == 0 ? 'warning' : color;
+                        color = data == 1 ? 'success' : color;
+                        color = data == 2 ? 'danger' : color;
+                        return `<span class="text-${color} font-weight-bold">${full.status_str}</span>`;
+                    }
+                },
+                { "data": "kode" },
+                { "data": "jenis_str" },
+                { "data": "bank_nama" },
+                { "data": "no_rekening" },
+                { "data": "atas_nama" },
+                { "data": "tanggal" },
+                { "data": "jumlah_pembayaran" },
+                {
+                    "data": "foto", render(data, type, full, meta) {
+                        return `<button
+                        class="btn btn-success btn-sm btn-gambar"
+                        data-toggle="modal"
+                        data-data="${data}"
+                        data-target="#gambar_modal"
+                        onclick="view_gambar(this)"
+                        id="btn-gambar"><i class="fas fa-eye"></i></button>|
+                        <a href="<?= base_url() ?>/files/bukti_pembayaran/${data}" target="_blank" download>Download</a>
+                        `
+                    }, className: "nowrap"
+                },
+                { "data": "catatan" },
+                { "data": "diubah_oleh" },
+
             ],
             order: [
                 [1, 'asc']
@@ -63,7 +90,7 @@ $(function () {
     $("#btn-tambah").click(() => {
         $("#tambahModalTitle").text("Tambah member");
         $('#id').val('');
-        $('#kelas_id').val('').trigger('change');
+        $('#pembayaran_id').val('').trigger('change');
         $('#status').val('1');
     });
 
@@ -74,7 +101,7 @@ $(function () {
         $.LoadingOverlay("show");
         $.ajax({
             method: 'post',
-            url: '<?= base_url() ?>member/kelas/' + ($("#id").val() == "" ? 'insert' : 'update'),
+            url: '<?= base_url() ?>member/pembayaran/' + ($("#id").val() == "" ? 'insert' : 'update'),
             data: form,
             cache: false,
             contentType: false,
@@ -109,7 +136,7 @@ $(function () {
         $.LoadingOverlay("show");
         $.ajax({
             method: 'post',
-            url: '<?= base_url() ?>member/kelas/delete',
+            url: '<?= base_url() ?>member/pembayaran/delete',
             data: {
                 id: id
             }
@@ -143,7 +170,11 @@ const Hapus = (id) => {
 const Ubah = (datas) => {
     const data = datas.dataset;
     $('#id').val(data.id);
-    $('#kelas_id').val(data.kelas_id).trigger('change');
+    $('#pembayaran_id').val(data.pembayaran_id).trigger('change');
     $('#status').val(data.status)
-    $("#tambahModalTitle").text("Ubah kelas");
+    $("#tambahModalTitle").text("Ubah pembayaran");
+}
+
+const view_gambar = (datas) => {
+    $("#img-view").attr('src', `<?= base_url() ?>/files/bukti_pembayaran/${datas.dataset.data}`)
 }

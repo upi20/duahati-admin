@@ -1,17 +1,11 @@
-$("#kelas_id").select2({ dropdownParent: $('#tambahModal') });
-const config_max_referral = 7;
-ajax_select(false, '#kelas_id', `<?= base_url(); ?>member/kelas/getListKelas?id_member=${$('#member_id').val()}`, null, false, 'Pilih Kelas');
 $(function () {
-
     function dynamic() {
         const table_html = $('#dt_basic');
         table_html.dataTable().fnDestroy()
         const new_table = table_html.DataTable({
             "ajax": {
-                "url": "<?= base_url()?>member/kelas/ajax_data/",
-                "data": {
-                    member_id: $('#member_id').val()
-                },
+                "url": "<?= base_url()?>pengaturan/rekening/ajax_data/",
+                "data": null,
                 "type": 'POST'
             },
             "processing": true,
@@ -21,15 +15,23 @@ $(function () {
             "autoWidth": false,
             "columns": [
                 { "data": null },
-                { "data": "nama_kelas" },
-                // { "data": "status_str" },
+                { "data": "nama" },
+                { "data": "nama_bank" },
+                { "data": "no_rekening" },
+                { "data": "atas_nama" },
+                { "data": "keterangan" },
+                { "data": "status_str" },
                 {
                     "data": "id", render(data, type, full, meta) {
                         return `<div class="pull-right">
 									<button class="btn btn-primary btn-xs"
-                                    data-id="${full.id}"
-                                    data-kelas_id="${full.kelas_id}"
-                                    data-status="${full.status}"
+                                        data-id="${data}"
+                                        data-nama="${full.nama}"
+                                        data-nama_bank="${full.nama_bank}"
+                                        data-no_rekening="${full.no_rekening}"
+                                        data-atas_nama="${full.atas_nama}"
+                                        data-keterangan="${full.keterangan}"
+                                        data-status="${full.status}"
                                         data-toggle="modal" data-target="#tambahModal"
                                     onclick="Ubah(this)">
 										<i class="fa fa-edit"></i> Ubah
@@ -37,7 +39,7 @@ $(function () {
 									<button class="btn btn-danger btn-xs" onclick="Hapus(${data})">
 										<i class="fa fa-trash"></i> Hapus
 									</button>
-								</div > `
+								</div>`
                     }, className: "nowrap"
                 }
             ],
@@ -46,7 +48,7 @@ $(function () {
             ],
             columnDefs: [{
                 orderable: false,
-                targets: [0, 2]
+                targets: [0, 7]
             }],
         });
         new_table.on('draw.dt', function () {
@@ -61,9 +63,13 @@ $(function () {
     dynamic();
 
     $("#btn-tambah").click(() => {
-        $("#tambahModalTitle").text("Tambah member");
+        $("#tambahModalTitle").text("Tambah Rekening");
         $('#id').val('');
-        $('#kelas_id').val('').trigger('change');
+        $('#nama').val('');
+        $('#nama_bank').val('');
+        $('#no_rekening').val('');
+        $('#atas_nama').val('');
+        $('#keterangan').val('');
         $('#status').val('1');
     });
 
@@ -74,7 +80,7 @@ $(function () {
         $.LoadingOverlay("show");
         $.ajax({
             method: 'post',
-            url: '<?= base_url() ?>member/kelas/' + ($("#id").val() == "" ? 'insert' : 'update'),
+            url: '<?= base_url() ?>pengaturan/rekening/' + ($("#id").val() == "" ? 'insert' : 'update'),
             data: form,
             cache: false,
             contentType: false,
@@ -86,13 +92,6 @@ $(function () {
             })
             dynamic();
         }).fail(($xhr) => {
-            if ($xhr.status == 409) {
-                Toast.fire({
-                    icon: 'error',
-                    title: 'Kelas Sudah Ada'
-                })
-                return;
-            }
             Toast.fire({
                 icon: 'error',
                 title: 'Data gagal disimpan'
@@ -109,7 +108,7 @@ $(function () {
         $.LoadingOverlay("show");
         $.ajax({
             method: 'post',
-            url: '<?= base_url() ?>member/kelas/delete',
+            url: '<?= base_url() ?>pengaturan/rekening/delete',
             data: {
                 id: id
             }
@@ -131,6 +130,10 @@ $(function () {
     })
 })
 
+const view_gambar = (datas) => {
+    $("#img-view").attr('src', `<?= base_url() ?>/files/pengaturan/rekening/${datas.dataset.data}`)
+}
+
 // Click Hapus
 const Hapus = (id) => {
     $("#idCheck").val(id)
@@ -143,7 +146,10 @@ const Hapus = (id) => {
 const Ubah = (datas) => {
     const data = datas.dataset;
     $('#id').val(data.id);
-    $('#kelas_id').val(data.kelas_id).trigger('change');
-    $('#status').val(data.status)
-    $("#tambahModalTitle").text("Ubah kelas");
+    $('#nama').val(data.nama);
+    $('#nama_bank').val(data.nama_bank);
+    $('#no_rekening').val(data.no_rekening);
+    $('#atas_nama').val(data.atas_nama);
+    $('#keterangan').val(data.keterangan);
+    $("#tambahModalTitle").text("Ubah Rekening");
 }

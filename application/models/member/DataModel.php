@@ -9,9 +9,14 @@ class DataModel extends Render_Model
         // select tabel
         // kelas vip
         $this->db->select("a.*,
-        IF(a.status = '0' , 'Tidak Aktif', IF(a.status = '1' , 'Aktif', 'Tidak Diketahui')) as status_str,
+        IF(a.status = '0' , 'Tidak Aktif',
+            IF(a.status = '1' , 'Aktif',
+                IF(a.status = '2' , 'Menunggu Pembayaran', 'Tidak Diketahui')
+            )
+        ) as status_str,
         ((select count(*) from member_kelas as z where z.status <> 3 and z.member_id = a.id)) as jumlah_kelas,
-        b.user_nama as mentor
+        ((select count(*) from pembayaran as y where y.status <> 3 and y.member_id = a.id)) as jumlah_pembayaran,
+        b.user_nama as mentor,
         ");
         // semua kelas
         // $this->db->select("a.*,
@@ -23,6 +28,7 @@ class DataModel extends Render_Model
         $this->db->from("member a");
         $this->db->join("users b", 'a.mentor_id = b.user_id', 'left');
         $this->db->where('a.status <>', 3);
+        $this->db->order_by('a.status', 'desc');
 
         // order by
         if ($order['order'] != null) {
@@ -45,7 +51,7 @@ class DataModel extends Render_Model
             $this->db->where("(
                 b.user_nama LIKE '%$cari%' or
                 a.nama LIKE '%$cari%' or
-                a.kode_refeal LIKE '%$cari%' or
+                a.kode_referral LIKE '%$cari%' or
                 IF(a.status = '0' , 'Tidak Aktif', IF(a.status = '1' , 'Aktif', 'Tidak Diketahui')) LIKE '%$cari%'
             )");
         }
@@ -69,7 +75,7 @@ class DataModel extends Render_Model
         $password,
         $email,
         $status,
-        $kode_refeal
+        $kode_referral
     ) {
         $data = [
             'mentor_id' => $mentor_id,
@@ -81,7 +87,7 @@ class DataModel extends Render_Model
             'password' => $this->b_password->bcrypt_hash($password),
             'email' => $email,
             'status' => $status,
-            'kode_refeal' => $kode_refeal,
+            'kode_referral' => $kode_referral,
             'created_by' => $user_id,
         ];
         // Insert users
@@ -101,7 +107,7 @@ class DataModel extends Render_Model
         $password,
         $email,
         $status,
-        $kode_refeal
+        $kode_referral
     ) {
         $data = [
             'mentor_id' => $mentor_id,
@@ -111,7 +117,7 @@ class DataModel extends Render_Model
             'alamat' => $alamat,
             'email' => $email,
             'status' => $status,
-            'kode_refeal' => $kode_refeal,
+            'kode_referral' => $kode_referral,
             'updated_by' => $user_id,
         ];
 
@@ -147,11 +153,11 @@ class DataModel extends Render_Model
             ->row_array();
     }
 
-    public function cekKodeRefeal($kode_refeal, $member_id)
+    public function cekKodeReferral($kode_referral, $member_id)
     {
-        return $this->db->select('kode_refeal')
+        return $this->db->select('kode_referral')
             ->from('member')
-            ->where('kode_refeal', $kode_refeal)
+            ->where('kode_referral', $kode_referral)
             ->where('id <> ', $member_id)
             ->where('status <> ', 3)
             ->get()

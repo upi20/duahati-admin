@@ -1,0 +1,8 @@
+database
+member->kode_refeal = kode_referral
+konfirmasi_pembayaran = Pembayaran
+
+ALTER TABLE `pembayaran` CHANGE `jenis` `jenis` INT(11) NOT NULL DEFAULT '1' COMMENT '1 pembayaran pendaftaran', CHANGE `tipe` `tipe` INT(11) NOT NULL DEFAULT '1' COMMENT '1 Transfer Bank';
+ALTER TABLE `pembayaran` ADD `atas_nama` VARCHAR(255) NOT NULL AFTER `no_rekening`;
+
+ALTER TABLE `pembayaran` ADD `catatan` VARCHAR(255) NOT NULL AFTER `tipe`;
