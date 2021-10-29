@@ -128,6 +128,6 @@ class MasterModel extends Render_Model
 
     public function getList()
     {
-        return $this->db->select('id, judul as text')->from('news')->where('status', 1)->get()->result_array();
+        return $this->db->select('id, judul as text')->from('news')->where('status <>', 99)->get()->result_array();
     }
 }

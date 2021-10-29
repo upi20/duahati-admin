@@ -3,14 +3,14 @@ Tutroial (Sana Kaya kelas Materi)
 Filter Kelas
   - Data Kelas [Kategori] [clear]
   - Materi [kategori, Kelas] [clear]
-  - Member [mentor]
+  - Member [mentor] [belum]
 
-CRUD News
-  - Data News
-  - Komentar
+Menu News
+  - Data News [crud] [clear]
+  - Komentar [rud] [clear]
 
 ----------------------------------------------------------------------
-buat tabel news, komentar di db
+buat tabel news, news_komentar di db
 News [clear]
   id
   judul
