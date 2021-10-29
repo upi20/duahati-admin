@@ -15,7 +15,7 @@
             </div>
             <div class="form-group">
                 <label for="deskripsi">Deskripsi</label>
-                <textarea cols="3" rows="4" class="form-control summernote" id="deskripsi" name="deskripsi" placeholder="Deskripsi" value="<?= $isi['deskripsi'] ?>" required></textarea>
+                <textarea cols="3" rows="4" class="form-control summernote" id="deskripsi" name="deskripsi" placeholder="Deskripsi" value="" required><?= $isi['deskripsi'] ?></textarea>
                 <script>
                     let deskripsi = "<?= $isi['deskripsi'] ?>"
                 </script>

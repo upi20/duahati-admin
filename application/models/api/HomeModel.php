@@ -67,4 +67,48 @@ class HomeModel extends Render_Model
     ];
     return $return;
   }
+
+  public function get_list_berita()
+  {
+    $data = $this->db->select('id, judul, foto')
+      ->from('news')
+      ->where('status', 2)
+      ->order_by('tanggal_terbit', 'desc')
+      ->limit(4)
+      ->get();
+    $return = [
+      'data' => $data->result_array(),
+      'length' => $data->num_rows(),
+    ];
+    return $return;
+  }
+
+  public function get_list_berita_full()
+  {
+    $data = $this->db->select('id, judul, foto')
+      ->from('news')
+      ->where('status', 2)
+      ->order_by('tanggal_terbit', 'desc')
+      ->get();
+    $return = [
+      'data' => $data->result_array(),
+      'length' => $data->num_rows(),
+    ];
+    return $return;
+  }
+
+  public function get_berita($id)
+  {
+    $data = $this->db->select('*')
+      ->from('news')
+      ->where('status', 2)
+      ->where('id', $id)
+      ->order_by('tanggal_terbit', 'desc')
+      ->get();
+    $return = [
+      'data' => $data->row_array(),
+      'length' => $data->num_rows(),
+    ];
+    return $return;
+  }
 }

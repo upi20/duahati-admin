@@ -115,7 +115,7 @@ class Master extends Render_Controller
             $foto = $temp_foto;
         }
         $judul = $this->input->post("judul");
-        $deskripsi = $this->input->post("deskripsi");
+        $deskripsi = $this->input->post("deskripsi", true);
         $tanggal_terbit = $this->input->post("tanggal_terbit");
         $status = $this->input->post("status");
         $user_id = $this->id;

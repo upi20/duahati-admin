@@ -21,6 +21,52 @@ class Home extends RestController
     ], $code);
   }
 
+  public function list_berita_get()
+  {
+    $data = $this->model->get_list_berita();
+    $code = $data['data'] == null ?
+      RestController::HTTP_NOT_FOUND
+      : RestController::HTTP_OK;
+    $status = $data['data'] != null;
+
+    $this->response([
+      'status' => $status,
+      'length' => $data['length'],
+      'data' => $data['data']
+    ], $code);
+  }
+
+  public function list_berita_full_get()
+  {
+    $data = $this->model->get_list_berita_full();
+    $code = $data['data'] == null ?
+      RestController::HTTP_NOT_FOUND
+      : RestController::HTTP_OK;
+    $status = $data['data'] != null;
+
+    $this->response([
+      'status' => $status,
+      'length' => $data['length'],
+      'data' => $data['data']
+    ], $code);
+  }
+
+  public function berita_get()
+  {
+    $id = $this->input->get('id');
+    $data = $this->model->get_berita($id);
+    $code = $data['data'] == null ?
+      RestController::HTTP_NOT_FOUND
+      : RestController::HTTP_OK;
+    $status = $data['data'] != null;
+
+    $this->response([
+      'status' => $status,
+      'length' => $data['length'],
+      'data' => $data['data']
+    ], $code);
+  }
+
   public function get_mentor_get()
   {
     $data = $this->model->get_mentor_by_member($this->id);
