@@ -38,11 +38,11 @@ $(function () {
                 { "data": "kode_referral" },
                 { "data": "jumlah_kelas" },
                 {
-                    "data": "status_str", render(data, type, full, meta) {
+                    "data": "status", render(data, type, full, meta) {
                         let color = 'success';
                         color = full.status == 0 ? 'danger' : color;
                         color = full.status == 2 ? 'warning' : color;
-                        return `<span class="text-${color} font-weight-bold">${data}</span>`;
+                        return `<span class="text-${color} font-weight-bold">${full.status_str}</span>`;
                     }
                 },
                 {
@@ -86,7 +86,7 @@ $(function () {
             ],
             columnDefs: [{
                 orderable: false,
-                targets: [0, 8]
+                targets: [0, 9]
             }],
         });
         new_table.on('draw.dt', function () {

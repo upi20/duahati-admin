@@ -60,6 +60,39 @@ class PembayaranModel extends Render_Model
         return $result;
     }
 
+
+    public function simpan($user_id, $id, $member_id, $jenis, $catatan, $status)
+    {
+        if ($status == 1 && $jenis == 1) {
+            $this->db->where('id', $member_id)->update('member', ['status' => $status]);
+        }
+        $result =  $this->db->where('id', $id)->update('pembayaran', [
+            'status' => $status,
+            'catatan' => $catatan,
+            'updated_by' => $user_id
+        ]);
+        return (object)[
+            'code' => 200,
+            'status' => true,
+            'data' => $result,
+            'message' => 'success',
+        ];
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     private function kodePembayaran($pre = '')
     {
         $date = date('Y-m-d') . ' 00:00:00.0';

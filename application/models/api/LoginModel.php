@@ -126,7 +126,7 @@ class LoginModel extends Render_Model
 		$level = $this->config->item('level_mentor');
 		// select tabel
 		$this->db->select("a.user_id, a.user_nama,
-		( select count(*) from member z where z.mentor_id = a.user_id and z.status = 1 ) as jumlah_member
+		( select count(*) from member z where z.mentor_id = a.user_id and z.status <> 3 ) as jumlah_member
 		")->from("users a")
 			->join("role_users b", 'a.user_id=b.role_user_id')
 			->where('b.role_lev_id', $level)

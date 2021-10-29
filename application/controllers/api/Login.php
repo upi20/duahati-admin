@@ -111,6 +111,3 @@ class Login extends RestController
     $this->check_cors = true;
   }
 }
-// uniqid("distribusi".Date('Ymdhis'), false); uuid generator
-/* End of file Login.php */
-/* Location: ./application/controllers/Login.php */

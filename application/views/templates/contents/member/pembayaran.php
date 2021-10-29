@@ -12,7 +12,6 @@
                     <th style="max-width: 45px;">No</th>
                     <th style="max-width: 100px;">Aksi</th>
                     <th>Status</th>
-                    <th>Kode</th>
                     <th>Jenis</th>
                     <th>Nama Bank</th>
                     <th>No Rekening</th>
@@ -39,29 +38,20 @@
                 <form action="" id="fmain" method="post">
                     <input type="hidden" id="id" name="id">
                     <input type="hidden" id="member_id" name="member_id" value="<?= $user['id'] ?>">
+                    <input type="hidden" id="status" name="status">
+                    <input type="hidden" id="jenis" name="jenis">
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="form-group">
-                                <label for="kelas_id">Kelas</label>
-                                <select name="kelas_id" id="kelas_id" class="form-control" style="width: 100%;" required>
-                                </select>
+                                <label for="kelas_id">Catatan</label>
+                                <textarea name="catatan" id="catatan" class="form-control" cols="3" rows="3"></textarea>
                             </div>
                         </div>
-
-                        <!-- <div class="col-lg-12">
-                            <div class="form-group">
-                                <label for="status">Status</label>
-                                <select name="status" id="status" class="form-control">
-                                    <option value="1">Aktif</option>
-                                    <option value="0">Tidak Aktif</option>
-                                </select>
-                            </div>
-                        </div> -->
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-primary btn-ef btn-ef-3 btn-ef-3c" type="submit" form="fmain"><i class="fa fa-save"></i> Simpan</button>
+                <button class="btn btn-primary btn-ef btn-ef-3 btn-ef-3c" type="submit" form="fmain"><i class="fa fa-save"></i> Submit</button>
                 <button class="btn btn-success btn-ef btn-ef-3 btn-ef-3c" data-dismiss="modal"><i class="fa fa-arrow-left"></i> Kembali</button>
             </div>
         </div>

@@ -22,12 +22,47 @@ class Pembayaran extends Render_Controller
     if ($id == null || $this->data['user'] == null) {
       redirect('my404', 'refresh');
     }
+
     // content
     $this->content  = 'member/pembayaran';
 
     // Send data to view
     $this->render();
   }
+
+  public function simpan()
+  {
+    $this->load->library('form_validation');
+    $this->form_validation->set_error_delimiters('', '');
+    $this->form_validation->set_rules('id', 'Id Pembayaran', 'trim|required|numeric');
+    $this->form_validation->set_rules('member_id', 'ID Member', 'trim|required|numeric');
+    $this->form_validation->set_rules('status', 'Status Pembayaran', 'trim|required|numeric');
+    $this->form_validation->set_rules('jenis', 'jenis Pembayaran', 'trim|required|numeric');
+    $this->form_validation->set_rules('catatan', 'catatan Pembayaran', 'trim');
+    if ($this->form_validation->run() == FALSE) {
+      $this->output_json([
+        'status' => false,
+        'data' => null,
+        'message' => validation_errors()
+      ], 400);
+    } else {
+
+      $member_id = $this->input->post('member_id');
+      $status = $this->input->post('status');
+      $catatan = $this->input->post('catatan');
+      $jenis = $this->input->post('jenis');
+      $id = $this->input->post('id');
+      $result = $this->model->simpan($this->id, $id, $member_id, $jenis, $catatan, $status);
+      $this->output_json([
+        'status' => $result->status,
+        'length' => 1,
+        'data' =>  $result->data,
+        'message' => $result->message,
+      ], $result->code);
+    }
+  }
+
+
 
   public function tes()
   {
