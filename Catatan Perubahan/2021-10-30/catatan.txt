@@ -1,0 +1,23 @@
+News (List Artikel)
+Tutroial (Sana Kaya kelas Materi)
+Filter Kelas
+  - Data Kelas [Kategori] [clear]
+  - Materi [kategori, Kelas] [clear]
+  - Member [mentor] [belum]
+
+Menu News
+  - Data News [crud] [clear]
+  - Komentar [rud] [clear]
+
+*Duahati*
+Sudah
+  Registrasi
+  Pembayaran Via Registrasi
+  Konfirmasi Pembayaran di admin
+  Berita News.
+
+belum 
+  Halaman Konfimasi pembayaran khusus buat member/calon member by email
+  tutorial (Crud admin belum)
+  Referral
+  Admin Mentor

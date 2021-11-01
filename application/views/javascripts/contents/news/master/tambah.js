@@ -1,6 +1,5 @@
 $(function () {
-    $('.summernote').summernote({height: 250});
-    $('#deskripsi').summernote('code', deskripsi);
+    $('.summernote').summernote({ height: 250 });
 
     // simpan
     $("#fmain").submit(function (ev) {
