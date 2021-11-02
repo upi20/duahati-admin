@@ -67,6 +67,39 @@ class Home extends RestController
     ], $code);
   }
 
+  public function berita_komentar_get()
+  {
+    $id = $this->input->get('id');
+    $data = $this->model->get_berita_komentar($id);
+    $code = $data['data'] == null ?
+      RestController::HTTP_NOT_FOUND
+      : RestController::HTTP_OK;
+    $status = $data['data'] != null;
+
+    $this->response([
+      'status' => $status,
+      'length' => $data['length'],
+      'data' => $data['data']
+    ], $code);
+  }
+
+  public function berita_comment_post()
+  {
+    $id = $this->input->post('id');
+    $comment = $this->input->post('comment', false);
+    $data = $this->model->post_comment($this->id, $id, $comment);
+    $code = $data['data'] == null ?
+      RestController::HTTP_NOT_FOUND
+      : RestController::HTTP_OK;
+    $status = $data['data'] != null;
+
+    $this->response([
+      'status' => $status,
+      'length' => $data['length'],
+      'data' => $data['data']
+    ], $code);
+  }
+
   public function get_mentor_get()
   {
     $data = $this->model->get_mentor_by_member($this->id);

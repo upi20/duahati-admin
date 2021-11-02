@@ -111,4 +111,33 @@ class HomeModel extends Render_Model
     ];
     return $return;
   }
+
+  public function get_berita_komentar($id)
+  {
+    $data = $this->db->select('a.*, b.nama as nama_member, b.foto as member_foto ')
+      ->from('news_komentar a')
+      ->join('member b', 'a.member_id = b.id')
+      ->where('a.status', 1)
+      ->where('b.status', 1)
+      ->where('a.news_id', $id)
+      ->order_by('a.created_at', 'desc')
+      ->get();
+    $return = [
+      'data' => $data->result_array(),
+      'length' => $data->num_rows(),
+    ];
+    return $return;
+  }
+
+
+  public function post_comment($member_id, $news_id, $comment)
+  {
+    $return = $this->db->insert('news_komentar', [
+      'news_id' => $news_id,
+      'member_id' => $member_id,
+      'komentar' => $comment,
+      'status' => 1,
+    ]);
+    return ['data' => $return, 'length' => 1];
+  }
 }
