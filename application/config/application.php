@@ -20,7 +20,7 @@ $config['app_name']         = 'Dua Hati Admin';
 |
 */
 
-$config['copyright']         = '&copy; 2021 Developed by <b>Dua Hati</b>';
+$config['copyright']         = '&copy; 2021 Developed by <b>Adikarya Infinit</b>';
 
 /*
 |--------------------------------------------------------------------------

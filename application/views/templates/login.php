@@ -71,7 +71,7 @@
     </div>
     <!-- /.card -->
   </div>
-  <small class="form-text text-muted">&copy; 2021 Developed by <b>BOBOTOH</b></small>
+  <small class="form-text text-muted">&copy; 2021 Developed by <b>Adikarya Infinit</b></small>
   <!-- /.login-box -->
 
   <!-- jQuery -->
