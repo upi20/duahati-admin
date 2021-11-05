@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Oct 30, 2021 at 12:14 AM
+-- Generation Time: Nov 05, 2021 at 10:53 AM
 -- Server version: 10.4.20-MariaDB
 -- PHP Version: 7.4.21
 
@@ -333,7 +333,8 @@ INSERT INTO `menu` (`menu_id`, `menu_menu_id`, `menu_nama`, `menu_keterangan`, `
 (121, 0, 'News', '-', 5, 'fa fa-newspaper', '#', 'Aktif', '2021-10-28 10:23:58'),
 (122, 121, 'Data News', '-', 1, 'fa fa-newspaper', 'news/master', 'Aktif', '2021-10-28 10:23:58'),
 (123, 121, 'Komentar', '-', 2, 'far fa-circle', 'news/komentar', 'Aktif', '2021-10-28 10:23:58'),
-(124, 2, 'Rekening', 'Rekening untuk registrasi invoice\n', 1, 'far fa-circle', 'pengaturan/rekening', 'Aktif', '2021-10-28 10:32:55');
+(124, 2, 'Rekening', 'Rekening untuk registrasi invoice\n', 1, 'far fa-circle', 'pengaturan/rekening', 'Aktif', '2021-10-28 10:32:55'),
+(125, 0, 'Tutorial', 'Tutorial', 5, 'far fa-lightbulb', 'tutorial/master', 'Aktif', '2021-11-02 07:55:41');
 
 -- --------------------------------------------------------
 
@@ -362,11 +363,11 @@ CREATE TABLE `news` (
 --
 
 INSERT INTO `news` (`id`, `judul`, `foto`, `deskripsi`, `tanggal_terbit`, `status`, `publisher`, `created_by`, `updated_by`, `deleted_by`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, '2.000 Pesantren Jawa Barat Sudah Miliki Unit Bisnis, Kang Emil: Pesantren Diharapkan Mandiri', '4319fcef1a7937f33811220f0ac2246a.jpg', '<p xss=removed><span xss=removed>JURNAL SOREANG</span>– Sebanyak 2.000 pesantren di Jawa Barat sudah memiliki unit bisnis melalui program One Pesantren One Product (OPOP).</p><p xss=removed>Upaya ini sebagai jalan kemandirian bagi pihak pesantren dan pemberdayaan masyarakat sekitarnya.</p><p xss=removed>“Pemprov Jabar mengalokasikan anggaran bisnis pesantren ini. Semuanya agar pesantren bisa lebih mandiri,” kata Gubernurnya Jabar, H. Ridwan Kamil atau <a href=\"https://jurnalsoreang.pikiran-rakyat.com/tag/Kang Emil\" xss=removed>Kang Emil</a> saat silaturahmi dengan jajaran <a href=\"https://jurnalsoreang.pikiran-rakyat.com/tag/MUI Jabar\" xss=removed>MUI Jabar</a> di kantor <a href=\"https://jurnalsoreang.pikiran-rakyat.com/tag/MUI Jabar\" xss=removed>MUI Jabar</a>, Rabu, 18 Agustus 2021.</p><p xss=removed>Acara dihadiri Ketua Umum <a href=\"https://jurnalsoreang.pikiran-rakyat.com/tag/MUI Jabar\" xss=removed>MUI Jabar</a>, Prof. KH. Rachmat Sjafei, Sekum <a href=\"https://jurnalsoreang.pikiran-rakyat.com/tag/MUI Jabar\" xss=removed>MUI Jabar</a>, KH. Rafani Achyar, ketua Dewan Pertimbangan <a href=\"https://jurnalsoreang.pikiran-rakyat.com/tag/MUI Jabar\" xss=removed>MUI Jabar</a> KH. Miftah Faridl, perwakilan Kodam III/Siliwangi dan Kanwil Kemenag Jabar serta Ustaz Adi Hidayat.</p><p xss=removed>Ratusan pengurus MUI kabur/kota se-Jawa Barat juga ikut dalam acara melalui aplikasi zoom. Para peserta Pendidikan Kader Ulama (PKU) juga ikut dalam acara secara virtual.</p><p xss=removed>Dalam kesempatan itu, Ustaz Adi Hidayat memberikan bantuan.paket imunitas untuk Covid-19 untuk warga Jawa Barat yang terdampak pandemi.</p><p xss=removed>Lebih jauh, <a href=\"https://jurnalsoreang.pikiran-rakyat.com/tag/Kang Emil\" xss=removed>Kang Emil</a> menyatakan, lembaga keagamaan dan pendidikan bisa jadi agen perubahan dan pemberdayaan masyarakat.</p><p xss=removed>“Selain membantu unit usaha pesantren, Pemprov Jabar juga membantu dalam pengiriman satu desa satu hafiz Alquran, English for ulama dan mengirimkan ulama ke luar negeri,” ujarnya.</p><p xss=removed>Mengenai pembukaan masjid maupun kegiatan keagamaan, <a href=\"https://jurnalsoreang.pikiran-rakyat.com/tag/Kang Emil\" xss=removed>Kang Emil</a> menyatakan, bisa dilakukan kalau masyarakat disiplin protokol kesehatan.</p><p xss=removed>“Minimal dengan memakai masker karena bisa menekan penyebaran Covid-19. Selain itu, 70 persen warga sudah menjalani vaksinasi sehingga sudah ada kekebalan komunal,” katanya.</p><p xss=removed>Gubernur merasa optimistis merdeka dari Covid-19 bisa terjadi tahun depan kalau usaha vaksinasi dan protokol kesehatan berjalan optimal.</p><p xss=removed>“Semoga pak presiden nantinya menyatakan Indonesia merdeka dari Covid-19. Kalau sudah begitu membuat warga bisa bebas untuk aktivitas seperti biasanya,” katanya.***</p>', '2021-10-30 03:28:00', 2, 1, 1, 1, NULL, '2021-10-30 03:32:02', '2021-10-30 03:41:07', NULL),
-(2, 'Ulama dan Umara Tentukan Kebaikan Umat, Forpimda Jabar Sambangi MUI Jabar', '9b0732dc600c01f49a88da3c3045121d.jpg', NULL, '2021-10-30 03:33:00', 2, 1, 1, 1, NULL, '2021-10-30 03:34:02', '2021-10-30 03:40:33', NULL),
+(1, '2.000 Pesantren Jawa Barat Sudah Miliki Unit Bisnis, Kang Emil: Pesantren Diharapkan Mandiri', '4319fcef1a7937f33811220f0ac2246a.jpg', '<p xss=removed><span xss=removed>JURNAL SOREANG</span>– Sebanyak 2.000 pesantren di Jawa Barat sudah memiliki unit bisnis melalui program One Pesantren One Product (OPOP).</p><p xss=removed>Upaya ini sebagai jalan kemandirian bagi pihak pesantren dan pemberdayaan masyarakat sekitarnya.</p><p xss=removed>“Pemprov Jabar mengalokasikan anggaran bisnis pesantren ini. Semuanya agar pesantren bisa lebih mandiri,” kata Gubernurnya Jabar, H. Ridwan Kamil atau <a href=\"https://jurnalsoreang.pikiran-rakyat.com/tag/Kang Emil\">Kang Emil</a> saat silaturahmi dengan jajaran <a href=\"https://jurnalsoreang.pikiran-rakyat.com/tag/MUI Jabar\">MUI Jabar</a> di kantor <a href=\"https://jurnalsoreang.pikiran-rakyat.com/tag/MUI Jabar\">MUI Jabar</a>, Rabu, 18 Agustus 2021.</p><p xss=removed>Acara dihadiri Ketua Umum <a href=\"https://jurnalsoreang.pikiran-rakyat.com/tag/MUI Jabar\">MUI Jabar</a>, Prof. KH. Rachmat Sjafei, Sekum <a href=\"https://jurnalsoreang.pikiran-rakyat.com/tag/MUI Jabar\">MUI Jabar</a>, KH. Rafani Achyar, ketua Dewan Pertimbangan <a href=\"https://jurnalsoreang.pikiran-rakyat.com/tag/MUI Jabar\">MUI Jabar</a> KH. Miftah Faridl, perwakilan Kodam III/Siliwangi dan Kanwil Kemenag Jabar serta Ustaz Adi Hidayat.</p><p xss=removed>Ratusan pengurus MUI kabur/kota se-Jawa Barat juga ikut dalam acara melalui aplikasi zoom. Para peserta Pendidikan Kader Ulama (PKU) juga ikut dalam acara secara virtual.</p><p xss=removed>Dalam kesempatan itu, Ustaz Adi Hidayat memberikan bantuan.paket imunitas untuk Covid-19 untuk warga Jawa Barat yang terdampak pandemi.</p><p xss=removed>Lebih jauh, <a href=\"https://jurnalsoreang.pikiran-rakyat.com/tag/Kang Emil\">Kang Emil</a> menyatakan, lembaga keagamaan dan pendidikan bisa jadi agen perubahan dan pemberdayaan masyarakat.</p><p xss=removed>“Selain membantu unit usaha pesantren, Pemprov Jabar juga membantu dalam pengiriman satu desa satu hafiz Alquran, English for ulama dan mengirimkan ulama ke luar negeri,” ujarnya.</p><p xss=removed>Mengenai pembukaan masjid maupun kegiatan keagamaan, <a href=\"https://jurnalsoreang.pikiran-rakyat.com/tag/Kang Emil\">Kang Emil</a> menyatakan, bisa dilakukan kalau masyarakat disiplin protokol kesehatan.</p><p xss=removed>“Minimal dengan memakai masker karena bisa menekan penyebaran Covid-19. Selain itu, 70 persen warga sudah menjalani vaksinasi sehingga sudah ada kekebalan komunal,” katanya.</p><p xss=removed>Gubernur merasa optimistis merdeka dari Covid-19 bisa terjadi tahun depan kalau usaha vaksinasi dan protokol kesehatan berjalan optimal.</p><p xss=removed>“Semoga pak presiden nantinya menyatakan Indonesia merdeka dari Covid-19. Kalau sudah begitu membuat warga bisa bebas untuk aktivitas seperti biasanya,” katanya.***</p>', '2021-10-30 03:28:00', 2, 1, 1, 1, NULL, '2021-10-30 03:32:02', '2021-11-01 13:11:56', NULL),
+(2, 'Ulama dan Umara Tentukan Kebaikan Umat, Forpimda Jabar Sambangi MUI Jabar', '9b0732dc600c01f49a88da3c3045121d.jpg', '<p xss=removed><span xss=removed>JURNAL SOREANG</span>– Memperingati kemerdekaan RI, hari jadi Jabar dan tahun baru Islam, <a href=\"https://jurnalsoreang.pikiran-rakyat.com/tag/MUI Jabar\" xss=removed>MUI Jabar</a> menggelar <a href=\"https://jurnalsoreang.pikiran-rakyat.com/tag/silaturahmi\" xss=removed>silaturahmi</a> dengan Forum Pimpinan Daerah (<a href=\"https://jurnalsoreang.pikiran-rakyat.com/tag/Forpimda\" xss=removed>Forpimda</a>) Jabar, Rabu, 18 Agustus 2021.</p><p xss=removed>Silaturahmi itu sebagai upaya menjalin kerja sama antara alim ulama dan umara (pemerintah) karena menentukan kebaikan umat.</p><p xss=removed>Hal itu dikatakan Ketua Umum <a href=\"https://jurnalsoreang.pikiran-rakyat.com/tag/MUI Jabar\" xss=removed>MUI Jabar</a>, Prof. KH. Rachmat Sjafei didampingi Sekum <a href=\"https://jurnalsoreang.pikiran-rakyat.com/tag/MUI Jabar\" xss=removed>MUI Jabar</a>, KH. Rafani Achyar.</p><p xss=removed>Hadir dalam <a href=\"https://jurnalsoreang.pikiran-rakyat.com/tag/silaturahmi\" xss=removed>silaturahmi</a> di antaranya Gubernur Jabar Dr. H. Ridwan Kamil, ST. Mud, ketua Dewan Pertimbangan <a href=\"https://jurnalsoreang.pikiran-rakyat.com/tag/MUI Jabar\" xss=removed>MUI Jabar</a> KH. Miftah Faridl, perwakilan Kodam III/Siliwangi, Polda Jabar, dan Kanwil Kemenag Jabar serta Ustaz Adi Hidayat.</p><p xss=removed>Lebih jauh Kiai Rachmat Sjafei mengatakan, kerja sama yang baik bisa dijamin dari <a href=\"https://jurnalsoreang.pikiran-rakyat.com/tag/silaturahmi\" xss=removed>silaturahmi</a> ini.</p><p xss=removed>“Apalagi dalam situasi pandemi ini membuat MUI menjadi rujukan masyarakat dalam bertanya soal ibadah. Misalnya, bagaimana hukum ibadah shalat dan ibadah lainnya saat pandemi ini,” ujarnya dalam acara dihadiri para pengurus MUI kabupaten/kota se-Jawa Barat secara virtual.</p><p xss=removed>Demikian juga dengan banyaknya <a href=\"https://jurnalsoreang.pikiran-rakyat.com/tag/fatwa\" xss=removed>fatwa</a> yang sudah dikeluarkan MUI berkaitan dengan ibadah saat pandemi maupun <a href=\"https://jurnalsoreang.pikiran-rakyat.com/tag/vaksinasi\" xss=removed>vaksinasi</a> dan lain-lainnya.</p><p xss=removed>“Kami mohon agar masjid-masjid dijadikan sentra <a href=\"https://jurnalsoreang.pikiran-rakyat.com/tag/vaksinasi\" xss=removed>vaksinasi</a> agar bisa mempercepat tercapainya kekebalan komunal. Kalau pesantren sudah mulai mengikuti <a href=\"https://jurnalsoreang.pikiran-rakyat.com/tag/vaksinasi\" xss=removed>vaksinasi</a> dengan target 3 juta santri,” katanya.</p><p xss=removed>Sedangkan Ridwan Kamil menyatakan, masyarakat harus tetap bersyukur di saat pandemi karena masih diberi kesehatan.</p><p xss=removed>“Karena dari 605 ulama yang meninggal dunia akibat Covid-19, maka sebanyak 200 ulama berasal dari Jawa Barat. Semoga pandemi ini segera bisa dikendalikan bahkan diakhiri,” ujarnya.</p><p xss=removed>Demikian juga dengan nikmat bisa bertemu tatap muka karena saat pandemi semuanya dibatasi.</p><p xss=removed>“Tenyata nikmat bertemu dan bicara tatap muka ini sangat mahal harganya. Saat PPKM ini banyak warga yang berupaya dengan cara apa pun agar bisa bertemu dengan keluarganya di kampung,” katanya.</p><p xss=removed>Bahkan, nikmat kemerdekaan juga sangat besar sebab sudah banyak negara yang bubar akibat peperangan seperti Yugoslavia dan Uni Soviet.</p><p xss=removed>“Betapa hebatnya Yugoslavia dan Uni Soviet pada masa lalu, tapi kini tak ada lagi kedua negara itu,” katanya.***</p>', '2021-10-30 03:33:00', 2, 1, 1, 1, NULL, '2021-10-30 03:34:02', '2021-11-01 13:13:09', NULL),
 (3, 'MUI Jabar Minta Masyarakat Tenang Sikapi Puisi Sukmawati', 'c70eedd2c00d763bd7a5a3583f891afd.jpg', '<p xss=removed>Majelis Ulama Indonesia (MUI) Jawa Barat meminta seluruh masyarakat tetap tenang dan tidak bertindak berlebihan menyikapi puisi berjudul Ibu Indonesia karya Sukmawati Soekarnoputri. Menurut Ketua MUI Jawa Barat, Rachmat Syafei, ia berharap permasalahan ini tak merusak kondusifitas yang sudah terjaga.</p><div id=\"div-gpt-ad-1513840706181-0\" class=\"ads detail_text\" xss=removed></div><p xss=removed>Rachmat Syafei mengatakan, bahwa perdamaian tetap harus dikedepankan sebagai prinsip kehidupan bernegara. Apalagi, yang bersangkutan sudah meminta maaf dan mengaku tidak ada maksud untuk menghina agama islam.</p><p xss=removed>“(Sukmawati) sudah meminta maaf dan akan memperbaiki karena ketidaktahuannya. Maafkan saja, pandangan (memaafkan) itu juga berdasarkan agama,” ujar Rachmat saat ditemui di Kantor MUI Jawa Barat, Kota Bandung, Jumat (5/4).</p><p xss=removed>Rachmat berharap, masyarakat pun tak sampai menghakimi di luar batasan agama. Sebab, jika berlebihan sama saja telah berbuat dzalim. Rachmat pun mempersilahkan jika ada ormas islam atau masyarakat yang ingin melakukan unjuk rasa. Namun, semua harus dalam koridor aturan yang berlaku. Selebihnya, MUI Jabar akan manut dengan sikap MUI pusat.</p><p xss=removed>Kalau demo, silahkan karena itu hak yang dilindungi undang undang. Tapi jangan membuat kemudaratan (merugikan),” kata Rachmat serayab mempersilakan kalau ada masyarakat yang memilki pandangan tapi tetap harus mengingat bahwa kemaslahatan harus didahulukan.</p><p xss=removed>Seperti diketahui, puisi yang dibacakan Sukmawati dalam acara 29 tahun Anne Avantie berkarya, Rabu (28/3) lalu mendapat respon dari masyarakat. Bahkan diantaranya berujung pada pelaporan kepada kepolisian.</p><p xss=removed>Tercatat, sudah ada dua laporan yang diterima Polda Metro Jaya terkait puisi tersebut. Kedua pelapor adalah pengacara bernama Denny Adrian Kushidayat dan politikus Partai Hanura, Amron Asyhari yang mendatangi Markas Polda Metro Jaya, Selasa (3/4/2018).</p><p xss=removed>Laporan Denny bernomor LP/1782/IV/2018/PMJ/Dit.Reskrimum atas dugaan Penistaan Agama Islam sebagaimana diatur dalam Pasal 156 A KUHP dan atau Pasal 16 UU Nomor 40 tahun 2008 tentang penghapusan diskriminasi Ras dan Etnis.</p><p xss=removed>Sedangkan laporan Amron bernomor LP/1785/IV/2018/PMJ/Dit.Reskrimum dengan dugaan Penistaan Agama Islam sebagaimana diatur dalam Pasal 156 A KUHP. Amron berharap polisi bertindak tegas dan profesional dalam mengusut laporan ini.</p><p xss=removed>Tak hanya ke Polda Metro Jaya, Sukmawati Soekarnoputri juga akan dilaporkan ke Bareskrim Polri. Laporan itu akan dilayangkan Forum Umat Islam Bersatu (FUIB) pada Kamis 4 April. Selain itu, sejumlah ormas pun melakukan unjuk rasa meminta pihak berwajib melanjutkan proses hokum untuk puteri presiden pertama Indonesia, Soekarno tersebut.</p><p xss=removed>(REPUBLIKA.CO.ID, BANDUNG)</p>', '2021-10-30 03:34:00', 2, 1, 1, 1, NULL, '2021-10-30 03:34:53', '2021-10-30 03:42:48', NULL),
-(4, 'MUI Jabar Kecam Pernyataan Kontroversial Trump Soal Yerusalem Ibu Kota Israel', '8d3bae9bfc29f583ec4faa3fd0fb93ac.jpg', '&lt;textarea cols=\"3\" rows=\"4\" class=\"form-control summernote\" id=\"deskripsi\" name=\"deskripsi\" placeholder=\"Deskripsi\" value=\"<div dir=\" auto\" xss=\"removed\" xss=removed><div dir=\"auto\" xss=removed>“Nanti wilayah Palestina habis tidak tersisa lagi kalau Yerusalem jadi ibu kota Israel,” kata Sekretaris Umum MUI Jawa Barat, Drs HM Rafani Akhyar M Si, Jumat (8/12/2017).</div><div dir=\"auto\" xss=removed>Ia mengatakan, sejak dulu Amerika Serikat sudah menerapkan kebijakan dua kaki terkait Israel dan Palestina.</div><div dir=\"auto\" xss=removed>Di satu sisi membela Hak Asasi Manusia (HAM) dan di sisi lain tak hentinya menyokong kekuatan kepada Israel.</div><div dir=\"auto\" xss=removed>“Israel sudah kuat didukung terus, Palestina yang lemah jadi semakin tertindas,” ujar Rafani Akhyar saat ditemui di kantor MUI Jawa Barat, Jalan RE Martadinata, Kota Bandung.</div><div dir=\"auto\" xss=removed></div><div dir=\"auto\" xss=removed>Amerika Serikat harus menyadari kekuatannya sebagai negara super power telah menurun.</div><div dir=\"auto\" xss=removed>Rafani yang saat ditemui mengenakan batik cokelat itu menilai, banyaknya permasalahan di Amerika Serikat membuat  Trump mencoba mengalihkan isu dengan mengatakan hal demikian.</div><div dir=\"auto\" xss=removed>Sepanjang sejarah Amerika Serikat, kata dia, baru kali ini rakyatnya berdemonstrasi meminta presidennya turun.</div><div dir=\"auto\" xss=removed>“Donald Trump sebagai presiden harus membaca keadaan negara yang dipimpinnya. Bukan malah seenaknya mendikte Palestina dan menetapkan Yerusalem sebagai ibu kota Israel. Super powernya sudah menurun. Korea Utara baru uji coba nuklir saja sudah ketar-ketir,” kata Rafani Akhyar.</div><div dir=\"auto\" xss=removed>(dilansir dari tribun jabar jumat 8 desember 2017)</div>\" required>&lt;/textarea&gt;', '2021-10-30 03:35:00', 2, 1, 1, 1, NULL, '2021-10-30 03:35:30', '2021-10-30 03:43:30', NULL),
-(5, 'Ustaz Adi Hidayat: Berbanggalah Jadi Warga Indonesia Sebab Keturunan Langsung Nabi Ibrahim', '4fea0582c8e2f3ac5e331aa750686d39.jpg', '<p xss=removed><span xss=removed>JURNAL SOREANG</span>–<a href=\"https://jurnalsoreang.pikiran-rakyat.com/tag/Ustaz Adi Hidayat\" xss=removed>Ustaz Adi Hidayat</a> mengajak masyarakat Indonesia untuk bersyukur karena hidup di Indonesia yang alamnya subur.</p><p xss=removed>Selain itu, <a href=\"https://jurnalsoreang.pikiran-rakyat.com/tag/warga Indonesia\" xss=removed>warga Indonesia</a> juga masih <a href=\"https://jurnalsoreang.pikiran-rakyat.com/tag/keturunan\" xss=removed>keturunan</a> langsung dari <a href=\"https://jurnalsoreang.pikiran-rakyat.com/tag/Nabi Ibrahim\" xss=removed>Nabi Ibrahim</a> dari jalur ketiga.</p><p xss=removed>“Ternyata istri <a href=\"https://jurnalsoreang.pikiran-rakyat.com/tag/Nabi Ibrahim\" xss=removed>Nabi Ibrahim</a> ada empat yakni Siti Sarah, Siti Hajar, Qantarah binti Alyakfan dan Aminah. Istri ketiga ini yang menjadi silsilah bagi <a href=\"https://jurnalsoreang.pikiran-rakyat.com/tag/keturunan\" xss=removed>keturunan</a> ke Asia Tenggara termasuk Indonesia,” kata <a href=\"https://jurnalsoreang.pikiran-rakyat.com/tag/Ustaz Adi Hidayat\" xss=removed>Ustaz Adi Hidayat</a> dalam silaturahmi MUI Jabar di kantor MUI Jabar, Rabu 18 Agustus 2021.</p><p xss=removed>Acara dihadiri Gubernur Jabar H. Ridwan Kamil, Ketua Umum MUI Jabar, Prof. KH. Rachmat Sjafei, Sekum MUI Jabar, KH. Rafani Achyar, ketua Dewan Pertimbangan MUI Jabar KH. Miftah Faridl, perwakilan Kodam III/Siliwangi dan Kanwil Kemenag Jabar.</p><p xss=removed>Ratusan pengurus MUI kabur/kota se-Jawa Barat juga ikut dalam acara melalui aplikasi zoom. Para peserta Pendidikan Kader Ulama (PKU) juga ikut dalam acara secara virtual.</p><p xss=removed>Dalam kesempatan itu, <a href=\"https://jurnalsoreang.pikiran-rakyat.com/tag/Ustaz Adi Hidayat\" xss=removed>Ustaz Adi Hidayat</a> memberikan bantuan.paket suplemen memperkuat imunitas untuk warga Jawa Barat yang terdampak pandemi.</p><p xss=removed>Lebih jauh Ustaz Adi mengatakan, Indonesia merupakan negara yang sangat strategis dari sisi apa pun.</p><p xss=removed>“Saya senang melakukan riset terhadap Indonesia dan subhanallah betapa hebatnya Indonesia,” katanya.</p><p xss=removed>Mengenai pandemi Covid-19, <a href=\"https://jurnalsoreang.pikiran-rakyat.com/tag/Ustaz Adi Hidayat\" xss=removed>Ustaz Adi Hidayat</a> menyatakan, sudah 13 abad lalu alim ulama sudah menyatakan soal penanganan wabah ini.</p><p xss=removed>“Alim ulama dengan merujuk kepada Al-Qur’an dan hadis ternyata sudah memiliki banyak iatilah baik lockdown, PPKM dan lain-lain. Intinya wabah dari virus adalah tak nampak sehingga harus dihadapi dengan kekuatan terbaik dari semua kalangan,” katanya.</p><p xss=removed>Demikian pula dengan kasus hoaks saat pandemi juga sudah terjadi sejak lama misalnya saat wabah kolera ketika kepemimpinan Khalifah Umar bin Khattab.</p><p xss=removed>“Saat itu warga sangat gelisah dengan maraknya hoaks. Akhirnya semua kalangan baik ulama dan tenaga kesehatan memberikan penjelasan agar warga tenang kembali,” katanya.</p><p xss=removed><a href=\"https://jurnalsoreang.pikiran-rakyat.com/tag/Ustaz Adi Hidayat\" xss=removed>Ustaz Adi Hidayat</a> mengimbau agar semua komponen bangsa bisa bersatu menghadapi semua ancaman.</p><p xss=removed>“Jangan sampai Indonesia terpecah belah karena fitnah maupun hoaks. TNI dan Polri harus diperkuat untuk menghadapi ancaman,” katanya.***</p><div><br></div><div class=\"blog-share text-center\" xss=removed></div>', '2021-10-30 05:01:00', 2, 1, 1, 1, NULL, '2021-10-30 05:01:33', '2021-10-30 05:01:40', NULL);
+(4, 'MUI Jabar Kecam Pernyataan Kontroversial Trump Soal Yerusalem Ibu Kota Israel', '8d3bae9bfc29f583ec4faa3fd0fb93ac.jpg', '<div dir=\"auto\" xss=removed>Majelis Ulama Indonesia (MUI) Jawa Barat mengecam pernyataan Presiden Amerika Serikat, Donald Trump, yang secara menyebut Yerusalem sebagai ibu kota Israel.</div><div dir=\"auto\" xss=removed>“Nanti wilayah Palestina habis tidak tersisa lagi kalau Yerusalem jadi ibu kota Israel,” kata Sekretaris Umum MUI Jawa Barat, Drs HM Rafani Akhyar M Si, Jumat (8/12/2017).</div><div dir=\"auto\" xss=removed>Ia mengatakan, sejak dulu Amerika Serikat sudah menerapkan kebijakan dua kaki terkait Israel dan Palestina.</div><div dir=\"auto\" xss=removed>Di satu sisi membela Hak Asasi Manusia (HAM) dan di sisi lain tak hentinya menyokong kekuatan kepada Israel.</div><div dir=\"auto\" xss=removed>“Israel sudah kuat didukung terus, Palestina yang lemah jadi semakin tertindas,” ujar Rafani Akhyar saat ditemui di kantor MUI Jawa Barat, Jalan RE Martadinata, Kota Bandung.</div><div dir=\"auto\" xss=removed></div><div dir=\"auto\" xss=removed>Amerika Serikat harus menyadari kekuatannya sebagai negara super power telah menurun.</div><div dir=\"auto\" xss=removed>Rafani yang saat ditemui mengenakan batik cokelat itu menilai, banyaknya permasalahan di Amerika Serikat membuat  Trump mencoba mengalihkan isu dengan mengatakan hal demikian.</div><div dir=\"auto\" xss=removed>Sepanjang sejarah Amerika Serikat, kata dia, baru kali ini rakyatnya berdemonstrasi meminta presidennya turun.</div><div dir=\"auto\" xss=removed>“Donald Trump sebagai presiden harus membaca keadaan negara yang dipimpinnya. Bukan malah seenaknya mendikte Palestina dan menetapkan Yerusalem sebagai ibu kota Israel. Super powernya sudah menurun. Korea Utara baru uji coba nuklir saja sudah ketar-ketir,” kata Rafani Akhyar.</div><div dir=\"auto\" xss=removed>(dilansir dari tribun jabar jumat 8 desember 2017)</div>', '2021-10-30 03:35:00', 2, 1, 1, 1, NULL, '2021-10-30 03:35:30', '2021-11-01 13:14:16', NULL),
+(5, 'Ustaz Adi Hidayat: Berbanggalah Jadi Warga Indonesia Sebab Keturunan Langsung Nabi Ibrahim', '4fea0582c8e2f3ac5e331aa750686d39.jpg', '<p xss=removed><span xss=removed>JURNAL SOREANG</span>–<a href=\"https://jurnalsoreang.pikiran-rakyat.com/tag/Ustaz Adi Hidayat\">Ustaz Adi Hidayat</a> mengajak masyarakat Indonesia untuk bersyukur karena hidup di Indonesia yang alamnya subur.</p><p xss=removed>Selain itu, <a href=\"https://jurnalsoreang.pikiran-rakyat.com/tag/warga Indonesia\">warga Indonesia</a> juga masih <a href=\"https://jurnalsoreang.pikiran-rakyat.com/tag/keturunan\">keturunan</a> langsung dari <a href=\"https://jurnalsoreang.pikiran-rakyat.com/tag/Nabi Ibrahim\">Nabi Ibrahim</a> dari jalur ketiga.</p><p xss=removed>“Ternyata istri <a href=\"https://jurnalsoreang.pikiran-rakyat.com/tag/Nabi Ibrahim\">Nabi Ibrahim</a> ada empat yakni Siti Sarah, Siti Hajar, Qantarah binti Alyakfan dan Aminah. Istri ketiga ini yang menjadi silsilah bagi <a href=\"https://jurnalsoreang.pikiran-rakyat.com/tag/keturunan\">keturunan</a> ke Asia Tenggara termasuk Indonesia,” kata <a href=\"https://jurnalsoreang.pikiran-rakyat.com/tag/Ustaz Adi Hidayat\">Ustaz Adi Hidayat</a> dalam silaturahmi MUI Jabar di kantor MUI Jabar, Rabu 18 Agustus 2021.</p><p xss=removed>Acara dihadiri Gubernur Jabar H. Ridwan Kamil, Ketua Umum MUI Jabar, Prof. KH. Rachmat Sjafei, Sekum MUI Jabar, KH. Rafani Achyar, ketua Dewan Pertimbangan MUI Jabar KH. Miftah Faridl, perwakilan Kodam III/Siliwangi dan Kanwil Kemenag Jabar.</p><p xss=removed>Ratusan pengurus MUI kabur/kota se-Jawa Barat juga ikut dalam acara melalui aplikasi zoom. Para peserta Pendidikan Kader Ulama (PKU) juga ikut dalam acara secara virtual.</p><p xss=removed>Dalam kesempatan itu, <a href=\"https://jurnalsoreang.pikiran-rakyat.com/tag/Ustaz Adi Hidayat\">Ustaz Adi Hidayat</a> memberikan bantuan.paket suplemen memperkuat imunitas untuk warga Jawa Barat yang terdampak pandemi.</p><p xss=removed>Lebih jauh Ustaz Adi mengatakan, Indonesia merupakan negara yang sangat strategis dari sisi apa pun.</p><p xss=removed>“Saya senang melakukan riset terhadap Indonesia dan subhanallah betapa hebatnya Indonesia,” katanya.</p><p xss=removed>Mengenai pandemi Covid-19, <a href=\"https://jurnalsoreang.pikiran-rakyat.com/tag/Ustaz Adi Hidayat\">Ustaz Adi Hidayat</a> menyatakan, sudah 13 abad lalu alim ulama sudah menyatakan soal penanganan wabah ini.</p><p xss=removed>“Alim ulama dengan merujuk kepada Al-Qur’an dan hadis ternyata sudah memiliki banyak iatilah baik lockdown, PPKM dan lain-lain. Intinya wabah dari virus adalah tak nampak sehingga harus dihadapi dengan kekuatan terbaik dari semua kalangan,” katanya.</p><p xss=removed>Demikian pula dengan kasus hoaks saat pandemi juga sudah terjadi sejak lama misalnya saat wabah kolera ketika kepemimpinan Khalifah Umar bin Khattab.</p><p xss=removed>“Saat itu warga sangat gelisah dengan maraknya hoaks. Akhirnya semua kalangan baik ulama dan tenaga kesehatan memberikan penjelasan agar warga tenang kembali,” katanya.</p><p xss=removed><a href=\"https://jurnalsoreang.pikiran-rakyat.com/tag/Ustaz Adi Hidayat\">Ustaz Adi Hidayat</a> mengimbau agar semua komponen bangsa bisa bersatu menghadapi semua ancaman.</p><p xss=removed>“Jangan sampai Indonesia terpecah belah karena fitnah maupun hoaks. TNI dan Polri harus diperkuat untuk menghadapi ancaman,” katanya.***</p><div><br></div><div class=\"blog-share text-center\" xss=removed></div>', '2021-10-30 05:01:00', 2, 1, 1, 1, NULL, '2021-10-30 05:01:33', '2021-11-01 13:14:27', NULL);
 
 -- --------------------------------------------------------
 
@@ -384,6 +385,19 @@ CREATE TABLE `news_komentar` (
   `updated_at` datetime DEFAULT NULL ON UPDATE current_timestamp(),
   `deleted_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `news_komentar`
+--
+
+INSERT INTO `news_komentar` (`id`, `news_id`, `member_id`, `komentar`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 5, 19, 'Testing komentar', 1, '2021-11-01 13:37:39', NULL, NULL),
+(2, 5, 19, 'Testing komentar', 1, '2021-11-01 13:38:56', NULL, NULL),
+(3, 5, 19, 'dsafsadfsdf', 1, '2021-11-02 08:33:39', NULL, NULL),
+(4, 5, 19, 'Testing Komentar wkwk', 1, '2021-11-02 09:01:21', NULL, NULL),
+(5, 5, 19, 'Testing Komentar wkwk', 1, '2021-11-02 09:01:37', NULL, NULL),
+(6, 5, 19, 'Komentar 5 GAnti', 1, '2021-11-02 09:02:30', NULL, NULL),
+(7, 4, 19, 'Komentar baru', 1, '2021-11-02 09:03:18', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -473,11 +487,9 @@ INSERT INTO `role_aplikasi` (`rola_id`, `rola_menu_id`, `rola_lev_id`, `created_
 (1, 1, 1, '2021-10-20 11:49:31'),
 (2, 82, 1, '2021-10-20 11:49:35'),
 (9, 2, 1, '2021-10-20 12:15:21'),
-(10, 3, 1, '2021-10-20 12:15:22'),
 (11, 4, 1, '2021-10-20 12:15:23'),
 (12, 5, 1, '2021-10-20 12:15:24'),
 (13, 6, 1, '2021-10-20 12:15:27'),
-(14, 97, 1, '2021-10-20 12:15:27'),
 (15, 106, 1, '2021-10-20 12:15:29'),
 (16, 107, 1, '2021-10-20 12:15:30'),
 (17, 108, 1, '2021-10-20 12:15:30'),
@@ -492,7 +504,8 @@ INSERT INTO `role_aplikasi` (`rola_id`, `rola_menu_id`, `rola_lev_id`, `created_
 (27, 121, 1, '2021-10-28 10:23:58'),
 (28, 122, 1, '2021-10-28 10:23:58'),
 (29, 123, 1, '2021-10-28 10:23:58'),
-(30, 124, 1, '2021-10-28 10:33:13');
+(30, 124, 1, '2021-10-28 10:33:13'),
+(31, 125, 1, '2021-11-02 07:56:03');
 
 -- --------------------------------------------------------
 
@@ -527,6 +540,34 @@ INSERT INTO `role_users` (`role_id`, `role_user_id`, `role_lev_id`, `created_at`
 (75, 22, 1, '2021-10-20 22:50:01'),
 (76, 23, 1, '2021-10-20 22:51:04'),
 (77, 24, 2, '2021-10-28 05:46:11');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tutorial`
+--
+
+CREATE TABLE `tutorial` (
+  `id` int(11) NOT NULL,
+  `nama` varchar(255) DEFAULT NULL,
+  `url` varchar(255) NOT NULL,
+  `keterangan` text NOT NULL,
+  `foto` varchar(255) NOT NULL,
+  `status` int(11) DEFAULT NULL,
+  `created_by` int(11) DEFAULT NULL,
+  `updated_by` int(11) DEFAULT NULL,
+  `deleted_by` int(11) DEFAULT NULL,
+  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
+  `updated_at` datetime DEFAULT NULL ON UPDATE current_timestamp(),
+  `deleted_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tutorial`
+--
+
+INSERT INTO `tutorial` (`id`, `nama`, `url`, `keterangan`, `foto`, `status`, `created_by`, `updated_by`, `deleted_by`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(6, 'Tutorial 1', 'https://www.youtube.com/watch?v=N9oKp6orIQQ', '123', '9eb2cefa70d7c09097db0cee991ff135.jpeg', 1, 1, 1, NULL, '2021-11-02 15:25:04', '2021-11-02 17:10:54', NULL);
 
 -- --------------------------------------------------------
 
@@ -710,6 +751,15 @@ ALTER TABLE `role_users`
   ADD KEY `role_user_id` (`role_user_id`);
 
 --
+-- Indexes for table `tutorial`
+--
+ALTER TABLE `tutorial`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `created_by` (`created_by`),
+  ADD KEY `updated_by` (`updated_by`),
+  ADD KEY `deleted_by` (`deleted_by`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -777,7 +827,7 @@ ALTER TABLE `member_materi_tonton`
 -- AUTO_INCREMENT for table `menu`
 --
 ALTER TABLE `menu`
-  MODIFY `menu_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=125;
+  MODIFY `menu_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=126;
 
 --
 -- AUTO_INCREMENT for table `news`
@@ -789,7 +839,7 @@ ALTER TABLE `news`
 -- AUTO_INCREMENT for table `news_komentar`
 --
 ALTER TABLE `news_komentar`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `pembayaran`
@@ -807,13 +857,19 @@ ALTER TABLE `rekening`
 -- AUTO_INCREMENT for table `role_aplikasi`
 --
 ALTER TABLE `role_aplikasi`
-  MODIFY `rola_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `rola_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `role_users`
 --
 ALTER TABLE `role_users`
   MODIFY `role_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=78;
+
+--
+-- AUTO_INCREMENT for table `tutorial`
+--
+ALTER TABLE `tutorial`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `users`
