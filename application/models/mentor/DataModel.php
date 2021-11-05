@@ -57,7 +57,7 @@ class DataModel extends Render_Model
         $data['user_nama'] = $nama;
         $data['user_email'] = $email;
         $data['user_password'] = $this->b_password->bcrypt_hash($password);
-        $data['user_phone'] = $telepon;
+        $data['user_phone'] = '+62' . $telepon;
         $data['user_status'] = $status;
         $data['user_tgl_lahir'] = $tanggal_lahir;
         $data['user_jk'] = $jenis_kelamin;
@@ -82,7 +82,7 @@ class DataModel extends Render_Model
     {
         $data['user_nama'] = $nama;
         $data['user_email'] = $email;
-        $data['user_phone'] = $telepon;
+        $data['user_phone'] = '+62' . $telepon;
         $data['user_status'] = $status;
         $data['updated_at'] = Date("Y-m-d H:i:s", time());
         $data['user_tgl_lahir'] = $tanggal_lahir;

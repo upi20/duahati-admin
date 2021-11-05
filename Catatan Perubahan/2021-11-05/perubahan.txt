@@ -25,8 +25,8 @@ referral_transaksi:
 
 Roadmap
   perbaikan
-    member tambah +62 di whatsapp dan nominal biaya_pendaftaran
-    mentor +62 di whatsapp
+    member tambah +62 di whatsapp [clear]
+    mentor +62 di whatsapp [clear]
 
   biaya pendataran
     crud [clear]
@@ -45,3 +45,14 @@ Roadmap
     saat konfirmasi pembayaran
     saat konfirmasi pembayaran refeal yang mengati saldo naik
 
+
+rencana
+  filter
+    member [mentor]
+
+  tutorial
+    dilihat
+
+  mentor panel admin
+
+  dashboard

@@ -66,7 +66,7 @@ $(function () {
                                     data-mentor_id="${full.mentor_id}"
                                     data-nama="${full.nama}"
                                     data-email="${full.email}"
-                                    data-no_telepon="${full.no_telepon == null ? '' : full.no_telepon}"
+                                    data-no_telepon="${full.no_telepon == null ? '' : String(full.no_telepon).replace('+62', '')}"
                                     data-alamat="${full.alamat}"
                                     data-status="${full.status}"
                                     data-kode_referral="${full.kode_referral}"

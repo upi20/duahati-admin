@@ -79,9 +79,12 @@
                             </div>
                         </div>
                         <div class="col-lg-6">
-                            <div class="form-group">
-                                <label for="telepon">No Whatsapp</label>
-                                <input type="telepon" class="form-control" id="telepon" name="telepon" placeholder="No Whatsapp" required />
+                            <label for="telepon">No Whatsapp</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">+62</div>
+                                </div>
+                                <input type="text" class="form-control" id="telepon" name="telepon" placeholder="No Whatsapp">
                             </div>
                         </div>
                         <div class="col-lg-6">

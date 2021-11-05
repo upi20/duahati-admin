@@ -48,7 +48,7 @@ $(function () {
                                         data-temp_foto="${full.user_foto}"
                                         data-alamat="${full.alamat}"
                                         data-email="${full.user_email}"
-                                        data-telepon="${full.user_phone}"
+                                        data-telepon="${String(full.user_phone).replace('+62', '')}"
                                         data-status="${full.user_status}"
                                         data-toggle="modal" data-target="#tambahModal"
                                     onclick="Ubah(this)">
