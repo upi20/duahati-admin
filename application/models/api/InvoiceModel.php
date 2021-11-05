@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class RekeningModel extends Render_Model
+class InvoiceModel extends Render_Model
 {
   public function get_list_rekening($id = null)
   {
@@ -22,6 +22,19 @@ class RekeningModel extends Render_Model
       ];
     }
     return $return;
+  }
+
+  public function member($member_id)
+  {
+    $return = $this->db->select('nama, 	no_telepon, email, biaya_pendaftaran')
+      ->from('member')
+      ->where('id', $member_id)
+      ->get()
+      ->row_array();
+    return [
+      'length' => is_null($return) ? 0 : 4,
+      'data' => $return
+    ];
   }
 
   public function get_mentor_by_member($id_member)

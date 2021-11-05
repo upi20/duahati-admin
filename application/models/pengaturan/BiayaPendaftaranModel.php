@@ -100,7 +100,9 @@ class BiayaPendaftaranModel extends Render_Model
             ]);
 
         // Update yang tidak aktif
-        $execute = $this->db->where('id <>', $id)
+        $execute = $this->db
+            ->where('id <>', $id)
+            ->where('status', 1)
             ->update('biaya_pendaftaran', [
                 'status' => 0,
                 'updated_by' => $user_id,

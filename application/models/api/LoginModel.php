@@ -32,6 +32,7 @@ class LoginModel extends Render_Model
 
 	public function registrasi($nama, $email, $telepon, $password, $referral, $status = 1)
 	{
+		// referral
 		$koder_referral = $this->getReferral(7);
 		$referral = $referral == '' ? null : $referral;
 		if ($referral != null) {
@@ -48,6 +49,7 @@ class LoginModel extends Render_Model
 			}
 		}
 
+		// pengecekan email
 		$cek_email = $this->checkEmail($email);
 		if ($cek_email) {
 			return (object) [
@@ -58,8 +60,14 @@ class LoginModel extends Render_Model
 			];
 		}
 
+		// mentor
 		$mentor = $this->getRandomMentor();
 		$token = uniqid("duahati" . Date('Ymdhis'));
+
+
+		// nominal pembayaran
+		$biaya_pendaftaran = $this->biaya_pendaftaran();
+
 
 		$this->db->db_debug = false;
 		$data['mentor_id'] = $mentor->id;
@@ -67,15 +75,16 @@ class LoginModel extends Render_Model
 		$data['nama'] = $nama;
 		$data['email'] = $email;
 		$data['password']	= $this->b_password->bcrypt_hash($password);
-		$data['no_telepon']	= $telepon;
+		$data['no_telepon']	= '+62' . $telepon;
 		$data['status']	= $status;
+		$data['biaya_pendaftaran']	= $biaya_pendaftaran;
 		$data['kode_referral'] = $koder_referral;
 		$data['created_at']	= Date('Y-m-d h:i:s');
 		$data['token'] = $token;
 
 		// Insert member
 		$execute		= $this->db->insert('member', $data);
-		$execute 					= $this->db->insert_id();
+		$execute 		= $this->db->insert_id();
 
 		$status = $execute != 0;
 
@@ -138,6 +147,22 @@ class LoginModel extends Render_Model
 			'nama' => $mentor == null ? null : $mentor->user_nama,
 			'jumlah_member' => $mentor == null ? null : $mentor->jumlah_member,
 		];
+	}
+
+	private function biaya_pendaftaran(): int
+	{
+		$nominal = 80000;
+		try {
+			$get = $this->db->select('nominal')
+				->from('biaya_pendaftaran')
+				->where('status', 1)
+				->get()->row();
+
+			$nominal = $get == null ? $nominal : $get->nominal;
+		} catch (\Throwable $th) {
+			//throw $th;
+		}
+		return $nominal;
 	}
 }
 

@@ -89,18 +89,27 @@ class Login extends RestController
         'message' => validation_errors()
       ], 400);
     } else {
-      $nama = $this->input->post('nama');
-      $email = $this->input->post('email');
-      $telepon = $this->input->post('telepon');
-      $password = $this->input->post('password');
-      $referral = $this->input->post('referral');
-      $result = $this->login->registrasi($nama, $email, $telepon, $password, $referral, 2);
-      $this->response([
-        'status' => $result->status,
-        'length' => 1,
-        'data' =>  $result->data,
-        'message' => $result->message,
-      ], $result->code);
+      try {
+        $nama = $this->input->post('nama');
+        $email = $this->input->post('email');
+        $telepon = $this->input->post('telepon');
+        $password = $this->input->post('password');
+        $referral = $this->input->post('referral');
+        $result = $this->login->registrasi($nama, $email, $telepon, $password, $referral, 2);
+        $this->response([
+          'status' => $result->status,
+          'length' => 1,
+          'data' =>  $result->data,
+          'message' => $result->message,
+        ], $result->code);
+      } catch (\Throwable $th) {
+        $this->response([
+          'status' => false,
+          'length' => 0,
+          'data' =>  null,
+          'message' => 'Internal Server error',
+        ], 500);
+      }
     }
   }
 
