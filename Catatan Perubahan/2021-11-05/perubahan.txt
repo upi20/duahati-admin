@@ -1,0 +1,44 @@
+Referral tampilan [clear]
+
+konsep database:
+referral_pencairan:
+  member_id
+  atas_nama
+  nama_bank
+  no_rekening
+  jumlah_dana
+
+referral:
+  member_id
+  total_pendapatan
+  dicairkan
+  belum_dicairkan
+
+referral_transaksi:
+  referral_id
+  member_id
+  jenis [0 dana keluar, 1 dana masuk]
+  status [0 tidak aktif, 1 aktif]
+  jumlah_dana
+  keterangan
+
+
+Roadmap
+
+biaya pendataran
+  crud [clear]
+  implementasi
+
+pendaftaran konfirmasi
+
+
+reward pengundang
+  crud
+  implementasi
+
+page konfirmasi pembayaran
+
+refferal
+  tabel
+  saat konfirmasi pembayaran
+
