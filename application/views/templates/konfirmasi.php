@@ -483,7 +483,7 @@
       $('#detail_atas_nama').html(detail.atas_nama);
       $('#detail_nama_bank').html(detail.nama_bank);
       $('#detail_no_rekening').html(detail.no_rekening);
-      $('#detail_nominal').html(detail.nominal);
+      $('#detail_nominal').html(`Rp. ${format_rupiah(detail.nominal)}`);
       $('#detail_tgl_bayar').html(detail.tgl_bayar);
       $('#detail_tgl_input').html(detail.tgl_input);
       $('#detail_tgl_respon').html(detail.tgl_respon);
@@ -501,6 +501,45 @@
       showConfirmButton: false,
       timer: 3000
     });
+
+    function format_rupiah(angka, format = 2, prefix) {
+      angka = angka != "" ? angka : 0;
+      angka = parseFloat(angka);
+      angka_ = angka.toString().split('.');
+      if (format) {
+        if (angka_[1]) {
+          const len = String(angka_[1]).length;
+
+          angka = angka.toFixed(format > len ? len : format);
+        }
+      }
+      const minus = angka < 0 ? "-" : "";
+      angka = angka.toString().split('.');
+      let suffix = angka[1] ? angka[1] : '';
+
+      angka = angka[0];
+      if (angka) {
+        let number_string = angka.toString().replace(/[^,\d]/g, '').toString(),
+          split = number_string.split(','),
+          sisa = split[0].length % 3,
+          rupiah = split[0].substr(0, sisa),
+          ribuan = split[0].substr(sisa).match(/\d{3}/gi)
+
+        // tambahkan titik jika yang di input sudah menjadi angka ribuan
+        if (ribuan) {
+          separator = sisa ? '.' : ''
+          rupiah += separator + ribuan.join('.')
+        }
+
+        rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah
+
+        // return prefix == undefined ? rupiah : (rupiah ? 'Rp. ' + rupiah : '')
+        const result = prefix == undefined ? rupiah : (rupiah ? prefix + rupiah : '');
+        return minus + result + (suffix != '' ? ',' + suffix : '');
+      } else {
+        return 0
+      }
+    }
   </script>
 </body>
 
