@@ -1,14 +1,14 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class BiayaPendaftaran extends Render_Controller
+class ReferralReward extends Render_Controller
 {
 
     public function index()
     {
         // Page Settings
-        $this->title = 'Pengaturan Biaya Pendaftaran';
-        $this->navigation = ['Biaya Pendaftaran'];
+        $this->title = 'Pengaturan Referral Nominal Reward';
+        $this->navigation = ['Referral Nominal Reward'];
         $this->plugins = ['datatables'];
 
         // Breadcrumb setting
@@ -16,10 +16,10 @@ class BiayaPendaftaran extends Render_Controller
         $this->breadcrumb_1_url = base_url();
         $this->breadcrumb_3 = 'Pengaturan';
         $this->breadcrumb_3_url = '#';
-        $this->breadcrumb_4 = 'Biaya Pendaftaran';
-        $this->breadcrumb_4_url = base_url() . 'pengaturan/biaya_pendaftaran/list';
+        $this->breadcrumb_4 = 'Referral Nominal Reward';
+        $this->breadcrumb_4_url = base_url() . 'pengaturan/referral_reward_nominal/list';
         // content
-        $this->content      = 'pengaturan/biaya_pendaftaran/list';
+        $this->content      = 'pengaturan/referral_reward_nominal/list';
 
         // Send data to view
         $this->render();
@@ -96,7 +96,7 @@ class BiayaPendaftaran extends Render_Controller
         }
         $this->id = $this->session->userdata('data')['id'];
         $this->photo_path = './files/pengaturan/rekening/';
-        $this->load->model("pengaturan/BiayaPendaftaranModel", 'model');
+        $this->load->model("pengaturan/ReferralRewardModel", 'model');
         $this->default_template = 'templates/dashboard';
         $this->load->library('plugin');
         $this->load->helper('url');

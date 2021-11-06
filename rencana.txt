@@ -1,34 +1,41 @@
 Referral tampilan [clear]
 
 konsep database:
-referral_pencairan:
+referral_pencairan: [clear]
   member_id
   atas_nama
   nama_bank
   no_rekening
   jumlah_dana
+  status [0 diajukan | 1 terima | 2 tolak]
+  catatan
 
-referral:
+referral:[clear]
   member_id
   total_pendapatan
   dicairkan
   belum_dicairkan
 
-referral_transaksi:
+referral_transaksi: [clear]
   referral_id
   member_id
   jenis [0 dana keluar, 1 dana masuk]
-  status [0 tidak aktif, 1 aktif, 3 deleted]
   jumlah_dana
+  catatan
+
+referral_nominal: [clear]
+  nama
+  nominal
+  status [0 tidak aktif, 1 aktif]
   keterangan
 
 
 Roadmap
-  perbaikan
+  perbaikan [clear]
     member tambah +62 di whatsapp [clear]
     mentor +62 di whatsapp [clear]
 
-  biaya pendataran
+  biaya pendataran [clear]
     crud [clear]
     implementasi [clear]
 
@@ -38,7 +45,7 @@ Roadmap
     crud
     implementasi
 
-  page konfirmasi pembayaran
+  page konfirmasi pembayaran [clear]
 
   refferal
     tabel

@@ -103,7 +103,7 @@
           <div class="input-group my-3 my-md-0">
             <input type="email" class="form-control" required name="email" id="cari_email" style="padding-top: 8px; padding-bottom: 8px; height: auto; padding-left: 30px; border-radius: 30px 0 0 30px;" placeholder="Masukan Email Untuk Mencari Riwayat Pembayaran" aria-label="Masukan Email Untuk Mencari Riwayat Pembayaran" aria-describedby="basic-addon2">
             <div class="input-group-append">
-              <button class="btn btn-indigo w-100 w-md-auto  p-2 pl-3 pr-4" style="border-radius: 0 30px 30px 0;" type="submit"><i class="fas fa-search mr-2"></i> Cari</button>
+              <button class="btn btn-indigo w-100 w-md-auto  p-2 pl-3 pr-4" style="border-radius: 0 30px 30px 0; box-shadow: 0 .125rem .25rem rgba(0,0,0,.075)!important;" type="submit"><i class="fas fa-search mr-2"></i> Cari</button>
             </div>
           </div>
         </form>
