@@ -115,22 +115,6 @@ class Home extends RestController
     ], $code);
   }
 
-  public function list_pertandingan_get()
-  {
-    $id = $this->get('id');
-    $data = $this->model->list_pertandingan_detail($id);
-    $code = $data['data'] == null ?
-      RestController::HTTP_NOT_FOUND
-      : RestController::HTTP_OK;
-    $status = $data['data'] != null;
-
-    $this->response([
-      'status' => $status,
-      'length' => $data['length'],
-      'data' => $data['data']
-    ], $code);
-  }
-
   function __construct()
   {
     parent::__construct();
