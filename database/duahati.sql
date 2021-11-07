@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Nov 07, 2021 at 04:32 AM
+-- Generation Time: Nov 07, 2021 at 09:00 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 7.4.25
 
@@ -225,14 +225,14 @@ CREATE TABLE `member` (
 --
 
 INSERT INTO `member` (`id`, `mentor_id`, `nama`, `no_telepon`, `tanggal_lahir`, `jenis_kelamin`, `alamat`, `password`, `email`, `foto`, `token`, `parrent_id`, `kode_referral`, `biaya_pendaftaran`, `status`, `created_by`, `updated_by`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(2, 6, 'Eska Yulinda Rahayu', '+6285798132505', NULL, NULL, 'Cianjur', '$2y$10$NXyctYJcxQTOVH0qJSgPX.d6W8IowPywTZ0JK08OQs/1jMfk11lCe', 'eskayr@gmail.com', '5a93fd88386b9bb7b9c194a31fd7172b.png', 'duahati202110211058496170e57995b5f', NULL, 'UMJYG7P', 0, 1, 1, 1, '2021-10-21 10:58:49', '2021-11-05 23:01:38', NULL),
-(3, 6, 'Member 2', '+6285798132505', NULL, NULL, '', '$2y$10$6.3PXYQx5KKVWQJ5C9cYqeJ5HiyQH9sOSfw2HdyTuEgeX4tUj/gkC', '2@gmail.com', 'f3fcbb4ac7377f576efebf18050e2b11.png', 'duahati202110211106436170e753c600c', NULL, 'FHECNLZ', 0, 1, 1, 1, '2021-10-21 11:06:43', '2021-11-05 23:01:50', NULL),
-(4, 6, 'Member 3', '+6285798132505', NULL, NULL, 'Cianjur', '$2y$10$NZaMXT1ZhSJIA245iQoxk.wUfV7j2NZ3CY9sebJaufLQKE1HRBX02', 'member3@gmail.com', '', 'duahati202110270151266178f6ee1b17a', NULL, '123', 0, 1, 1, 1, '2021-10-27 13:51:26', '2021-11-05 23:01:56', NULL),
-(5, 24, 'Member 7', '+6285798132505', NULL, NULL, 'Alamat', '$2y$10$twC1snL5xVas0JeZWeKIX.KftU7cHK0/Qs4Hh.1m.qmyT1cbbe8Ua', 'member7@gmail.com', '190b014bbef8397dfbc40b956b4a8863.png', 'duahati20211028115555617a2d5b0e3fa', NULL, '6R1ECOB', 0, 1, 1, 1, '2021-10-28 11:55:55', '2021-10-28 12:47:48', NULL),
-(19, 24, 'Member 1', '+6285798132505', NULL, NULL, '', '$2y$10$DA8x/kDIPpcweRy4C93OY.Gsm3JWOP8FxxnmcBfGWqRTQkaGnniee', 'member1@gmail.com', '', 'duahati20211030023630617c4d3e39688', NULL, 'V978EO5', 0, 1, NULL, NULL, '2021-10-30 02:36:30', '2021-10-30 03:17:23', NULL),
-(20, 24, 'Member BAru 3', '+6285798132505', NULL, NULL, '', '$2y$10$AA/tS2bTAPPn4Hy1KJPsEOYm164WbWPdDYojtxig0VJbXboFbOeHa', 'baru3@gmail.com', '', 'duahati20211030032316617c58342b8a4', 2, 'NGUWRIC', 0, 2, NULL, NULL, '2021-10-30 03:23:16', NULL, NULL),
-(24, 6, 'Isep Lutpi Nur', '+6285798132505', NULL, NULL, '', '$2y$10$JkLJFKoF14AJ0XxbEBI7wu4EA3ks5lvAXL9ifPig0xxk6cvvGSaZm', 'administrator@gmail.com', '', 'duahati20211105100338618547ca73f76', NULL, 'L6NR4ZK', 0, 2, NULL, NULL, '2021-11-05 10:03:38', NULL, NULL),
-(26, 24, 'Isep Lutpi Nur 1', '+6285798132505', NULL, NULL, '', '$2y$10$cfhGGL0Hy3aQ30KPrf.03OlQn78TvEWjQeXSW1tw9uSmSqCjUINjW', 'isep@gmail.com', '', 'duahati2021110510274161854d6d0bec8', NULL, 'KD175JB', 80000, 2, NULL, NULL, '2021-11-05 10:27:41', NULL, NULL);
+(2, 6, 'Eska Yulinda Rahayu', '+6285798132505', NULL, NULL, 'Cianjur', '$2y$10$NXyctYJcxQTOVH0qJSgPX.d6W8IowPywTZ0JK08OQs/1jMfk11lCe', 'eskayr@gmail.com', '5a93fd88386b9bb7b9c194a31fd7172b.png', 'duahati202110211058496170e57995b5f', NULL, 'UMJYG7P', 80000, 1, 1, 1, '2021-10-21 10:58:49', '2021-11-08 00:43:14', NULL),
+(3, 6, 'Member 2', '+6285798132505', NULL, NULL, '', '$2y$10$6.3PXYQx5KKVWQJ5C9cYqeJ5HiyQH9sOSfw2HdyTuEgeX4tUj/gkC', '2@gmail.com', 'f3fcbb4ac7377f576efebf18050e2b11.png', 'duahati202110211106436170e753c600c', NULL, 'FHECNLZ', 80000, 1, 1, 1, '2021-10-21 11:06:43', '2021-11-08 00:43:14', NULL),
+(4, 6, 'Member 3', '+6285798132505', NULL, NULL, 'Cianjur', '$2y$10$NZaMXT1ZhSJIA245iQoxk.wUfV7j2NZ3CY9sebJaufLQKE1HRBX02', 'member3@gmail.com', '', 'duahati202110270151266178f6ee1b17a', NULL, '123', 80000, 1, 1, 1, '2021-10-27 13:51:26', '2021-11-08 00:43:14', NULL),
+(5, 24, 'Member 7', '+6285798132505', NULL, NULL, 'Alamat', '$2y$10$twC1snL5xVas0JeZWeKIX.KftU7cHK0/Qs4Hh.1m.qmyT1cbbe8Ua', 'member7@gmail.com', '190b014bbef8397dfbc40b956b4a8863.png', 'duahati20211028115555617a2d5b0e3fa', NULL, '6R1ECOB', 80000, 1, 1, 1, '2021-10-28 11:55:55', '2021-11-08 00:43:14', NULL),
+(19, 24, 'Member 1', '+6285798132505', NULL, NULL, '', '$2y$10$DA8x/kDIPpcweRy4C93OY.Gsm3JWOP8FxxnmcBfGWqRTQkaGnniee', 'member1@gmail.com', '', 'duahati20211030023630617c4d3e39688', NULL, 'V978EO5', 80000, 1, NULL, NULL, '2021-10-30 02:36:30', '2021-11-08 00:43:05', NULL),
+(20, 24, 'Member BAru 3', '+6285798132505', NULL, NULL, '', '$2y$10$AA/tS2bTAPPn4Hy1KJPsEOYm164WbWPdDYojtxig0VJbXboFbOeHa', 'baru3@gmail.com', '', 'duahati20211030032316617c58342b8a4', 2, 'NGUWRIC', 80000, 1, NULL, NULL, '2021-10-30 03:23:16', '2021-11-08 00:48:58', NULL),
+(24, 6, 'Isep Lutpi Nur', '+6285798132505', NULL, NULL, '', '$2y$10$JkLJFKoF14AJ0XxbEBI7wu4EA3ks5lvAXL9ifPig0xxk6cvvGSaZm', 'administrator@gmail.com', '', 'duahati20211105100338618547ca73f76', 2, 'L6NR4ZK', 80000, 1, NULL, NULL, '2021-11-05 10:03:38', '2021-11-08 00:48:38', NULL),
+(26, 24, 'Isep Lutpi Nur 1', '+6285798132505', NULL, NULL, '', '$2y$10$cfhGGL0Hy3aQ30KPrf.03OlQn78TvEWjQeXSW1tw9uSmSqCjUINjW', 'isep@gmail.com', '', 'duahati2021110510274161854d6d0bec8', NULL, 'KD175JB', 80000, 1, NULL, NULL, '2021-11-05 10:27:41', '2021-11-08 00:56:05', NULL);
 
 -- --------------------------------------------------------
 
@@ -350,7 +350,9 @@ INSERT INTO `menu` (`menu_id`, `menu_menu_id`, `menu_nama`, `menu_keterangan`, `
 (124, 2, 'Rekening', 'Rekening untuk registrasi invoice\n', 1, 'far fa-circle', 'pengaturan/rekening', 'Aktif', '2021-10-28 10:32:55'),
 (125, 0, 'Tutorial', 'Tutorial', 5, 'far fa-lightbulb', 'tutorial/master', 'Aktif', '2021-11-02 07:55:41'),
 (126, 2, 'Biaya Pendaftaran', 'Biaya pendaftaran', 2, ' far fa-circle', 'pengaturan/BiayaPendaftaran', 'Aktif', '2021-11-05 12:34:20'),
-(127, 2, 'Referral Nominal Reward', 'Nominal referral reward', 2, ' far fa-circle', 'pengaturan/referralReward', 'Aktif', '2021-11-06 12:46:24');
+(127, 2, 'Referral Nominal Reward', 'Nominal referral reward', 2, ' far fa-circle', 'pengaturan/referralReward', 'Aktif', '2021-11-06 12:46:24'),
+(128, 0, 'Referral', '-', 5, 'fas fa-dollar-sign', '#', 'Aktif', '2021-11-07 18:47:42'),
+(129, 128, 'Pencairan', '-', 1, ' far fa-circle', 'referral/pencairan', 'Aktif', '2021-11-07 18:48:11');
 
 -- --------------------------------------------------------
 
@@ -450,8 +452,10 @@ CREATE TABLE `pembayaran` (
 INSERT INTO `pembayaran` (`id`, `member_id`, `kelas_id`, `bank_nama`, `no_rekening`, `atas_nama`, `tanggal`, `jumlah_pembayaran`, `foto`, `jenis`, `tipe`, `catatan`, `status`, `created_by`, `updated_by`, `deleted_by`, `created_at`, `updated_at`, `deleted_at`) VALUES
 (12, 19, NULL, 'Bank BRI', '12345679', 'Isep Lutpi Nur', '2021-10-30', NULL, '585e5e758c05904453754a61ed8fab00.png', 1, 1, 'Tolak Bukti tidak valid', 2, NULL, 1, NULL, '2021-10-30 02:36:59', '2021-10-30 03:17:07', NULL),
 (14, 19, NULL, 'Bank BRI', '123', 'Isep Lutpi Nur', '2021-10-23', 80000, '7e5529d0057fcc3cc89a2ba664018771.jpeg', 1, 1, 'Bukti Valid', 1, NULL, 1, NULL, '2021-10-30 02:46:51', '2021-10-30 03:17:23', NULL),
-(15, 20, NULL, 'Bank BRI', '798562456', 'Member 3', '2021-10-23', 80000, '1cca08b3c1cea472f5a0818c67eec9c8.jpg', 1, 1, '', 0, NULL, NULL, NULL, '2021-10-30 03:23:46', NULL, NULL),
-(19, 24, NULL, 'Bank Rakyat Indonesia', '123', 'Isep Lutpi Nur', '2021-11-06', 80000, '2be09357c5ff6a65a5c118eeee61dee7.png', 1, 1, '', 0, NULL, NULL, NULL, '2021-11-06 13:41:38', NULL, NULL);
+(15, 20, NULL, 'Bank BRI', '798562456', 'Member 3', '2021-10-23', 80000, '1cca08b3c1cea472f5a0818c67eec9c8.jpg', 1, 1, '', 1, NULL, 1, NULL, '2021-10-30 03:23:46', '2021-11-08 01:17:19', NULL),
+(19, 24, NULL, 'Bank Rakyat Indonesia', '123', 'Isep Lutpi Nur', '2021-11-06', 80000, '2be09357c5ff6a65a5c118eeee61dee7.png', 1, 1, 'Bukti tidak valid', 2, NULL, 1, NULL, '2021-11-06 13:41:38', '2021-11-08 00:44:27', NULL),
+(20, 24, NULL, 'Bank Rakyat Indonesia', '1234', 'Isep Lutpi Nur', '2021-11-08', 80000, '788d29b6bc209e54a1bf092da66882a0.png', 1, 1, '', 1, NULL, 1, NULL, '2021-11-08 00:47:14', '2021-11-08 01:16:44', NULL),
+(21, 26, NULL, 'Bank Rakyat Indonesia', '1234', 'isep@gmail.com', '2021-11-08', 80000, '678e6581ad5000ad4bc4c15de34bd527.png', 1, 1, '', 1, NULL, 1, NULL, '2021-11-08 00:54:41', '2021-11-08 01:16:26', NULL);
 
 -- --------------------------------------------------------
 
@@ -462,10 +466,10 @@ INSERT INTO `pembayaran` (`id`, `member_id`, `kelas_id`, `bank_nama`, `no_rekeni
 CREATE TABLE `referral` (
   `id` int(11) NOT NULL,
   `member_id` int(11) DEFAULT NULL,
-  `total_pendapatan` int(11) DEFAULT NULL,
-  `dicairkan` int(11) DEFAULT NULL,
-  `belum_dicairkan` int(11) DEFAULT NULL,
-  `status` int(11) NOT NULL DEFAULT 0 COMMENT '0 tidak aktif, 1 aktif',
+  `total_pendapatan` int(11) DEFAULT 0,
+  `dicairkan` int(11) DEFAULT 0,
+  `belum_dicairkan` int(11) DEFAULT 0,
+  `status` int(11) NOT NULL DEFAULT 1 COMMENT '0 tidak aktif, 1 aktif',
   `catatan` text DEFAULT NULL,
   `created_by` int(11) DEFAULT NULL,
   `updated_by` int(11) DEFAULT NULL,
@@ -474,6 +478,20 @@ CREATE TABLE `referral` (
   `updated_at` datetime DEFAULT NULL ON UPDATE current_timestamp(),
   `deleted_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `referral`
+--
+
+INSERT INTO `referral` (`id`, `member_id`, `total_pendapatan`, `dicairkan`, `belum_dicairkan`, `status`, `catatan`, `created_by`, `updated_by`, `deleted_by`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(9, 2, 80000, 0, 30000, 1, NULL, NULL, NULL, NULL, '2021-11-07 13:37:50', '2021-11-08 02:51:02', NULL),
+(10, 3, 0, 0, 0, 1, NULL, NULL, NULL, NULL, '2021-11-07 13:37:50', '2021-11-08 00:37:34', NULL),
+(11, 4, 0, 0, 0, 1, NULL, NULL, NULL, NULL, '2021-11-07 13:37:50', '2021-11-08 00:37:34', NULL),
+(12, 5, 0, 0, 0, 1, NULL, NULL, NULL, NULL, '2021-11-07 13:37:50', '2021-11-08 00:37:34', NULL),
+(13, 19, 0, 0, 0, 1, NULL, NULL, NULL, NULL, '2021-11-07 13:37:50', '2021-11-08 00:37:34', NULL),
+(14, 20, 0, 0, 0, 1, NULL, NULL, NULL, NULL, '2021-11-07 13:37:50', '2021-11-08 00:37:34', NULL),
+(15, 24, 0, 0, 0, 1, NULL, NULL, NULL, NULL, '2021-11-07 13:37:50', '2021-11-08 00:37:34', NULL),
+(22, 26, 0, 0, 0, 1, NULL, NULL, NULL, NULL, '2021-11-08 01:02:47', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -500,9 +518,9 @@ CREATE TABLE `referral_nominal` (
 --
 
 INSERT INTO `referral_nominal` (`id`, `nama`, `nominal`, `status`, `keterangan`, `created_by`, `updated_by`, `deleted_by`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'Promo Referral', 80000, 1, 'Registrasi Pertama', 1, 1, NULL, '2021-11-05 20:26:22', '2021-11-06 19:53:31', NULL),
+(1, 'Promo Referral', 80000, 0, 'Registrasi Pertama', 1, 1, NULL, '2021-11-05 20:26:22', '2021-11-08 00:48:25', NULL),
 (2, 'Promo 80%', 70000, 0, 'Promosi 2022', 1, 1, NULL, '2021-11-05 20:28:13', '2021-11-06 19:53:15', NULL),
-(3, 'Promo 50%', 40000, 0, 'Promosi bulan desember 2021', 1, 1, NULL, '2021-11-05 20:39:25', '2021-11-05 20:57:53', NULL),
+(3, 'Promo 50%', 40000, 1, 'Promosi bulan desember 2021', 1, 1, NULL, '2021-11-05 20:39:25', '2021-11-08 00:48:25', NULL),
 (4, 'Diskon 10%', 72000, 0, 'Diskon terbaru', 1, 1, NULL, '2021-11-05 20:57:51', '2021-11-05 22:27:16', NULL);
 
 -- --------------------------------------------------------
@@ -518,8 +536,10 @@ CREATE TABLE `referral_pencairan` (
   `nama_bank` varchar(255) DEFAULT NULL,
   `no_rekening` varchar(255) DEFAULT NULL,
   `jumlah_dana` int(11) DEFAULT NULL,
-  `status` int(11) NOT NULL DEFAULT 0 COMMENT '0 diajukan | 1 terima | 2 tolak',
+  `status` int(11) NOT NULL DEFAULT 0 COMMENT '0 diajukan | 1 dicairkan | 2 tolak | 3 dibatalkan',
   `catatan` text DEFAULT NULL,
+  `foto` varchar(255) DEFAULT NULL,
+  `tanggal_respon` datetime DEFAULT NULL,
   `created_by` int(11) DEFAULT NULL,
   `updated_by` int(11) DEFAULT NULL,
   `deleted_by` int(11) DEFAULT NULL,
@@ -527,6 +547,14 @@ CREATE TABLE `referral_pencairan` (
   `updated_at` datetime DEFAULT NULL ON UPDATE current_timestamp(),
   `deleted_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `referral_pencairan`
+--
+
+INSERT INTO `referral_pencairan` (`id`, `member_id`, `atas_nama`, `nama_bank`, `no_rekening`, `jumlah_dana`, `status`, `catatan`, `foto`, `tanggal_respon`, `created_by`, `updated_by`, `deleted_by`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(7, 2, 'Isep Lutpi Nur', 'Bank Rakyat Indonesia', '3263201008000006', 50000, 1, 'Bukti terlampir', 'cd3310b94f0b22307c436785f2f30f69.png', '2021-11-08 02:51:02', NULL, 1, NULL, '2021-11-08 01:52:40', '2021-11-08 02:51:02', NULL),
+(8, 2, 'Member 3', 'Bank Rakyat Indonesia', '123', 30000, 0, NULL, NULL, NULL, NULL, NULL, NULL, '2021-11-08 02:58:37', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -537,7 +565,6 @@ CREATE TABLE `referral_pencairan` (
 CREATE TABLE `referral_transaksi` (
   `id` int(11) NOT NULL,
   `member_id` int(11) DEFAULT NULL,
-  `referral_id` int(11) DEFAULT NULL,
   `jumlah_dana` int(11) DEFAULT NULL,
   `jenis` int(11) NOT NULL DEFAULT 0 COMMENT '0 keluar | 1 masuk',
   `dari_member_id` int(11) DEFAULT NULL,
@@ -549,6 +576,15 @@ CREATE TABLE `referral_transaksi` (
   `updated_at` datetime DEFAULT NULL ON UPDATE current_timestamp(),
   `deleted_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `referral_transaksi`
+--
+
+INSERT INTO `referral_transaksi` (`id`, `member_id`, `jumlah_dana`, `jenis`, `dari_member_id`, `catatan`, `created_by`, `updated_by`, `deleted_by`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(5, 2, 40000, 1, 24, NULL, NULL, NULL, NULL, '2021-11-08 01:16:44', NULL, NULL),
+(6, 2, 40000, 1, 20, NULL, NULL, NULL, NULL, '2021-11-08 01:17:19', NULL, NULL),
+(10, 2, 50000, 0, NULL, NULL, NULL, NULL, NULL, '2021-11-08 02:51:02', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -621,7 +657,9 @@ INSERT INTO `role_aplikasi` (`rola_id`, `rola_menu_id`, `rola_lev_id`, `created_
 (30, 124, 1, '2021-10-28 10:33:13'),
 (31, 125, 1, '2021-11-02 07:56:03'),
 (32, 126, 1, '2021-11-05 12:34:33'),
-(33, 127, 1, '2021-11-06 12:46:33');
+(33, 127, 1, '2021-11-06 12:46:33'),
+(34, 128, 1, '2021-11-07 18:48:21'),
+(35, 129, 1, '2021-11-07 18:48:22');
 
 -- --------------------------------------------------------
 
@@ -846,6 +884,7 @@ ALTER TABLE `pembayaran`
 --
 ALTER TABLE `referral`
   ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `member_id_2` (`member_id`,`status`),
   ADD KEY `member_id` (`member_id`),
   ADD KEY `deleted_by` (`deleted_by`),
   ADD KEY `created_by` (`created_by`),
@@ -876,7 +915,6 @@ ALTER TABLE `referral_pencairan`
 ALTER TABLE `referral_transaksi`
   ADD PRIMARY KEY (`id`),
   ADD KEY `member_id` (`member_id`),
-  ADD KEY `referral_id` (`referral_id`),
   ADD KEY `deleted_by` (`deleted_by`),
   ADD KEY `created_by` (`created_by`),
   ADD KEY `updated_by` (`updated_by`),
@@ -984,7 +1022,7 @@ ALTER TABLE `member_materi_tonton`
 -- AUTO_INCREMENT for table `menu`
 --
 ALTER TABLE `menu`
-  MODIFY `menu_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=128;
+  MODIFY `menu_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=130;
 
 --
 -- AUTO_INCREMENT for table `news`
@@ -1002,13 +1040,13 @@ ALTER TABLE `news_komentar`
 -- AUTO_INCREMENT for table `pembayaran`
 --
 ALTER TABLE `pembayaran`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `referral`
 --
 ALTER TABLE `referral`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `referral_nominal`
@@ -1020,13 +1058,13 @@ ALTER TABLE `referral_nominal`
 -- AUTO_INCREMENT for table `referral_pencairan`
 --
 ALTER TABLE `referral_pencairan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `referral_transaksi`
 --
 ALTER TABLE `referral_transaksi`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `rekening`
@@ -1038,7 +1076,7 @@ ALTER TABLE `rekening`
 -- AUTO_INCREMENT for table `role_aplikasi`
 --
 ALTER TABLE `role_aplikasi`
-  MODIFY `rola_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `rola_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT for table `role_users`
@@ -1177,7 +1215,6 @@ ALTER TABLE `referral_transaksi`
   ADD CONSTRAINT `referral_transaksi_ibfk_2` FOREIGN KEY (`deleted_by`) REFERENCES `users` (`user_id`) ON DELETE SET NULL ON UPDATE CASCADE,
   ADD CONSTRAINT `referral_transaksi_ibfk_3` FOREIGN KEY (`created_by`) REFERENCES `users` (`user_id`) ON DELETE SET NULL ON UPDATE CASCADE,
   ADD CONSTRAINT `referral_transaksi_ibfk_4` FOREIGN KEY (`updated_by`) REFERENCES `users` (`user_id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `referral_transaksi_ibfk_5` FOREIGN KEY (`referral_id`) REFERENCES `referral` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
   ADD CONSTRAINT `referral_transaksi_ibfk_6` FOREIGN KEY (`dari_member_id`) REFERENCES `member` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 --
