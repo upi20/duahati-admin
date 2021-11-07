@@ -42,15 +42,28 @@ Roadmap
   pendaftaran konfirmasi [clear]
 
   reward pengundang
-    crud
-    implementasi
+    crud [clear]
+    implementasi [clear]
 
   page konfirmasi pembayaran [clear]
 
   refferal
-    tabel
-    saat konfirmasi pembayaran
-    saat konfirmasi pembayaran refeal yang mengati saldo naik
+    tabel[clear]
+    saat konfirmasi pembayaran [clear]
+    saat konfirmasi pembayaran refeal yang mengati saldo naik [clear]
+    batal pengajuan frontend
+    acc upload bukti pengajuan
+
+
+
+
+
+
+
+
+
+
+
 
 
 rencana

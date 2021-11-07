@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class PembayaranModel extends Render_Model
+class PencairanModel extends Render_Model
 {
     public function getAllData($draw = null, $show = null, $start = null, $cari = null, $order = null,  $filter = null)
     {
@@ -11,14 +11,17 @@ class PembayaranModel extends Render_Model
         $this->db->select("a.*,
         IF(a.status = '0' , 'Diajukan',
             IF(a.status = '1' , 'Diterima',
-                IF(a.status = '2' , 'Ditolak', 'Tidak Diketahui')
+                IF(a.status = '2' , 'Ditolak',
+                    IF(a.status = '3' , 'Dibatalkan', 'Tidak Diketahui')
+                )
             )
-        ) as status_str,
-        IF(a.jenis = '1' , 'Pembayaran Pendaftaran', 'Tidak Diketahui') as jenis_str,
-        b.user_nama as diubah_oleh");
-        $this->db->from("pembayaran a");
+        ) as status_str, date(a.created_at) as tanggal,
+        b.user_nama as diubah_oleh, c.nama as member_nama");
+        $this->db->from("referral_pencairan a");
         $this->db->join("users b", 'a.updated_by = b.user_id', 'left');
-        $this->db->where('a.status <>', 3);
+        $this->db->join("member c", 'a.member_id = c.id', 'left');
+        $this->db->where('c.status <>', 3);
+        $this->db->order_by('a.status');
 
         // order by
         if ($order['order'] != null) {
@@ -39,13 +42,26 @@ class PembayaranModel extends Render_Model
         // pencarian
         if ($cari != null) {
             $this->db->where("(
-                IF(a.status = '0' , 'Tidak Aktif', IF(a.status = '1' , 'Aktif', 'Tidak Diketahui')) LIKE '%$cari%'
+                IF(a.status = '0' , 'Diajukan',
+                    IF(a.status = '1' , 'Diterima',
+                        IF(a.status = '2' , 'Ditolak',
+                            IF(a.status = '3' , 'Dibatalkan', 'Tidak Diketahui')
+                        )
+                    )
+                ) LIKE '%$cari%' or
+                b.user_nama  LIKE '%$cari%' or
+                a.nama_bank  LIKE '%$cari%' or
+                a.no_rekening  LIKE '%$cari%' or
+                a.atas_nama  LIKE '%$cari%' or
+                a.created_at  LIKE '%$cari%' or
+                a.jumlah_dana  LIKE '%$cari%' or
+                c.nama LIKE '%$cari%'
             )");
         }
 
         // filter
         if ($filter != null) {
-            // by sekolah
+
             if ($filter['member_id'] != '') {
                 $this->db->where('a.member_id', $filter['member_id']);
             }
@@ -61,71 +77,38 @@ class PembayaranModel extends Render_Model
     }
 
 
-    public function simpan($user_id, $id, $member_id, $jenis, $catatan, $status)
+    public function simpan($user_id, $id, $catatan, $foto, $status)
     {
         $this->db->trans_start();
+        // get member
+        $datas = $this->db->select('member_id as member, jumlah_dana as jumlah')
+            ->from('referral_pencairan')
+            ->where('id', $id)
+            ->get()->row();
+        $datas = $datas ?? (object)['member' => 0, 'jumlah' => 0];
 
-        if ($status == 1 && $jenis == 1) {
-            $this->db->where('id', $member_id)->update('member', ['status' => $status]);
+        // update saldo
+        if ($status == 1) {
+            $this->db->query("
+            UPDATE `referral` SET `belum_dicairkan` = (
+                (ifnull((SELECT belum_dicairkan from referral where member_id = $datas->member LIMIT 1), 0)) - $datas->jumlah
+                ) WHERE `referral`.`member_id` = $datas->member;
+            ");
 
-            // tambah saldo referral pengundang
-            // get parrent
-            $parrent = $this->db->select('parrent_id as id')
-                ->from('member')
-                ->where('id', $member_id)
-                ->get()
-                ->row();
-            if (!is_null($parrent->id)) {
-                $nominal = $this->db->select('ifnull(nominal, 0) as referral')
-                    ->from('referral_nominal')
-                    ->where('status', 1)
-                    ->get()->row();
-
-                // simpan belum dicairkan
-                $this->db->query("UPDATE `referral` SET
-
-                    `belum_dicairkan` = ((ifnull(
-                    (SELECT belum_dicairkan FROM `referral` WHERE member_id = '{$parrent->id}' limit 1) ,0)
-                    ) + ({$nominal->referral})),
-
-                    `total_pendapatan` = ((ifnull(
-                    (SELECT belum_dicairkan FROM `referral` WHERE member_id = '{$parrent->id}' limit 1) ,0)
-                    ) + ({$nominal->referral}))
-
-                    WHERE `referral`.`member_id` = '{$parrent->id}';
-                        ");
-
-                // simpan riwayat masuk
-                $this->db->insert('referral_transaksi', [
-                    'member_id' => $parrent->id,
-                    'dari_member_id' => $member_id,
-                    'jumlah_dana' => $nominal->referral,
-                    'jenis' => 1
-                ]);
-            }
-
-            // cek apakah sudah mempunyai detail referral
-            $detail = $this->db->select('count(*) as jumlah')
-                ->from('referral')
-                ->where('member_id', $member_id)
-                ->where('status', 1)
-                ->get()->row();
-
-            if ($detail->jumlah == 0) {
-                // tambah referral detail member
-                $data = [
-                    'total_pendapatan' => 0,
-                    'dicairkan' => 0,
-                    'belum_dicairkan' => 0,
-                    'member_id' => $member_id
-                ];
-                $this->db->insert('referral', $data);
-            }
+            // catat transaksi
+            $this->db->insert('referral_transaksi', [
+                'member_id' => $datas->member,
+                'jumlah_dana' => $datas->jumlah,
+                'jenis' => 0
+            ]);
         }
 
-        // simpan pembayaran
-        $result =  $this->db->where('id', $id)->update('pembayaran', [
+
+        // simpan referral_pencairan
+        $result =  $this->db->where('id', $id)->update('referral_pencairan', [
             'status' => $status,
+            'foto' => $foto,
+            'tanggal_respon' => Date('Y-m-d H:i:s'),
             'catatan' => $catatan,
             'updated_by' => $user_id
         ]);

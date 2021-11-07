@@ -55,7 +55,7 @@ class ReferralModel extends Render_Model
             IF(a.status = '1' , 'Dicairkan',
                 IF(a.status = '2' , 'Ditolak', 'Tidak Diketahui')
             )
-        ) as status_str, date(created_at) as tanggal");
+        ) as status_str, date(created_at) as tanggal, date(a.tanggal_respon) as tanggal_respon");
     $this->db->from("referral_pencairan a");
 
     // order by
@@ -112,8 +112,9 @@ class ReferralModel extends Render_Model
     // select tabel
     $this->db->select("a.*, IF(a.jenis = '0' , 'Keluar',
             IF(a.jenis = '1' , 'Masuk', 'Tidak Diketahui')
-        ) as jenis_str,");
+        ) as jenis_str,  date(a.created_at) as tanggal, b.nama as nama_diundang");
     $this->db->from("referral_transaksi a");
+    $this->db->join('member b', 'b.id = a.dari_member_id', 'left');
     $this->db->where("a.jenis", 1);
 
     // order by
