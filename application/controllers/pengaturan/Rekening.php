@@ -55,6 +55,12 @@ class Rekening extends Render_Controller
 
     public function insert()
     {
+        $foto = '';
+        if ($_FILES['foto']['name'] != '') {
+            $foto = $this->uploadImage('foto');
+            $foto = $foto['data'];
+        }
+
         $nama = $this->input->post("nama");
         $nama_bank = $this->input->post("nama_bank");
         $no_rekening = $this->input->post("no_rekening");
@@ -62,7 +68,7 @@ class Rekening extends Render_Controller
         $keterangan = $this->input->post("keterangan");
         $status = $this->input->post("status");
         $user_id = $this->id;
-        $result = $this->model->insert($user_id, $nama, $keterangan, $nama_bank, $no_rekening, $atas_nama, $status);
+        $result = $this->model->insert($user_id, $nama, $keterangan, $nama_bank, $no_rekening, $atas_nama, $foto, $status);
 
         $this->db->trans_complete();
         $code = $result ? 200 : 500;
@@ -71,6 +77,14 @@ class Rekening extends Render_Controller
 
     public function update()
     {
+        $temp_foto = $this->input->post("temp_foto");
+        if ($_FILES['foto']['name'] != '') {
+            $foto = $this->uploadImage('foto');
+            $foto = $foto['data'];
+            $this->deleteFile($temp_foto);
+        } else {
+            $foto = $temp_foto;
+        }
         $id = $this->input->post("id");
         $nama = $this->input->post("nama");
         $nama_bank = $this->input->post("nama_bank");
@@ -79,7 +93,7 @@ class Rekening extends Render_Controller
         $keterangan = $this->input->post("keterangan");
         $status = $this->input->post("status");
         $user_id = $this->id;
-        $result = $this->model->update($id, $user_id, $nama, $keterangan, $nama_bank, $no_rekening, $atas_nama, $status);
+        $result = $this->model->update($id, $user_id, $nama, $keterangan, $nama_bank, $no_rekening, $atas_nama, $foto, $status);
         $code = $result ? 200 : 500;
         $this->output_json(["data" => $result], $code);
     }
@@ -115,7 +129,7 @@ class Rekening extends Render_Controller
             redirect('my404', 'refresh');
         }
         $this->id = $this->session->userdata('data')['id'];
-        $this->photo_path = './files/pengaturan/rekening/';
+        $this->photo_path = './files/icon_bank/';
         $this->load->model("pengaturan/RekeningModel", 'model');
         $this->default_template = 'templates/dashboard';
         $this->load->library('plugin');

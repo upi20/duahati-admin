@@ -5,7 +5,7 @@ class KonfirmasiModel extends Render_Model
 {
   public function get_member($token)
   {
-    $data = $this->db->select("id, nama, no_telepon, email")
+    $data = $this->db->select("id, nama, no_telepon, email, biaya_pendaftaran")
       ->from('member')->where('token', $token);
     $data = $data->get();
     $return = [

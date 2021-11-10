@@ -49,11 +49,12 @@ class RekeningModel extends Render_Model
         return $result;
     }
 
-    public function insert($user_id, $nama, $keterangan, $nama_bank, $no_rekening, $atas_nama, $status)
+    public function insert($user_id, $nama, $keterangan, $nama_bank, $no_rekening, $atas_nama, $foto, $status)
     {
         $data = [
             'nama' => $nama,
             'keterangan' => $keterangan,
+            'icon' => $foto,
             'status' => $status,
             'nama_bank' => $nama_bank,
             'no_rekening' => $no_rekening,
@@ -66,11 +67,12 @@ class RekeningModel extends Render_Model
         return $execute;
     }
 
-    public function update($id, $user_id, $nama, $keterangan, $nama_bank, $no_rekening, $atas_nama, $status)
+    public function update($id, $user_id, $nama, $keterangan, $nama_bank, $no_rekening, $atas_nama, $foto, $status)
     {
         $data = [
             'nama' => $nama,
             'keterangan' => $keterangan,
+            'icon' => $foto,
             'status' => $status,
             'nama_bank' => $nama_bank,
             'no_rekening' => $no_rekening,

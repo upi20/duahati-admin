@@ -28,9 +28,11 @@ class Konfirmasi extends RestController
     $this->form_validation->set_error_delimiters('', '');
     $this->form_validation->set_rules('id_member', 'Id Member', 'trim|required|numeric');
     $this->form_validation->set_rules('nominal', 'Nominal Pembayaran', 'trim|required|numeric');
-    $this->form_validation->set_rules('bank_nama', 'Nama Bank', 'trim|required');
-    $this->form_validation->set_rules('no_rekening', 'Nomor Rekening', 'trim|required|numeric');
-    $this->form_validation->set_rules('atas_nama', 'Atas Nama', 'trim|required');
+
+    // $this->form_validation->set_rules('bank_nama', 'Nama Bank', 'trim|required');
+    // $this->form_validation->set_rules('no_rekening', 'Nomor Rekening', 'trim|required|numeric');
+    // $this->form_validation->set_rules('atas_nama', 'Atas Nama', 'trim|required');
+
     $this->form_validation->set_rules('tanggal', 'Atas Nama', 'trim|required');
     if ($this->form_validation->run() == FALSE) {
       $this->response([
@@ -46,9 +48,15 @@ class Konfirmasi extends RestController
       }
 
       $id_member = $this->input->post('id_member');
-      $bank_nama = $this->input->post('bank_nama');
-      $no_rekening = $this->input->post('no_rekening');
-      $atas_nama = $this->input->post('atas_nama');
+
+      // $bank_nama = $this->input->post('bank_nama');
+      // $no_rekening = $this->input->post('no_rekening');
+      // $atas_nama = $this->input->post('atas_nama');
+
+      $bank_nama = '';
+      $no_rekening = '';
+      $atas_nama = '';
+
       $tanggal = $this->input->post('tanggal');
       $nominal = $this->input->post('nominal');
       $result = $this->model->simpan($id_member, $bank_nama, $no_rekening, $atas_nama, $nominal, $tanggal, $foto);

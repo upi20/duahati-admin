@@ -5,7 +5,7 @@ class InvoiceModel extends Render_Model
 {
   public function get_list_rekening($id = null)
   {
-    $data = $this->db->select("nama_bank, no_rekening, atas_nama")
+    $data = $this->db->select("nama_bank, no_rekening, atas_nama, icon")
       ->from('rekening')->where('status', 1);
     if ($id) {
       $data->where('a.id', $id);

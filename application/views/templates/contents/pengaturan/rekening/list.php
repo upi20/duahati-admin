@@ -15,6 +15,7 @@
                     <th>Nama Bank</th>
                     <th>Nomor Rekening</th>
                     <th>Atas Nama</th>
+                    <th>Icon</th>
                     <th>Keterangan</th>
                     <th>Status</th>
                     <th>Aksi</th>
@@ -67,7 +68,14 @@
                                 <textarea cols="3" rows="4" class="form-control" id="keterangan" name="keterangan" placeholder="Keterangan"></textarea>
                             </div>
                         </div>
-                        <div class="col-12">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label for="foto">Icon Bank</label>
+                                <input type="file" class="form-control" id="foto" name="foto" />
+                                <input type="hidden" class="form-control" id="temp_foto" name="temp_foto" />
+                            </div>
+                        </div>
+                        <div class="col-6">
                             <div class="form-group">
                                 <label for="status">Status</label>
                                 <select name="status" id="status" class="form-control">
@@ -77,12 +85,6 @@
                             </div>
                         </div>
                     </div>
-
-
-
-
-
-
                 </form>
             </div>
             <div class="modal-footer">
@@ -97,7 +99,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header outline-info">
-                <h5 class="modal-title text-center">Icon</h5>
+                <h5 class="modal-title text-center">Icon Bank</h5>
             </div>
             <div class="modal-body">
                 <img src="<?= base_url() ?>\assets\images\student.png" class="img-fluid" alt="" id="img-view">

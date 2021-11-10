@@ -19,6 +19,17 @@ $(function () {
                 { "data": "nama_bank" },
                 { "data": "no_rekening" },
                 { "data": "atas_nama" },
+                {
+                    "data": "icon", render(data, type, full, meta) {
+                        return `<button
+                        class="btn btn-success btn-sm btn-gambar"
+                        data-toggle="modal"
+                        data-data="${data}"
+                        data-target="#gambar_modal"
+                        onclick="view_gambar(this)"
+                        id="btn-gambar"><i class="fas fa-eye"></i></button>`
+                    }, className: "nowrap"
+                },
                 { "data": "keterangan" },
                 { "data": "status_str" },
                 {
@@ -31,6 +42,7 @@ $(function () {
                                         data-no_rekening="${full.no_rekening}"
                                         data-atas_nama="${full.atas_nama}"
                                         data-keterangan="${full.keterangan}"
+                                        data-foto="${full.icon}"
                                         data-status="${full.status}"
                                         data-toggle="modal" data-target="#tambahModal"
                                     onclick="Ubah(this)">
@@ -131,7 +143,7 @@ $(function () {
 })
 
 const view_gambar = (datas) => {
-    $("#img-view").attr('src', `<?= base_url() ?>/files/pengaturan/rekening/${datas.dataset.data}`)
+    $("#img-view").attr('src', `<?= base_url() ?>/files/icon_bank/${datas.dataset.data}`)
 }
 
 // Click Hapus
@@ -147,6 +159,8 @@ const Ubah = (datas) => {
     const data = datas.dataset;
     $('#id').val(data.id);
     $('#nama').val(data.nama);
+    $('#temp_foto').val(data.foto);
+    $('#foto').val('');
     $('#nama_bank').val(data.nama_bank);
     $('#no_rekening').val(data.no_rekening);
     $('#atas_nama').val(data.atas_nama);

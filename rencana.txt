@@ -56,15 +56,39 @@ Roadmap
 
 
 
+refisi
 
+Daftar:
+1.	Kode referral boleh kosong [clear]
 
+Informasi Invoice
+1.	BRI diubah jadi Icon Nomor Rekening (atas nama) [clear]
 
+Konfirmasi Pembayaran
+1.	Nama bank dihilangkan [clear]
+2.	Atas nama dihilangkan [clear]
+3.	Nomor rekening dihilangkan [clear]
+4.	Nominal di isi dengan total biaya regis [clear]
 
+Referral
+1.	Pengajuan Pencairan - Sisa Dana nya ditampilkan [clear]
+2.	Riwayat Pencairan belum kerefresh jiga terjadi pengajuan pencairan [clear]
+3.	Riwayat Pencairan – Detail Pencairan button submit dihilangkan dan batal diganti jadi tutup [clear]
+4.	Bisa copy kode referral, share sosmed [nanti]
 
-
-
-
-
+Profile
+1.	email
+    nama lengkap
+    nama panggilan
+    jenis kelamin
+    tanggal lahir
+    status (sudah menikah / belum)
+    pekerjaan
+    nomer whatsapp
+    kode referal (boleh kosong)
+    provinsi
+    kapbupaten/kota,
+    alamat
 
 rencana
   filter
