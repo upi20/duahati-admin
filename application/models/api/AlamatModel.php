@@ -18,6 +18,19 @@ class AlamatModel extends Render_Model
     return $return;
   }
 
+  public function provinsi_all(): array
+  {
+    $data = $this->db->select('id, name as text')
+      ->from('address_provinces')
+      ->get();
+
+    $return  = [
+      'length' => $data->num_rows(),
+      'results' => $data->result_array()
+    ];
+    return $return;
+  }
+
   public function kabupaten_kota($id_provinsi, String $key): array
   {
     $data = $this->db->select('id, name as text')

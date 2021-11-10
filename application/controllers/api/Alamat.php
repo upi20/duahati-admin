@@ -46,6 +46,26 @@ class Alamat extends RestController
     }
   }
 
+  public function provinsi_all_get()
+  {
+    $result = $this->model->provinsi_all();
+    $this->response([
+      'status' => true,
+      'length' => 1,
+      'results' =>  $result['results'],
+    ], 200);
+  }
+
+  public function provinsi_all_post()
+  {
+    $result = $this->model->provinsi_all();
+    $this->response([
+      'status' => true,
+      'length' => 1,
+      'results' =>  $result['results'],
+    ], 200);
+  }
+
   public function kabupaten_kota_get()
   {
     $id_provinsi = $this->input->get('id_provinsi');

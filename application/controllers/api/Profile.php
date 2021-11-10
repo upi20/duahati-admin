@@ -61,7 +61,34 @@ class Profile extends RestController
       $email = $this->input->post('email');
       $telepon = $this->input->post('telepon');
       $password = $this->input->post('password');
-      $result = $this->model->UpdateProfile($this->id, $nama, $email, $telepon, $password);
+
+      // revisi v2
+      $nama_panggilan = $this->input->post('nama_panggilan');
+      $tanggal_lahir = $this->input->post('tanggal_lahir');
+      $jenis_kelamin = $this->input->post('jenis_kelamin');
+      $status = $this->input->post('status');
+      $alamat_provinsi = $this->input->post('alamat_provinsi');
+      $alamat_kabupaten_kota = $this->input->post('alamat_kabupaten_kota');
+      $alamat_kecamatan = $this->input->post('alamat_kecamatan');
+      $alamat_desa_kelurahan = $this->input->post('alamat_desa_kelurahan');
+      $detail_lainnya = $this->input->post('detail_lainnya');
+
+      $result = $this->model->UpdateProfile(
+        $this->id,
+        $nama,
+        $email,
+        $telepon,
+        $password,
+        $nama_panggilan,
+        $tanggal_lahir,
+        $jenis_kelamin,
+        $status,
+        $alamat_provinsi,
+        $alamat_kabupaten_kota,
+        $alamat_kecamatan,
+        $alamat_desa_kelurahan,
+        $detail_lainnya
+      );
 
       $code = $result['code'] != 1 ?
         409

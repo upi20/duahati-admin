@@ -7,19 +7,69 @@ class ProfileModel extends Render_Model
   public function info($id)
   {
     return $this->db->select("
-    email as email,
-    nama as nama,
-    foto,
-    no_telepon as telepon,
-    date(created_at) as since
-    ")->from('member')->where('id', $id)->get()->row_array();
+      a.email,
+      a.nama ,
+      a.address_full as detail_lainnya ,
+      a.nama_panggilan,
+      a.foto,
+      a.no_telepon as telepon,
+      date(a.created_at) as since,
+      a.menikah,
+      (
+        if(a.menikah = 0, 'Belum Menikah',
+          if(a.menikah = 1, 'Sudah Menikah', 'Tidak Diketahui')
+        )
+      ) as menikah_str,
+      a.jenis_kelamin,
+      a.tanggal_lahir,
+      a.pekerjaan,
+      a.kode_referral,
+      a.address_full as alamat,
+      b.id as id_provinsi,
+      b.name as nama_provinsi,
+      c.id as id_kabupaten_kota,
+      c.name as nama_kabupaten_kota,
+      d.id as id_kecamatan,
+      d.name as nama_kecamatan,
+      e.id as id_desa_kelurahan,
+      e.name as nama_desa_kelurahan,
+    ")->from('member a')
+      ->join('address_provinces b', 'a.id_address_provinces = b.id', 'left')
+      ->join('address_regencies c', 'a.id_address_regencies = c.id', 'left')
+      ->join('address_districts d', 'a.id_address_districts = d.id', 'left')
+      ->join('address_villages e', 'a.id_address_villages = e.id', 'left')
+      ->where('a.id', $id)
+      ->get()->row_array();
   }
 
-  public function UpdateProfile($id, $nama, $email, $telepon, $password)
-  {
+  public function UpdateProfile(
+    $id,
+    $nama,
+    $email,
+    $telepon,
+    $password,
+    $nama_panggilan,
+    $tanggal_lahir,
+    $jenis_kelamin,
+    $status,
+    $alamat_provinsi,
+    $alamat_kabupaten_kota,
+    $alamat_kecamatan,
+    $alamat_desa_kelurahan,
+    $detail_lainnya
+  ) {
     $data = [
       'nama' => $nama,
       'no_telepon' => $telepon,
+      'nama_panggilan' => $nama_panggilan,
+      'tanggal_lahir' => $tanggal_lahir,
+      'jenis_kelamin' => $jenis_kelamin,
+      'menikah' => $status,
+      'id_address_provinces' => $alamat_provinsi,
+      'id_address_regencies' => $alamat_kabupaten_kota,
+      'id_address_districts' => $alamat_kecamatan,
+      'id_address_villages' => $alamat_desa_kelurahan,
+      'address_full' => $detail_lainnya,
       'email' => $email,
       'updated_at' => Date('Y-m-d h:i:s')
     ];
