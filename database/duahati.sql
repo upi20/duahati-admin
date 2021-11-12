@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Nov 10, 2021 at 07:31 PM
+-- Generation Time: Nov 12, 2021 at 11:04 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 7.4.25
 
@@ -88489,6 +88489,8 @@ CREATE TABLE `kelas_materi` (
   `nama` varchar(255) NOT NULL,
   `url` varchar(255) DEFAULT NULL,
   `keterangan` text DEFAULT NULL,
+  `submateri` int(1) NOT NULL DEFAULT 0 COMMENT '0 Tidak ada, 1 Ada',
+  `selesai` int(1) NOT NULL DEFAULT 0,
   `created_by` int(11) DEFAULT NULL,
   `updated_by` int(11) DEFAULT NULL,
   `deleted_by` int(11) DEFAULT NULL,
@@ -88502,12 +88504,47 @@ CREATE TABLE `kelas_materi` (
 -- Dumping data for table `kelas_materi`
 --
 
-INSERT INTO `kelas_materi` (`id`, `kelas_id`, `no_urut`, `nama`, `url`, `keterangan`, `created_by`, `updated_by`, `deleted_by`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 3, 1, 'Kewajiban Belajar Tajwid - Ustadz Ulin Nuha', 'https://www.youtube.com/watch?v=qF_HuLMI-B4&list=PLUuYlj8dcEXbyJzGAUYTSCfYr5EqLo0dy&index=1', 'Keterangan video\r\n', 1, 1, NULL, 1, '2021-10-22 00:17:45', '2021-10-22 08:15:38', NULL),
-(2, 3, 2, 'Tujuan Mempelajari Ilmu Tajwid - Ustadz M. Ulin Nuha', 'https://www.youtube.com/watch?v=ztfrZn7jBx4&list=PLUuYlj8dcEXbyJzGAUYTSCfYr5EqLo0dy&index=2', '', 1, NULL, NULL, 1, '2021-10-22 00:17:45', '2021-10-22 06:05:07', NULL),
-(3, 3, 3, 'Adab-Adab Membaca Al-Quran - Ustadz M. Ulin Nuha', 'https://www.youtube.com/watch?v=KDt7qcbfb_g&list=PLUuYlj8dcEXbyJzGAUYTSCfYr5EqLo0dy&index=3', '', 1, NULL, NULL, 1, '2021-10-22 00:17:45', '2021-10-22 06:05:10', NULL),
-(4, 3, 4, 'Tingkatan Bacaan Al-Qur\'an', 'https://www.youtube.com/watch?v=6H9T2QvxDCg&list=PLUuYlj8dcEXbyJzGAUYTSCfYr5EqLo0dy&index=4', '', 1, NULL, NULL, 1, '2021-10-22 00:17:45', '2021-10-22 06:05:13', NULL),
-(5, 3, 5, 'Bacaan Ta\'awudz Di Awal Surat - Ustadz M. Ulin Nuha - Serial Pelajaran Tahsin (05)', 'https://www.youtube.com/watch?v=rKtGi3CrWZw&list=PLUuYlj8dcEXbyJzGAUYTSCfYr5EqLo0dy&index=5', '', 1, NULL, NULL, 1, '2021-10-22 00:17:45', '2021-10-22 06:05:16', NULL);
+INSERT INTO `kelas_materi` (`id`, `kelas_id`, `no_urut`, `nama`, `url`, `keterangan`, `submateri`, `selesai`, `created_by`, `updated_by`, `deleted_by`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 3, 1, 'Kewajiban Belajar Tajwid - Ustadz Ulin Nuha', 'https://www.youtube.com/watch?v=qF_HuLMI-B4&list=PLUuYlj8dcEXbyJzGAUYTSCfYr5EqLo0dy&index=1', '-', 0, 0, 1, 1, NULL, 1, '2021-10-22 00:17:45', '2021-11-13 04:29:51', NULL),
+(2, 3, 6, 'Tujuan Mempelajari Ilmu Tajwid - Ustadz M. Ulin Nuha', 'https://www.youtube.com/watch?v=ztfrZn7jBx4&list=PLUuYlj8dcEXbyJzGAUYTSCfYr5EqLo0dy&index=2', 'Tes keterangan', 0, 0, 1, 1, 1, 1, '2021-10-22 00:17:45', '2021-11-13 00:02:32', NULL),
+(3, 3, 3, 'Adab-Adab Membaca Al-Quran - Ustadz M. Ulin Nuha', 'https://www.youtube.com/watch?v=KDt7qcbfb_g&list=PLUuYlj8dcEXbyJzGAUYTSCfYr5EqLo0dy&index=3', '', 1, 0, 1, 1, NULL, 1, '2021-10-22 00:17:45', '2021-11-13 04:29:56', NULL),
+(4, 3, 4, 'Tingkatan Bacaan Al-Qur\'an', 'https://www.youtube.com/watch?v=6H9T2QvxDCg&list=PLUuYlj8dcEXbyJzGAUYTSCfYr5EqLo0dy&index=4', '', 0, 0, 1, NULL, NULL, 1, '2021-10-22 00:17:45', '2021-10-22 06:05:13', NULL),
+(5, 3, 5, 'Bacaan Ta\'awudz Di Awal Surat - Ustadz M. Ulin Nuha - Serial Pelajaran Tahsin (05)', 'https://www.youtube.com/watch?v=rKtGi3CrWZw&list=PLUuYlj8dcEXbyJzGAUYTSCfYr5EqLo0dy&index=5', '', 0, 0, 1, 1, NULL, 1, '2021-10-22 00:17:45', '2021-11-11 21:19:42', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `kelas_materi_sub`
+--
+
+CREATE TABLE `kelas_materi_sub` (
+  `id` int(11) NOT NULL,
+  `kelas_id` int(11) DEFAULT NULL,
+  `materi_id` int(11) DEFAULT NULL,
+  `no_urut` int(11) NOT NULL,
+  `nama` varchar(255) NOT NULL,
+  `url` varchar(255) DEFAULT NULL,
+  `keterangan` text DEFAULT NULL,
+  `selesai` int(1) NOT NULL DEFAULT 0,
+  `submateri` int(1) NOT NULL DEFAULT 0 COMMENT '0 Tidak ada, 1 Ada',
+  `created_by` int(11) DEFAULT NULL,
+  `updated_by` int(11) DEFAULT NULL,
+  `deleted_by` int(11) DEFAULT NULL,
+  `status` int(11) NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
+  `updated_at` datetime DEFAULT NULL ON UPDATE current_timestamp(),
+  `deleted_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `kelas_materi_sub`
+--
+
+INSERT INTO `kelas_materi_sub` (`id`, `kelas_id`, `materi_id`, `no_urut`, `nama`, `url`, `keterangan`, `selesai`, `submateri`, `created_by`, `updated_by`, `deleted_by`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(3, 3, 1, 1, 'tes materi sub 2', 'https://www.youtube.com/watch?v=qF_HuLMI-B4&list=PLUuYlj8dcEXbyJzGAUYTSCfYr5EqLo0dy&index=1', '123', 0, 0, 1, 1, NULL, 1, '2021-11-12 14:26:43', '2021-11-12 14:35:35', NULL),
+(4, 3, 1, 2, 'Rekening Utama Kantor', 'https://www.youtube.com/watch?v=6DbNvagWFjM', '-', 0, 0, 1, NULL, NULL, 1, '2021-11-12 14:35:45', NULL, NULL),
+(5, 3, 3, 1, 'Tes submateri id 3', 'https://www.youtube.com/watch?v=6DbNvagWFjM', 'tiga', 0, 0, 1, NULL, NULL, 1, '2021-11-13 00:02:10', NULL, NULL),
+(6, 3, 3, 2, 'aaaaaaaaaaaaa', 'https://www.youtube.com/watch?v=qF_HuLMI-B4&list=PLUuYlj8dcEXbyJzGAUYTSCfYr5EqLo0dy&index=1', '1', 0, 0, 1, NULL, NULL, 1, '2021-11-13 00:44:15', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -88575,7 +88612,7 @@ CREATE TABLE `member` (
 INSERT INTO `member` (`id`, `mentor_id`, `nama`, `nama_panggilan`, `no_telepon`, `tanggal_lahir`, `jenis_kelamin`, `alamat`, `password`, `email`, `foto`, `token`, `parrent_id`, `kode_referral`, `biaya_pendaftaran`, `id_address_provinces`, `id_address_regencies`, `id_address_districts`, `id_address_villages`, `address_full`, `status`, `menikah`, `pekerjaan`, `created_by`, `updated_by`, `created_at`, `updated_at`, `deleted_at`) VALUES
 (2, 6, 'Isep Lutpi Nur', 'Isep', '+6285798132505', '2000-08-10', 'Laki-Laki', 'Cianjur', '$2y$10$NXyctYJcxQTOVH0qJSgPX.d6W8IowPywTZ0JK08OQs/1jMfk11lCe', 'iseplutpi@gmail.com', '5a93fd88386b9bb7b9c194a31fd7172b.png', 'duahati202110211058496170e57995b5f', NULL, 'UMJYG7P', 80000, '32', '3203', '3203051', '3203051006', 'Kampung Tipar, Rt 23, Rw 24 43 272', 1, 0, '', 1, 1, '2021-10-21 10:58:49', '2021-11-11 01:17:06', NULL),
 (3, 6, 'Member 2', NULL, '+6285798132505', NULL, NULL, '', '$2y$10$6.3PXYQx5KKVWQJ5C9cYqeJ5HiyQH9sOSfw2HdyTuEgeX4tUj/gkC', '2@gmail.com', 'f3fcbb4ac7377f576efebf18050e2b11.png', 'duahati202110211106436170e753c600c', NULL, 'FHECNLZ', 80000, NULL, NULL, NULL, NULL, NULL, 1, NULL, '', 1, 1, '2021-10-21 11:06:43', '2021-11-08 00:43:14', NULL),
-(4, 6, 'Member 3', '', '+6285798132505', '0000-00-00', '', 'Cianjur', '$2y$10$NZaMXT1ZhSJIA245iQoxk.wUfV7j2NZ3CY9sebJaufLQKE1HRBX02', 'member3@gmail.com', '', 'duahati202110270151266178f6ee1b17a', NULL, '123', 80000, '', '', '', '', '', 1, 0, '', 1, 1, '2021-10-27 13:51:26', '2021-11-11 01:29:27', NULL),
+(4, 6, 'Member 3', '', '+6285798132505', '0000-00-00', '', 'Cianjur', '$2y$10$NZaMXT1ZhSJIA245iQoxk.wUfV7j2NZ3CY9sebJaufLQKE1HRBX02', 'member3@gmail.com', '', 'duahati202110270151266178f6ee1b17a', NULL, '123', 80000, '32', '3272', '3272010', '3272010006', '', 1, 0, '', 1, 1, '2021-10-27 13:51:26', '2021-11-11 10:05:41', NULL),
 (5, 24, 'Member 7', NULL, '+6285798132505', NULL, NULL, 'Alamat', '$2y$10$twC1snL5xVas0JeZWeKIX.KftU7cHK0/Qs4Hh.1m.qmyT1cbbe8Ua', 'member7@gmail.com', '190b014bbef8397dfbc40b956b4a8863.png', 'duahati20211028115555617a2d5b0e3fa', NULL, '6R1ECOB', 80000, NULL, NULL, NULL, NULL, NULL, 1, NULL, '', 1, 1, '2021-10-28 11:55:55', '2021-11-08 00:43:14', NULL),
 (19, 24, 'Member 1', NULL, '+6285798132505', NULL, NULL, '', '$2y$10$DA8x/kDIPpcweRy4C93OY.Gsm3JWOP8FxxnmcBfGWqRTQkaGnniee', 'member1@gmail.com', '', 'duahati20211030023630617c4d3e39688', NULL, 'V978EO5', 80000, NULL, NULL, NULL, NULL, NULL, 1, NULL, '', NULL, NULL, '2021-10-30 02:36:30', '2021-11-08 00:43:05', NULL),
 (20, 24, 'Member BAru 3', NULL, '+6285798132505', NULL, NULL, '', '$2y$10$AA/tS2bTAPPn4Hy1KJPsEOYm164WbWPdDYojtxig0VJbXboFbOeHa', 'baru3@gmail.com', '', 'duahati20211030032316617c58342b8a4', 2, 'NGUWRIC', 80000, NULL, NULL, NULL, NULL, NULL, 1, NULL, '', NULL, NULL, '2021-10-30 03:23:16', '2021-11-08 00:48:58', NULL),
@@ -88639,9 +88676,43 @@ CREATE TABLE `member_materi_tonton` (
 --
 
 INSERT INTO `member_materi_tonton` (`id`, `member_id`, `kelas_id`, `kelas_materi_id`, `materi_feedback_nilai`, `materi_feedback_keterangan`, `mentor_feedback_nilai`, `mentor_feedback_keterangan`, `created_by`, `updated_by`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(5, 2, 3, 1, 4, 'Feedback kedua', 4, 'Feedback pertama', NULL, NULL, 1, '2021-10-22 10:52:17', NULL, NULL),
-(6, 3, 3, 1, 5, 'Member 2', 4, 'Member 2', NULL, NULL, 1, '2021-10-22 10:55:27', NULL, NULL),
-(7, 3, 3, 2, 4, '', 4, '', NULL, NULL, 1, '2021-10-22 11:09:24', NULL, NULL);
+(14, 4, 3, 1, 5, 'res', 5, 'tes', NULL, NULL, 1, '2021-11-13 03:47:18', NULL, NULL),
+(15, 2, 3, 1, 5, 'bagus', 5, 'bagus', NULL, NULL, 1, '2021-11-13 04:50:22', NULL, NULL),
+(16, 2, 3, 3, 5, 'selesai', 5, 'selesai', NULL, NULL, 1, '2021-11-13 04:56:55', NULL, NULL),
+(17, 2, 3, 4, 5, 'a', 5, 'a', NULL, NULL, 1, '2021-11-13 05:00:49', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `member_materi_tonton_sub`
+--
+
+CREATE TABLE `member_materi_tonton_sub` (
+  `id` int(11) NOT NULL,
+  `member_id` int(11) DEFAULT NULL,
+  `kelas_id` int(11) NOT NULL,
+  `kelas_materi_sub_id` int(11) NOT NULL,
+  `materi_feedback_nilai` int(11) NOT NULL,
+  `materi_feedback_keterangan` text NOT NULL,
+  `mentor_feedback_nilai` int(11) NOT NULL,
+  `mentor_feedback_keterangan` text NOT NULL,
+  `created_by` int(11) DEFAULT NULL,
+  `updated_by` int(11) DEFAULT NULL,
+  `status` int(11) NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
+  `updated_at` datetime DEFAULT NULL ON UPDATE current_timestamp(),
+  `deleted_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `member_materi_tonton_sub`
+--
+
+INSERT INTO `member_materi_tonton_sub` (`id`, `member_id`, `kelas_id`, `kelas_materi_sub_id`, `materi_feedback_nilai`, `materi_feedback_keterangan`, `mentor_feedback_nilai`, `mentor_feedback_keterangan`, `created_by`, `updated_by`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(2, 4, 3, 3, 4, 'bagus', 4, 'bagus', NULL, NULL, 1, '2021-11-12 21:14:28', NULL, NULL),
+(3, 4, 3, 4, 5, 'TEs', 5, 'Tes', NULL, NULL, 1, '2021-11-13 02:56:04', NULL, NULL),
+(4, 2, 3, 5, 4, 'tes sub', 5, 'tes sub', NULL, NULL, 1, '2021-11-13 04:56:02', NULL, NULL),
+(5, 2, 3, 6, 5, 'selesai', 5, 'selesai', NULL, NULL, 1, '2021-11-13 04:56:55', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -88690,7 +88761,7 @@ INSERT INTO `menu` (`menu_id`, `menu_menu_id`, `menu_nama`, `menu_keterangan`, `
 (116, 0, 'Mentor', 'Menu Mentor', 3, 'fas fa-fw fa-user', 'mentor/data', 'Aktif', '2021-10-20 12:17:22'),
 (117, 82, 'Data Kelas', '-', 1, 'far fa-circle', 'kelas/master', 'Aktif', '2021-10-20 12:22:56'),
 (118, 82, 'Kategori', '-', 3, 'far fa-circle', 'kelas/kategori', 'Aktif', '2021-10-20 12:23:20'),
-(119, 82, 'Materi', 'Materi Kelas', 2, 'far fa-circle', 'kelas/materi', 'Aktif', '2021-10-21 01:04:35'),
+(119, 82, 'Materi', 'Materi Kelas', 2, 'far fa-circle', 'kelas/materi', 'Tidak Aktif', '2021-10-21 01:04:35'),
 (120, 0, 'Slider', 'Silder di menu home', 2, 'far fa-image', 'slider/data', 'Aktif', '2021-10-21 10:26:49'),
 (121, 0, 'News', '-', 5, 'fa fa-newspaper', '#', 'Aktif', '2021-10-28 10:23:58'),
 (122, 121, 'Data News', '-', 1, 'fa fa-newspaper', 'news/master', 'Aktif', '2021-10-28 10:23:58'),
@@ -89184,6 +89255,17 @@ ALTER TABLE `kelas_materi`
   ADD KEY `deleted_by` (`deleted_by`);
 
 --
+-- Indexes for table `kelas_materi_sub`
+--
+ALTER TABLE `kelas_materi_sub`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `kelas_id` (`kelas_id`),
+  ADD KEY `created_by` (`created_by`),
+  ADD KEY `updated_by` (`updated_by`),
+  ADD KEY `deleted_by` (`deleted_by`),
+  ADD KEY `materi_id` (`materi_id`);
+
+--
 -- Indexes for table `level`
 --
 ALTER TABLE `level`
@@ -89220,6 +89302,17 @@ ALTER TABLE `member_materi_tonton`
   ADD KEY `created_by` (`created_by`),
   ADD KEY `updated_by` (`updated_by`),
   ADD KEY `kelas_materi_id` (`kelas_materi_id`);
+
+--
+-- Indexes for table `member_materi_tonton_sub`
+--
+ALTER TABLE `member_materi_tonton_sub`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `kelas_id` (`kelas_id`),
+  ADD KEY `member_id` (`member_id`),
+  ADD KEY `created_by` (`created_by`),
+  ADD KEY `updated_by` (`updated_by`),
+  ADD KEY `kelas_materi_id` (`kelas_materi_sub_id`);
 
 --
 -- Indexes for table `menu`
@@ -89369,7 +89462,13 @@ ALTER TABLE `kelas_kategori`
 -- AUTO_INCREMENT for table `kelas_materi`
 --
 ALTER TABLE `kelas_materi`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `kelas_materi_sub`
+--
+ALTER TABLE `kelas_materi_sub`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `level`
@@ -89393,7 +89492,13 @@ ALTER TABLE `member_kelas`
 -- AUTO_INCREMENT for table `member_materi_tonton`
 --
 ALTER TABLE `member_materi_tonton`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+
+--
+-- AUTO_INCREMENT for table `member_materi_tonton_sub`
+--
+ALTER TABLE `member_materi_tonton_sub`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `menu`
@@ -89530,6 +89635,16 @@ ALTER TABLE `kelas_materi`
   ADD CONSTRAINT `kelas_materi_ibfk_4` FOREIGN KEY (`deleted_by`) REFERENCES `users` (`user_id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 --
+-- Constraints for table `kelas_materi_sub`
+--
+ALTER TABLE `kelas_materi_sub`
+  ADD CONSTRAINT `kelas_materi_sub_ibfk_1` FOREIGN KEY (`materi_id`) REFERENCES `kelas_materi` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `kelas_materi_sub_ibfk_2` FOREIGN KEY (`materi_id`) REFERENCES `kelas_materi` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `kelas_materi_sub_ibfk_3` FOREIGN KEY (`created_by`) REFERENCES `users` (`user_id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `kelas_materi_sub_ibfk_4` FOREIGN KEY (`updated_by`) REFERENCES `users` (`user_id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `kelas_materi_sub_ibfk_5` FOREIGN KEY (`deleted_by`) REFERENCES `users` (`user_id`) ON DELETE SET NULL ON UPDATE CASCADE;
+
+--
 -- Constraints for table `member`
 --
 ALTER TABLE `member`
@@ -89557,6 +89672,16 @@ ALTER TABLE `member_materi_tonton`
   ADD CONSTRAINT `member_materi_tonton_ibfk_3` FOREIGN KEY (`created_by`) REFERENCES `users` (`user_id`) ON DELETE SET NULL ON UPDATE CASCADE,
   ADD CONSTRAINT `member_materi_tonton_ibfk_4` FOREIGN KEY (`updated_by`) REFERENCES `users` (`user_id`) ON DELETE SET NULL ON UPDATE CASCADE,
   ADD CONSTRAINT `member_materi_tonton_ibfk_5` FOREIGN KEY (`kelas_materi_id`) REFERENCES `kelas_materi` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `member_materi_tonton_sub`
+--
+ALTER TABLE `member_materi_tonton_sub`
+  ADD CONSTRAINT `member_materi_tonton_sub_ibfk_1` FOREIGN KEY (`created_by`) REFERENCES `users` (`user_id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `member_materi_tonton_sub_ibfk_2` FOREIGN KEY (`updated_by`) REFERENCES `users` (`user_id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `member_materi_tonton_sub_ibfk_3` FOREIGN KEY (`kelas_materi_sub_id`) REFERENCES `kelas_materi_sub` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `member_materi_tonton_sub_ibfk_4` FOREIGN KEY (`member_id`) REFERENCES `member` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `member_materi_tonton_sub_ibfk_5` FOREIGN KEY (`kelas_id`) REFERENCES `kelas` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `news`

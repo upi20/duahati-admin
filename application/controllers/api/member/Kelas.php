@@ -121,6 +121,81 @@ class Kelas extends RestController
   }
 
 
+  // sub materi
+  public function get_materi_sub_get()
+  {
+    $materi_id = $this->input->get('materi_id');
+    $data = $this->model->get_materi_sub($this->id, $materi_id);
+    $code = $data['data'] == null ?
+      RestController::HTTP_NOT_FOUND
+      : RestController::HTTP_OK;
+    $status = $data['data'] != null;
+
+    $this->response([
+      'status' => $status,
+      'length' => $data['length'],
+      'data' => $data['data']
+    ], $code);
+  }
+  public function get_materi_sub_detail_get()
+  {
+    $materi_sub_id = $this->input->get('materi_sub_id');
+    $data = $this->model->get_materi_sub_detail($this->id, $materi_sub_id);
+    $code = $data['data'] == null ?
+      RestController::HTTP_NOT_FOUND
+      : RestController::HTTP_OK;
+    $status = $data['data'] != null;
+
+    $this->response([
+      'status' => $status,
+      'length' => $data['length'],
+      'data' => $data['data']
+    ], $code);
+  }
+
+
+  public function feedback_sub_post()
+  {
+    $kelas_id = $this->input->post('kelas_id');
+    $keterangan_materi = $this->input->post('keterangan_materi');
+    $keterangan_mentor = $this->input->post('keterangan_mentor');
+    $materi_sub_id = $this->input->post('materi_sub_id');
+    $nilai_materi = $this->input->post('nilai_materi');
+    $nilai_mentor = $this->input->post('nilai_mentor');
+    $tonton_id = $this->input->post('tonton_id');
+    $materi_id = $this->input->post('materi_id');
+    $finish = $this->input->post('finish');
+    $return = $this->model->feedback_sub(
+      $this->id,
+      $kelas_id,
+      $materi_id,
+      $keterangan_materi,
+      $keterangan_mentor,
+      $materi_sub_id,
+      $nilai_materi,
+      $nilai_mentor,
+      $tonton_id,
+      $finish
+    );
+    $this->response($return, 200);
+  }
+
+  public function kelas_head_sub_get()
+  {
+    $materi_id = $this->input->get('materi_id');
+    $data = $this->model->materi_sub_head($this->id, $materi_id);
+    $code = $data['data'] == null ?
+      RestController::HTTP_NOT_FOUND
+      : RestController::HTTP_OK;
+    $status = $data['data'] != null;
+
+    $this->response([
+      'status' => $status,
+      'length' => $data['length'],
+      'data' => $data['data']
+    ], $code);
+  }
+
   function __construct()
   {
     parent::__construct();

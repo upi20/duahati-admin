@@ -47,6 +47,9 @@ $(function () {
                 {
                     "data": "id", render(data, type, full, meta) {
                         return `<div class="pull-right">
+                                    <a href="<?= base_url()?>kelas/materi/${data}" class="btn btn-xs btn-info">
+                                        <i class="fas fa-file-video"></i> Materi
+                                    </a>
 									<button class="btn btn-primary btn-xs"
                                         data-id="${data}"
                                         data-kategori_id="${full.kategori_id}"

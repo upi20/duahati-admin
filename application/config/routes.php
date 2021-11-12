@@ -77,3 +77,9 @@ $route['stok/keluar']      = 'stok/keluar/listKeluar';
 
 $route['member/kelas/(:num)'] = 'member/kelas/index/$1';
 $route['member/pembayaran/(:num)'] = 'member/pembayaran/index/$1';
+
+// konfirmasi
+$route['konfirmasi'] = 'member/konfirmasi';
+
+// materi
+$route['kelas/materi/(:num)'] = 'kelas/materi/materi_kelas/$1';

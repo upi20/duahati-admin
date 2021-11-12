@@ -7,7 +7,7 @@ class Pencairan extends Render_Controller
   {
     // Page Settings
     $this->title = 'Pencarian Referral';
-    $this->navigation = ['Member'];
+    $this->navigation = ['Pencairan'];
     $this->plugins = ['datatables', 'select2'];
 
     // Breadcrumb setting
